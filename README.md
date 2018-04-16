@@ -1,6 +1,6 @@
-## personFliter
+# personfilter
 
-> 使用vuejs构建人才筛选类网站。通过简历评估对招聘者进行初步筛选。
+> A Vue.js project
 
 ## Build Setup
 
@@ -25,7 +25,6 @@ npm run e2e
 
 # run all tests
 npm test
-```         
+```
 
-
-
+For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
