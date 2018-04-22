@@ -1,26 +1,38 @@
 <template>
 <div class="container">
-  <div class="registerForm">
-     <h3>注册leader招聘</h3>
-    <el-form :model="registerInfo" status-icon :rules="rules2" ref="registerInfo" label-width="100px" class="demo-ruleForm">
+    <div class="hrForm">
+     <h3>注册leader 直聘</h3>
+    <el-form :model="hrInfo" status-icon :rules="hrrules" ref="hrInfo" label-width="100px" class="demo-ruleForm">
     <el-form-item label="用户名" prop="username">
-    <el-input type="text" v-model="registerInfo.username" auto-complete="off"></el-input>
+    <el-input type="text" v-model="hrInfo.username" auto-complete="off"></el-input>
   </el-form-item>
   <el-form-item label="密码" prop="password">
-    <el-input type="password" v-model="registerInfo.password" auto-complete="off"></el-input>
+    <el-input type="password" v-model="hrInfo.password" auto-complete="off"></el-input>
   </el-form-item>
   <el-form-item label="确认密码" prop="checkPass">
-    <el-input type="password" v-model="registerInfo.checkPass" auto-complete="off"></el-input>
+    <el-input type="password" v-model="hrInfo.checkPass" auto-complete="off"></el-input>
   </el-form-item>
   <el-form-item label="手机号" prop="phone">
-    <el-input v-model.number="registerInfo.phone"><template slot="append">发送验证码</template></el-input>
+    <el-input v-model.number="hrInfo.phone"></el-input>
+  </el-form-item>
+    <el-form-item label="验证码" prop="code">
+    <el-input v-model.number="hrInfo.code" class="codeinput"></el-input><el-button class="code" @click="sendCode">{{this.msg}}</el-button>
+  </el-form-item>
+   <el-form-item label="公司" prop="company"  >
+      <el-select v-model="hrInfo.company" filterable placeholder="请选择">
+    <el-option
+      v-for="item in options"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
   </el-form-item>
    <el-form-item label="邮箱" prop="email">
-    <el-input v-model="registerInfo.email"></el-input>
+    <el-input v-model="hrInfo.email"></el-input>
   </el-form-item>
   <el-form-item>
-    <el-button @click="hrSubmit('registerInfo')">hr注册</el-button>
-    <el-button @click="finderSubmit('registerInfo')">求职注册</el-button>
+    <el-button @click="hrSubmit('Info')">注册</el-button>
   </el-form-item>
 </el-form>
 <span class="toLogin">已有账号?<span @click="toLogin">直接登录</span></span>
@@ -44,8 +56,16 @@ html * {
   background: url("../assets/bgimg.jpg") no-repeat;
   background-size: 100% 100%;
 }
-
-.registerForm {
+.hrForm {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid #ededed;
+  width: 30%;
+  height: 30%;
+  margin: 10% 35% 25% 35%;
+  box-shadow: 0px 5px 8px #888;
+  border-radius: 8px;
+}
+.applyForm {
   background: rgba(255, 255, 255, 0.8);
   border: 1px solid #ededed;
   width: 30%;
@@ -55,7 +75,11 @@ html * {
   border-radius: 8px;
 }
 
-.registerForm h3 {
+.applyForm h3 {
+  color: #36bba6;
+  margin-top: 25px;
+}
+.hrForm h3 {
   color: #36bba6;
   margin-top: 25px;
 }
@@ -68,6 +92,10 @@ html * {
   border: 1px solid #36bba6;
   border-radius: 8px;
   color: #36bba6;
+}
+
+.el-select {
+  width: 100%;
 }
 
 .el-form-item__label {
@@ -93,13 +121,33 @@ html * {
   color: #36bba6;
   cursor: pointer;
 }
+
+.codeinput {
+  width: 60%;
+  padding-right: 10px;
+}
 </style>
 
 <script>
+import fetch from "../api/fetch";
 import axios from "axios";
 import api from "../api/index";
 export default {
   data() {
+    var checkCode = () => {
+      if (!value) {
+        return callback(new Error("请输入验证码"));
+      } else {
+        callback();
+      }
+    };
+    var checkCompany = () => {
+      if (!value) {
+        return callback(new Error("请选择公司"));
+      } else {
+        callback();
+      }
+    };
     var checkPhone = (rule, value, callback) => {
       if (!value) {
         return callback(new Error("请输入手机号"));
@@ -125,8 +173,8 @@ export default {
       if (value === "") {
         callback(new Error("请输入密码"));
       } else {
-        if (this.registerInfo.checkPass !== "") {
-          this.$refs.registerInfo.validateField("checkPass");
+        if (this.hrInfo.checkPass !== "") {
+          this.$refs.hrInfo.validateField("checkPass");
         }
         callback();
       }
@@ -134,21 +182,32 @@ export default {
     var validatePass2 = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请再次输入密码"));
-      } else if (value !== this.registerInfo.password) {
+      } else if (value !== this.hrInfo.password) {
         callback(new Error("两次输入密码不一致!"));
       } else {
         callback();
       }
     };
     return {
-      registerInfo: {
+      isRegister: false,
+      msg: "发送验证码",
+      count: "",
+      timer: null,
+      show: true,
+      confirmCode: "",
+      options: [],
+      hrInfo: {
         password: "",
         checkPass: "",
         phone: "",
         username: "",
-        email: ""
+        email: "",
+        company: "",
+        code: ""
       },
-      rules2: {
+      hrrules: {
+        code: [{ validator: checkCode, trigger: "blur" }],
+        company: [{ validator: checkCompany, trigger: "blur" }],
         username: [{ validator: validUsername, trigger: "blur" }],
         password: [{ validator: validatePass, trigger: "blur" }],
         checkPass: [{ validator: validatePass2, trigger: "blur" }],
@@ -157,44 +216,87 @@ export default {
       }
     };
   },
+  mounted() {
+    this.isRegister = localStorage.getItem("isRegister");
+    this.getCompany();
+  },
   methods: {
+    sendCode() {
+      console.log("phone", this.hrInfo.phone);
+      const TIME_COUNT = 60;
+      fetch
+        .getCode(this.hrInfo.phone)
+        .then(res => {
+          if (res.status === 200) {
+            if (res.data.success === "true") {
+              this.confirmCode = res.data.data;
+              if (this.confirmCode == this.hrInfo.code) {
+                this.$router.push({ name: "index" });
+              } else {
+                this.$message({
+                  message: "验证码错误",
+                  type: "warning"
+                });
+              }
+            }
+          }
+          console.log(res.data);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+      if (!this.timer) {
+        this.count = TIME_COUNT;
+        this.show = false;
+        this.timer = setInterval(() => {
+          if (this.count > 0 && this.count <= TIME_COUNT) {
+            this.count--;
+            this.msg = this.count + "s后发送";
+          } else {
+            this.show = true;
+            clearInterval(this.timer);
+            this.timer = null;
+          }
+        }, 1000);
+      }
+    },
     hrSubmit(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-
         }
       });
     },
     finderSubmit(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          console.log(JSON.stringify(this.registerInfo));
-          axios
-            .post(api.getUser(), JSON.stringify(this.registerInfo), {
-              headers: {
-                "Content-type": "application/json"
-              }
-            })
+          console.log(JSON.stringify(this.applyInfo));
+          fetch
+            .userRegister(this.applyInfo)
             .then(res => {
-              if (res.status === "200") {
-                if (res.data.success === true) {
-                  localStorage.setItem({ token: res.data.data.data });
-                  console.log("token", localStorage.getItem(token));
-                  this.$router.push({ name: "login" });
-                } else {
-                  this.$message({
-                    message: res.data.data.msg,
-                    type: "warning"
-                  });
-                }
-              }
-              return true;
+              console.log(res);
+            })
+            .catch(e => {
+              console.log(e);
             });
         } else {
           console.log("error submit!!");
           return false;
         }
       });
+    },
+    getCompany() {
+      console.log("register", this.isRegister);
+      fetch
+        .getCompany()
+        .then(res => {
+          console.log("hahah", res.data.data);
+          for (let item of res.data.data) {
+            this.options.push({ value: item.id, label: item.name });
+          }
+        })
+        .catch(e => {
+          console.log(e);
+        });
     },
     toLogin() {
       this.$router.push({ name: "login" });

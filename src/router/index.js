@@ -9,6 +9,9 @@ const createResume = resolve => require(['../views/createResume.vue'], resolve)
 const login = resolve => require(['../views/login.vue'], resolve)
 const register = resolve => require(['../views/register.vue'], resolve)
 const demo = resolve => require(['../views/test.vue'], resolve)
+const test = resolve => require(['../views/test.vue'], resolve)
+const userInfo = resolve => require(['../views/userInfo.vue'], resolve)
+const companyDetail = resolve => require(['../views/companyDetail.vue'], resolve)
 export default new Router({
   routes: [
     {
@@ -45,6 +48,21 @@ export default new Router({
       path: '/demo',
       name: 'demo',
       component: demo
+    },
+    {
+      path: '/test',
+      name: 'test',
+      component: test
+    },
+    {
+      path: '/userInfo',
+      name: 'userInfo',
+      component: userInfo
+    },
+    {
+      path: '/companyDetail',
+      name: 'companyDetail',
+      component: companyDetail
     }
   ]
 })
