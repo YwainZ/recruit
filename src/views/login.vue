@@ -2,7 +2,7 @@
 <div class="container">
   <div class="registerForm">
     <h3>登录leader招聘</h3>
-    <el-form :model="loginInfo" status-icon :rules="rules2" ref="loginInfo" label-width="100px" class="demo-ruleForm">
+    <el-form :model="loginInfo" status-icon :rules="rules2" ref="loginInfo" label-width="100px" class="loginForm">
     <el-form-item label="用户名" prop="username">
     <el-input type="text" v-model="loginInfo.username" auto-complete="off"></el-input>
   </el-form-item>
@@ -10,7 +10,7 @@
     <el-input type="password" v-model="loginInfo.password" auto-complete="off"></el-input>
   </el-form-item>
   <el-form-item>
-    <el-button  @click="submitForm('loginInfo')">登录</el-button>
+    <el-button class="loginBtn"  @click="submitForm('loginInfo')">登录</el-button>
   </el-form-item>
 </el-form>
 <span class="toRegister">没有账号？<span @click="toRegister">直接注册</span></span>
@@ -29,10 +29,10 @@ html * {
 }
 .container {
   width: 100%;
-  height: 100%;
+  height: 200%;
   border: 1px solid #ededed;
   background: url("../assets/bgimg.jpg") no-repeat;
-  background-size: 100% 100%;
+  background-size: 100% 200%;
 }
 
 .registerForm {
@@ -50,11 +50,11 @@ html * {
   color: #36bba6;
 }
 
-.el-form {
+.loginForm {
   margin: 10% 10% 23% auto;
 }
 
-.el-button {
+.loginBtn {
   border: 1px solid #36bba6;
   border-radius: 8px;
   color: #36bba6;

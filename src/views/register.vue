@@ -16,9 +16,10 @@
     <el-input v-model.number="hrInfo.phone"></el-input>
   </el-form-item>
     <el-form-item label="验证码" prop="code">
-    <el-input v-model.number="hrInfo.code" class="codeinput"></el-input><el-button class="code" @click="sendCode">{{this.msg}}</el-button>
+    <el-input v-model.number="hrInfo.code" class="codeinput"></el-input><el-button class="registerBtn" @click="sendCode">{{this.msg}}</el-button>
   </el-form-item>
-   <el-form-item label="公司" prop="company"  >
+  <div  v-if="!this.isRegister">
+   <el-form-item label="公司" prop="company" >
       <el-select v-model="hrInfo.company" filterable placeholder="请选择">
     <el-option
       v-for="item in options"
@@ -28,11 +29,12 @@
     </el-option>
   </el-select>
   </el-form-item>
+  </div>
    <el-form-item label="邮箱" prop="email">
     <el-input v-model="hrInfo.email"></el-input>
   </el-form-item>
   <el-form-item>
-    <el-button @click="hrSubmit('Info')">注册</el-button>
+    <el-button class="registerBtn" @click="hrSubmit('Info')">注册</el-button>
   </el-form-item>
 </el-form>
 <span class="toLogin">已有账号?<span @click="toLogin">直接登录</span></span>
@@ -84,11 +86,11 @@ html * {
   margin-top: 25px;
 }
 
-.el-form {
+.demo-ruleForm {
   margin: 10% 10% 20% auto;
 }
 
-.el-button {
+.registerBtn {
   border: 1px solid #36bba6;
   border-radius: 8px;
   color: #36bba6;
@@ -189,7 +191,7 @@ export default {
       }
     };
     return {
-      isRegister: false,
+      isRegister: localStorage.getItem("isRegister"),
       msg: "发送验证码",
       count: "",
       timer: null,
@@ -217,7 +219,7 @@ export default {
     };
   },
   mounted() {
-    this.isRegister = localStorage.getItem("isRegister");
+    console.log('isregister', this.isRegister)
     this.getCompany();
   },
   methods: {
