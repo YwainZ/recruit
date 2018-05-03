@@ -1,7 +1,7 @@
 <template>
  <div>
 <my-menu></my-menu>
-<el-card>
+<el-card class="companycard">
   <img :src="detail.avatar" class="avatar">
   <div class="introduce">
   <p class="title">{{detail.name}}</p>
@@ -9,13 +9,13 @@
   <p>{{detail.address}}<span>|</span>{{detail.scale}}<span>|</span>{{detail.type}}</p>
   </div>
 </el-card>
-<el-card>
+<el-card class="companycard">
   <div class="job">招聘信息</div>
   <p v-if="!isShow" class="nojob">暂时没有招聘信息哦</p>
   <div class="jobcard" v-if="isShow" >
     <el-card v-for="(item, key) in recruit" :key="key" shadow="hover">
       <div class="jobinfo" @click="getJobDetail(item.id)">
-      <p class="jobname">{{item.content}}</p>
+      <p class="jobname">{{item.title}}</p>
       <p><i class="el-icon-location"></i>{{detail.address}}<span>|</span>{{detail.scale}}<span>|</span>{{detail.type}}</p>
       </div>
     </el-card>
@@ -33,13 +33,13 @@ body {
   padding: 0;
 }
 
-.el-card .job {
+.companycard .job {
   border-left: 5px solid #36bba6;
   text-align: left;
   padding-left: 0.5rem;
 }
 
-.el-card {
+.companycard {
   width: 70%;
   margin: 2% 15% auto 15%;
 }
@@ -79,7 +79,7 @@ p span {
 }
 .jobcard .el-card {
   width: 100%;
-  margin-left: 0.06rem;
+  margin: 1rem auto auto 0.06rem;
 }
 .nojob {
   font-size: 18px;

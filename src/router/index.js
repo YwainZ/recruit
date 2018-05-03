@@ -12,6 +12,8 @@ const test = resolve => require(['../views/test.vue'], resolve)
 const userInfo = resolve => require(['../views/userInfo.vue'], resolve)
 const companyDetail = resolve => require(['../views/companyDetail.vue'], resolve)
 const search = resolve => require(['../views/searchRes.vue'], resolve)
+const test2 = resolve => require(['../views/test2.vue'], resolve)
+const hrUserInfo = resolve => require(['../views/hrViews/userInfo.vue'], resolve)
 export default new Router({
   routes: [
     {
@@ -63,6 +65,17 @@ export default new Router({
       path: '/search',
       name: 'search',
       component: search
+    },
+    {
+      path: '/test2',
+      name: 'test2',
+      component: test2
+
+    },
+    {
+      path: '/hrView',
+      name: 'hrView',
+      component: hrUserInfo
     }
   ]
 })

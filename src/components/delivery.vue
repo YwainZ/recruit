@@ -4,15 +4,13 @@
     <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1524746733938&di=9ae24b5205e97c2876b48d3ff26f1c23&imgtype=0&src=http%3A%2F%2Fwww.snlfjx.com%2Fforum%2FSkin%2Fimgs%2Fno-data.png">
     <p>暂时没有记录哦</p>
   </div>
-  <div v-for="(item, index) in list" :key="index" v-if="show">
-    <el-col :span="16" >
-    <el-card shadow="hover">
+  <div v-for="(item, index) in list" :key="index" v-if="show" @click="getDetail(key)">
+    <el-card shadow="hover" class="deliverycard">
       <div class="resumeBox">
       <p>{{item.title}}</p>
       <p>投递时间{{item.time}}</p>
        </div>
     </el-card>
-  </el-col>
   </div>
 </div>
 </template>
@@ -21,9 +19,10 @@
   display: flex;
   justify-content: space-between;
 }
-.el-col {
+.deliverycard {
   margin-bottom: 1rem;
   width: 100%;
+  height: 5rem;
 }
 .nofind p{
   font-size: 18px;
@@ -57,13 +56,19 @@ export default {
             if (res.data.data === null) {
               this.show = false;
             }
-            console.log("delivery", res.data.data);
+            console.log("delivery", res);
             this.list = res.data.data.sendList;
+
+           console.log('company', this.list[1])
           }
         })
         .catch(e => {
           console.log(e);
         });
+    },
+    getDetail (key) {
+      localStorage.setItem("companyId", this.list[key].recruitId)
+      this.$router.push({name: "companyDetail"})
     }
   }
 };

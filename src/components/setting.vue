@@ -3,8 +3,8 @@
   <el-collapse>
   <el-collapse-item title="修改手机号" name="1">
     <el-form :model="phoneForm" status-icon :rules="phonerules" ref="phoneForm" label-width="100px" class="demo-ruleForm">
-  <el-form-item label="手机号" prop="phone">
-    <el-input  v-model="phoneForm.checkphone" auto-complete="off"></el-input>
+  <el-form-item label="手机号" prop="phone" class="settinginput">
+    <el-input  v-model="phoneForm.phone" auto-complete="off"></el-input>
   </el-form-item>
     <el-form-item >
     <el-button class="btn" @click="changePhone('phoneForm')">确定</el-button>
@@ -13,11 +13,11 @@
   </el-collapse-item>
   <el-collapse-item title="修改密码" name="2">
   <el-form :model="passForm" status-icon :rules="passwordrules" ref="passForm" label-width="100px" class="demo-ruleForm">
-    <el-form-item label="密码" prop="pass">
-    <el-input type="password" v-model="passForm.checkpass" auto-complete="off"></el-input>
+    <el-form-item label="密码" prop="pass"  class="settinginput">
+    <el-input   type="password" v-model="passForm.pass" auto-complete="off"></el-input>
   </el-form-item>
-  <el-form-item label="确认密码" prop="checkPass">
-    <el-input type="password" v-model="passForm.confirmPass" auto-complete="off"></el-input>
+  <el-form-item label="确认密码" prop="checkPass" class="settinginput" >
+    <el-input  type="password" v-model="passForm.Pass" auto-complete="off"></el-input>
   </el-form-item>
     <el-form-item >
     <el-button class="btn"  @click="changePass('passForm')">确定</el-button>
@@ -26,8 +26,8 @@
   </el-collapse-item>
   <el-collapse-item title="修改邮箱" name="3">
   <el-form :model="emailForm" status-icon :rules="emailrules" ref="emailForm" label-width="100px" class="demo-ruleForm">
-  <el-form-item label="邮箱" prop="email">
-    <el-input v-model="emailForm.checkemail" auto-complete="off"></el-input>
+  <el-form-item label="邮箱" prop="email" class="settinginput">
+    <el-input   v-model="emailForm.email" auto-complete="off"></el-input>
   </el-form-item>
     <el-form-item>
     <el-button class="btn"  @click="changeEmail('emailForm')">确定</el-button>
@@ -52,6 +52,9 @@
   border-radius: 8px;
   color: white;
   background: #36bba6;
+}
+.settinginput {
+  width: 75%
 }
 </style>
 
@@ -115,13 +118,12 @@ export default {
        this.$refs[formName].validate(valid => {
         if (valid) {
           fetch.changePhone(this.phoneForm).then(res =>{
-            console.log('1',res)
+            console.log('电话号码',res)
           }).catch(e =>{
             console.log(e)
           })
         } else {
           console.log("error submit!!");
-          return false;
         }
       });
     },

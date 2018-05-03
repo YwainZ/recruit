@@ -18,8 +18,8 @@
     <el-form-item label="验证码" prop="code">
     <el-input v-model.number="hrInfo.code" class="codeinput"></el-input><el-button class="registerBtn" @click="sendCode">{{this.msg}}</el-button>
   </el-form-item>
-  <div  v-if="!this.isRegister">
-   <el-form-item label="公司" prop="company" >
+  <div >
+   <el-form-item v-if="!isRegister" label="公司" prop="company">
       <el-select v-model="hrInfo.company" filterable placeholder="请选择">
     <el-option
       v-for="item in options"
@@ -191,7 +191,7 @@ export default {
       }
     };
     return {
-      isRegister: localStorage.getItem("isRegister"),
+      isRegister: false,
       msg: "发送验证码",
       count: "",
       timer: null,
@@ -219,6 +219,7 @@ export default {
     };
   },
   mounted() {
+     this.isRegister = Boolean(localStorage.getItem("isRegister"));
     console.log('isregister', this.isRegister)
     this.getCompany();
   },

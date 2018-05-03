@@ -1,4 +1,5 @@
 const host = 'http://personfilter.clairezyw.com'
+// const host = 'http://192.168.199.147:6200'
 
 export default {
   getCompany () {
@@ -59,8 +60,8 @@ export default {
     return host + `/recruit/${id}`
   },
   // 投递简历
-  deliveryReusme (recruiteId) {
-    return host + `/recruit/resume/${recruiteId}`
+  deliveryReusme () {
+    return host + '/recruit/resume'
   },
   // 获取站内信
   getMessage () {
@@ -68,6 +69,25 @@ export default {
   },
   // 搜索职位信息
   findJob () {
+    return host + '/recruit'
+  },
+  // 已读
+  readMessage () {
+    return host + '/message/read'
+  },
+  // hr resumelist
+  receiveResume () {
+    return host + '/recruit/receive'
+  },
+  // hr发布职位信息
+  publishJob () {
+    return host + '/recruit'
+  },
+  // 查看hr发布的职位信息
+  checkJob () {
+    return host + '/recruit/hr'
+  },
+  deletejob () {
     return host + '/recruit'
   }
 

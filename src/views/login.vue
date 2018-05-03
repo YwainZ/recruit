@@ -4,10 +4,10 @@
     <h3>登录leader招聘</h3>
     <el-form :model="loginInfo" status-icon :rules="rules2" ref="loginInfo" label-width="100px" class="loginForm">
     <el-form-item label="用户名" prop="username">
-    <el-input type="text" v-model="loginInfo.username" auto-complete="off"></el-input>
+    <el-input type="text" v-model="loginInfo.username" auto-complete="off" class="loginInput"></el-input>
   </el-form-item>
   <el-form-item label="密码" prop="password">
-    <el-input type="password" v-model="loginInfo.password" auto-complete="off"></el-input>
+    <el-input type="password" v-model="loginInfo.password" auto-complete="off" class="loginInput"></el-input>
   </el-form-item>
   <el-form-item>
     <el-button class="loginBtn"  @click="submitForm('loginInfo')">登录</el-button>
@@ -51,14 +51,14 @@ html * {
 }
 
 .loginForm {
-  margin: 10% 10% 23% auto;
+  margin: 10% 10% 23% 0;
 }
 
 .loginBtn {
   border: 1px solid #36bba6;
   border-radius: 8px;
   color: #36bba6;
-  margin-left: -50px;
+  margin-left: 5rem;
 }
 
 .el-form-item__label {
@@ -83,6 +83,9 @@ html * {
 .toRegister span {
   color: #36bba6;
   cursor: pointer;
+}
+.loginInput{
+  width: 17rem
 }
 </style>
 
@@ -118,6 +121,11 @@ export default {
       }
     };
   },
+  watch: {
+    userId() {
+      location.reload();
+    }
+  },
   methods: {
     toRegister() {
       this.$router.push({ name: "register" });
@@ -131,10 +139,17 @@ export default {
               console.log(res)
               if (res.status === 200) {
                 if (res.data.success === true) {
-                  localStorage.setItem("token", res.data.data);
-                  console.log(localStorage.getItem("token"), "token");
-                  console.log("denglu", res);
-                  this.$router.push({ name: "userInfo" });
+                  localStorage.setItem("token", res.data.data.token);
+                  console.log(localStorage.getItem("token"), "token")
+                  localStorage.setItem('companyId', res.data.data.companyId)
+                  localStorage.setItem('role', res.data.data.role)
+                  localStorage.setItem('userId', res.data.data.userId)
+                  if(res.data.data.role === 2){
+                    this.$router.push({ name: "userInfo" });
+                  }
+                  else{
+                     this.$router.push({ name: "hrView" });
+                  }
                 }
                 else{
                   this.$message({

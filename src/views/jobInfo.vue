@@ -4,7 +4,7 @@
   <el-card class="jobcard">
   <img :src="company.avatar" class="avatar">
   <div class="introduce">
-  <p class="title">{{recruit.content}}</p>
+  <p class="title">{{recruit.title}}</p>
   <p>{{company.introduce}}</p>
   <p>{{company.address}}<span>|</span>{{company.scale}}<span>|</span>{{company.type}}</p>
   </div>
@@ -12,16 +12,7 @@
 </el-card>
 <el-card class="jobcard">
   <div class="jobintroduce">职位介绍</div>
-  <p> 这是一个很长很长很长很长很长很长很长的职位介绍</p>
-  <p> 这是一个很长很长很长很长很长很长很长的职位介绍</p>
-  <p> 这是一个很长很长很长很长很长很长很长的职位介绍</p>
-  <p> 这是一个很长很长很长很长很长很长很长的职位介绍</p>
-  <p> 这是一个很长很长很长很长很长很长很长的职位介绍</p>
-  <p> 这是一个很长很长很长很长很长很长很长的职位介绍</p>
-  <p> 这是一个很长很长很长很长很长很长很长的职位介绍</p>
-  <p> 这是一个很长很长很长很长很长很长很长的职位介绍</p>
-  <p> 这是一个很长很长很长很长很长很长很长的职位介绍</p>
-  <p> 这是一个很长很长很长很长很长很长很长的职位介绍</p>
+  <p style="height: 6rem">{{recruit.content}}</p>
   <div class="jobintroduce">联系hr</div>
   <div class="hrinfo">
     <span><i class="el-icon-news"></i>{{hr.username}}</span>
@@ -101,6 +92,7 @@ export default {
     };
   },
   mounted() {
+  console.log('我是',localStorage.getItem("token"))
     this.getJobDetail();
   },
   methods: {
@@ -125,9 +117,19 @@ export default {
         });
     },
     sendResume() {
-      console.log('info', )
-       fetch.deliveryReusme(this.recruitId, this.title).then(res => {
+      let body = {
+        recruitId: this.recruitId,
+        title: this.title
+      }
+       fetch.deliveryReusme(body).then(res => {
          console.log("投递",res)
+         if(res.status === 200){
+           this.$message({
+             message: res.data.data,
+             type: "success"
+           })
+
+         }
        }).catch(e =>{
          console.log(e)
        })

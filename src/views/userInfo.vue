@@ -4,19 +4,29 @@
  <div class="wrapper">
 <el-card class="box-card">
   <div>
-    <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1524249513799&di=a5b524befcd72c0b088bffbb1673806c&imgtype=0&src=http%3A%2F%2Fpic.qqtn.com%2Fup%2F2017-8%2F201708281546438994444.png">
-    <span class="username">{{username}}</span>
+<el-upload
+  class="avatar-uploader"
+  action="http://personfilter.clairezyw.com/user/avatar"
+  name="avatar"
+  :headers="head"
+  :show-file-list="false"
+  :on-success="handleAvatarSuccess"
+  :before-upload="beforeAvatarUpload">
+  <img v-if="imageUrl" :src="imageUrl" class="avatar">
+  <img v-else  class="img" :src="list.avatar">
+</el-upload>
+    <span class="username">{{list.username}}</span>
   </div>
 </el-card>
-<el-tabs type="border-card" tabPosition="left" style="height: 700px;">
+<el-tabs type="border-card" tabPosition="left" style="height: 1000px;">
   <el-tab-pane >
     <span slot="label">个人信息<i class="el-icon-arrow-right"></i></span>
-    <user :username="username" :sex="sex" :address='address' :introduce='introduce' :endTime='endTime'  :education="this.education" :school='school' :intentionCompany='intentionCompany' :intentionJob='intentionJob' :isEdit="isEdit"></user>
+    <user :list="list" :isEdit="isEdit"></user>
     <el-button class='editor' @click="changeEdit">{{btnText}}</el-button>
   </el-tab-pane>
   <el-tab-pane >
     <span slot="label">我的简历<i class="el-icon-arrow-right"></i></span>
-    <my-resume :user-id="this.userId"></my-resume>
+    <my-resume></my-resume>
   </el-tab-pane>
    <el-tab-pane >
     <span slot="label">投递记录<i class="el-icon-arrow-right"></i></span>
@@ -53,11 +63,10 @@ html * {
   margin: 1rem 15% auto 15%;
 }
 
-.box-card img {
+.img {
   border-radius: 50%;
-  width: 8%;
-  float: left;
-  margin-bottom: 1rem;
+  width: 5rem;
+  height: 5rem;
 }
 
 .button {
@@ -93,6 +102,26 @@ html * {
   top: 0;
   right: 0;
 }
+.avatar-uploader {
+  float: left;
+}
+.avatar-uploader .el-upload {
+  border-radius: 50%;
+  width: 5rem;
+  height: 5rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.avatar-uploader .el-upload:hover {
+  border-color: #409eff;
+}
+.avatar {
+  width: 5rem;
+  height: 5rem;
+  display: block;
+}
 </style>
 
 <script>
@@ -102,27 +131,23 @@ import Resume from "../components/resume";
 import Delivery from "../components/delivery";
 import Setting from "../components/setting";
 import menu from "../components/common/menu";
-import userInfoVue from '../components/userInfo.vue';
+import userInfoVue from "../components/userInfo.vue";
 export default {
   data() {
     return {
-      userId:1,
       activeIndex2: "1",
-      username: "",
-      nickname: "",
-      sex: "",
-      address: "",
-      introduce: "",
-      endTime: "",
-      education: "",
-      school: "",
-      intentionCompany: "",
-      intentionJob: "",
       isEdit: false,
-      btnText: "编辑"
+      btnText: "编辑",
+      list: [],
+      imageUrl: "",
+      head: {}
     };
   },
   mounted() {
+    this.head = {
+      ContentType: "application/json",
+      Authorization: "Basic " + localStorage.getItem("token")
+    };
     this.getUserInfo();
   },
   components: {
@@ -138,19 +163,7 @@ export default {
         .getUserInfo()
         .then(res => {
           console.log("用户信息", res.data.data);
-          let arr = res.data.data;
-          this.username = arr.username;
-          this.nickname = arr.nickname;
-          this.sex = arr.man;
-          this.address = arr.address;
-          this.introduce = arr.introduce;
-          this.endTime = arr.endTime;
-          this.education = arr.education;
-          this.school = arr.school;
-          this.intentionCompany = arr.intentionCompany;
-          this.intentionJob = arr.intentionJob;
-          this.userId = arr.userId;
-          localStorage.setItem("userId", this.userId)
+          this.list = res.data.data;
         })
         .catch(err => {
           console.log(err);
@@ -173,6 +186,21 @@ export default {
       } else {
         this.btnText = "取消";
       }
+    },
+    handleAvatarSuccess(res, file) {
+      this.imageUrl = URL.createObjectURL(file.raw);
+    },
+    beforeAvatarUpload(file) {
+      const isJPG = file.type === "image/jpeg";
+      const isLt2M = file.size / 1024 / 1024 < 2;
+
+      if (!isJPG) {
+        this.$message.error("上传头像图片只能是 JPG 格式!");
+      }
+      if (!isLt2M) {
+        this.$message.error("上传头像图片大小不能超过 2MB!");
+      }
+      return isJPG && isLt2M;
     }
   }
 };

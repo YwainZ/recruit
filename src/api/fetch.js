@@ -54,13 +54,30 @@ export default {
   getJobDetail (id) {
     return axios.get(api.getJobDetail(id), {headers: headers})
   },
-  deliveryReusme (recruiteId, title) {
-    return axios.get(api.deliveryReusme(recruiteId), {params: {title: title}}, {headers: headers})
+  deliveryReusme (body) {
+    console.log('headers', headers)
+    return axios.post(api.deliveryReusme(), JSON.stringify(body), {headers: headers})
   },
   getMessage () {
     return axios.get(api.getMessage(), {headers: headers})
   },
   findJob (key) {
     return axios.get(api.findJob(), {params: {key: key}}, {headers: headers})
+  },
+  readMessage (info) {
+    return axios.post(api.readMessage(), JSON.stringify(info), {headers: headers})
+  },
+  receiveResume () {
+    return axios.get(api.receiveResume(), {headers: headers})
+  },
+  publishJob (jobinfo) {
+    return axios.post(api.publishJob(), JSON.stringify(jobinfo), {headers: headers})
+  },
+  checkJob () {
+    return axios.get(api.checkJob(), {headers: headers})
+  },
+  deletejob (id) {
+    return axios.delete(api.deletejob(), {params: {id: id}}, {headers: headers})
   }
+
 }
