@@ -1,0 +1,40 @@
+<template>
+  <div>
+    <my-menu></my-menu>
+    <el-tabs type="border-card" tabPosition="left" style="height: 1000px;" class="hr">
+    <el-tab-pane>
+    <span slot="label">职位管理<i class="el-icon-arrow-right"></i></span>
+   <manage-job></manage-job>
+  </el-tab-pane>
+   <el-tab-pane>
+    <span slot="label">投递记录<i class="el-icon-arrow-right"></i></span>
+   <receive></receive>
+  </el-tab-pane>
+   <el-tab-pane >
+    <span slot="label">设置<i class="el-icon-arrow-right"></i></span>
+   <setting></setting>
+  </el-tab-pane>
+</el-tabs>
+  </div>
+</template>
+
+<script>
+import menu from '../../components/common/menu'
+import receive from '../../components/hrtabs/getResume'
+import setting from '../../components/setting'
+import manageJob from '../../components/hrtabs/manageJob'
+export default {
+ components:{
+   "my-menu": menu,
+   receive,
+   setting,
+   manageJob
+ }
+}
+</script>
+
+<style>
+.hr {
+   margin: 2% 15% auto 15%;
+}
+</style>
