@@ -8,12 +8,11 @@ const infoCenter = resolve => require(['../views/infoCenter.vue'], resolve)
 const createResume = resolve => require(['../views/createResume.vue'], resolve)
 const login = resolve => require(['../views/login.vue'], resolve)
 const register = resolve => require(['../views/register.vue'], resolve)
-const test = resolve => require(['../views/test.vue'], resolve)
 const userInfo = resolve => require(['../views/userInfo.vue'], resolve)
 const companyDetail = resolve => require(['../views/companyDetail.vue'], resolve)
 const search = resolve => require(['../views/searchRes.vue'], resolve)
-const test2 = resolve => require(['../views/test2.vue'], resolve)
 const hrUserInfo = resolve => require(['../views/hrViews/userInfo.vue'], resolve)
+const hrRegister = resolve => require(['../views/hrRegister.vue'], resolve)
 export default new Router({
   routes: [
     {
@@ -47,11 +46,6 @@ export default new Router({
       component: register
     },
     {
-      path: '/test',
-      name: 'test',
-      component: test
-    },
-    {
       path: '/userInfo',
       name: 'userInfo',
       component: userInfo
@@ -67,15 +61,14 @@ export default new Router({
       component: search
     },
     {
-      path: '/test2',
-      name: 'test2',
-      component: test2
-
-    },
-    {
       path: '/hrView',
       name: 'hrView',
       component: hrUserInfo
+    },
+    {
+      path: '/hrRegister',
+      name: 'hrRegister',
+      component: hrRegister
     }
   ]
 })

@@ -1,6 +1,11 @@
 <template>
  <div>
    <my-menu></my-menu>
+   <el-card v-if="isShow" class="jobcard">
+     <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1524746733938&di=9ae24b5205e97c2876b48d3ff26f1c23&imgtype=0&src=http%3A%2F%2Fwww.snlfjx.com%2Fforum%2FSkin%2Fimgs%2Fno-data.png">
+     <p>啊哦，职位已经下线了</p>
+   </el-card>
+   <div v-if="!isShow">
   <el-card class="jobcard">
   <img :src="company.avatar" class="avatar">
   <div class="introduce">
@@ -8,17 +13,18 @@
   <p>{{company.introduce}}</p>
   <p>{{company.address}}<span>|</span>{{company.scale}}<span>|</span>{{company.type}}</p>
   </div>
-  <el-button class="jobbtn" @click="sendResume()">投递简历</el-button>
+  <el-button class="jobbtn" @click="sendResume()" v-if="!isHr">投递简历</el-button>
 </el-card>
 <el-card class="jobcard">
   <div class="jobintroduce">职位介绍</div>
-  <p style="height: 6rem">{{recruit.content}}</p>
+  <p style="height: 6rem;">{{recruit.content}}</p>
   <div class="jobintroduce">联系hr</div>
   <div class="hrinfo">
     <span><i class="el-icon-news"></i>{{hr.username}}</span>
-    邮箱<span><i class="el-icon-message"></i>{{hr.email}}</span>
+    <span><i class="el-icon-message"></i>{{hr.email}}</span>
   </div>
 </el-card>
+   </div>
 </div>
 </template>
 <style>
@@ -82,62 +88,65 @@ p span {
 import menu from "../components/common/menu";
 import fetch from "../api/fetch";
 export default {
-  data() {
+  data () {
     return {
       company: [],
       hr: [],
       recruit: [],
       recruitId: 0,
-      title:""
-    };
+      title: '',
+      isHr: false,
+      isShow: false
+    }
   },
-  mounted() {
-  console.log('我是',localStorage.getItem("token"))
-    this.getJobDetail();
+  mounted () {
+    if (localStorage.getItem('role') === '1') {
+      this.isHr = true
+    }
+    this.getJobDetail()
   },
   methods: {
-    getJobDetail() {
-      let jobId = localStorage.getItem("jobId");
+    getJobDetail () {
+      let jobId = localStorage.getItem('jobId')
       fetch
         .getJobDetail(jobId)
         .then(res => {
           if (res.status === 200) {
+            if (res.data.data === null) {
+              this.isShow = true
+            }
             if (res.data.success === true) {
               this.company = res.data.data.company
               this.hr = res.data.data.hr
               this.recruit = res.data.data.recruit
-              console.log("详情", res)
               this.recruitId = this.recruit.id
               this.title = this.recruit.title
             }
           }
         })
         .catch(e => {
-          console.log(e);
-        });
+          console.log(e)
+        })
     },
-    sendResume() {
+    sendResume () {
       let body = {
         recruitId: this.recruitId,
         title: this.title
       }
-       fetch.deliveryReusme(body).then(res => {
-         console.log("投递",res)
-         if(res.status === 200){
-           this.$message({
-             message: res.data.data,
-             type: "success"
-           })
-
-         }
-       }).catch(e =>{
-         console.log(e)
-       })
+      fetch.deliveryReusme(body).then(res => {
+        if (res.status === 200) {
+          this.$message({
+            message: res.data.data,
+            type: 'success'
+          })
+        }
+      }).catch(e => {
+        console.log(e)
+      })
     }
   },
   components: {
-    "my-menu": menu
+    'my-menu': menu
   }
-};
+}
 </script>
-

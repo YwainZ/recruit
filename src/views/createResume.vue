@@ -4,7 +4,6 @@
   :default-active="activeIndex2"
   class="el-menu-demo"
   mode="horizontal"
-  @select="handleSelect"
   background-color="#36bba6"
   text-color="#fff"
   active-text-color="#fff">
@@ -31,43 +30,38 @@
   </div>
 </template>
 <style>
-@import "swiper/dist/css/swiper.css";
+ @import 'swiper/dist/css/swiper.css'
 .img {
   width: 100%;
   height: 187px;
 }
 </style>
 <script>
-import { swiper, swiperSlide } from "vue-awesome-swiper";
+import { swiper, swiperSlide } from 'vue-awesome-swiper';
 
 export default {
   data() {
     return {
       swiperOption: {
-        pagination:{
-          el:'.swiper-pagination',
+        pagination: {
+          el: '.swiper-pagination',
           type: 'fraction'
         },
-        navigation:{
-         nextEl: '.swiper-button-next',
-         prevEl: '.swiper-button-prev',
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev'
         },
-        initialSlide: 0, //设定初始化时slide的索引
-        direction: "horizontal", //Slides的滑动方向，可设置水平(horizontal)或垂直(vertical)。
-        loop: true, //无限滚动
-        speed: 300, //滑动速度
-        autoplay: true, //自动切换的时间间
+        initialSlide: 0,
+        direction: 'horizontal',
+        loop: true,
+        speed: 300,
+        autoplay: true
       }
-    };
-  },
-  methods: {
-    handleSelect(key, keyPath) {
-      console.log(key, keyPath);
     }
   },
   components: {
     swiper,
     swiperSlide
   }
-};
+}
 </script>

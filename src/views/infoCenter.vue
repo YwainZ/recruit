@@ -1,6 +1,10 @@
 <template>
   <div>
   <my-menu></my-menu>
+    <el-card class="infocard" v-if="isShow">
+      <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1524746733938&di=9ae24b5205e97c2876b48d3ff26f1c23&imgtype=0&src=http%3A%2F%2Fwww.snlfjx.com%2Fforum%2FSkin%2Fimgs%2Fno-data.png"/>
+      <p>暂时没有消息哦</p>
+    </el-card>
   <el-card class="infocard" v-for="(item, key) in infoList" :key="key">
     <i class="el-icon-message myMsg" ></i>
     <div class="infoTitle" @click="info(item.content, item.id)">
@@ -13,7 +17,7 @@
   <el-dialog  title="系统通知" :visible.sync="dialogVisible" width="30%" >
   <span>{{content}}</span>
   <span slot="footer" class="dialog-footer">
-    <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+    <el-button type="primary" @click="confirmClick">确 定</el-button>
   </span>
 </el-dialog>
   </div>
@@ -22,59 +26,70 @@
 <script>
 import menu from "../components/common/menu";
 import fetch from "../api/fetch";
+import ElCard from "../../node_modules/element-ui/packages/card/src/main.vue";
 export default {
-  data() {
+  data () {
     return {
+      num: 0,
       infoList: [],
       dialogVisible: false,
       content: '',
-      count:  localStorage.getItem("count"),
-    };
+      isShow: false,
+      count: localStorage.getItem('count')
+    }
   },
   components: {
-    "my-menu": menu
+    ElCard,
+    'my-menu': menu
   },
-  mounted() {
-    this.getMessage();
+  mounted () {
+    this.getMessage()
   },
   watch: {
-    count() {
+    num () {
+      location.reload()
+    },
+    count () {
       location.reload()
     }
   },
   methods: {
-    getMessage() {
+    confirmClick () {
+      this.dialogVisible = false
+      this.num++
+    },
+    getMessage () {
       fetch
         .getMessage()
         .then(res => {
-          console.log(res);
           if (res.status === 200) {
             if (res.data.success === true) {
-              this.infoList = res.data.data;
+              this.infoList = res.data.data
+              if (this.infoList.length === 0) {
+                this.isShow = true
+              }
             }
           }
         })
         .catch(e => {
-          console.log(e);
-        });
+          console.log(e)
+        })
     },
-    info(msg, num) {
-      this.dialogVisible =true
+    info (msg, num) {
+      this.dialogVisible = true
       this.content = msg
       let info = {
         id: num,
-        userId: localStorage.getItem('userId')
+        userId: sessionStorage.getItem('userId')
       }
       fetch.readMessage(info).then(res => {
-        console.log("已读",res)
+        console.log('已读', res)
       }).catch(e => {
         console.log(e)
       })
-
     }
-
   }
-};
+}
 </script>
 
 <style>

@@ -89,6 +89,9 @@ export default {
   },
   deletejob () {
     return host + '/recruit'
+  },
+  hrRegister () {
+    return host + '/user/hr'
   }
 
 }

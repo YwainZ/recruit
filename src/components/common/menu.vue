@@ -3,7 +3,7 @@
   <div class="contain">
   <div>
   <span @click="redirect(1)" class="tab">首页</span>
-  <span v-if="isHr" @click="publishvisible = true">发布职位</span>
+  <span v-if="isHr" @click="publishvisible = true" class="tab">发布职位</span>
   <span v-if="isHr" @click="redirect(6)">个人中心</span>
   <span @click="redirect(2)" class="tab"  v-if="!isHr">个人中心</span>
   <span class="tab" v-if="!isHr"><el-input placeholder="搜索心仪的职位" style="width:18rem"  v-model="content"  @change="getJob(content)"><i slot="prefix" class="el-input__icon el-icon-search"></i></el-input></span>
@@ -11,10 +11,10 @@
   <div>
   <span @click="redirect(3)" class="tab"><i class="el-icon-message" style="margin-right:0.3rem" @click="redirect(5)"></i>消息中心</span><span class="icon">0</span>
   <span v-if="isShow">
-  <span class="tab"><el-button class="menuBtn" @click="redirect(4)">登录</el-button></span>
+  <span class="tab"><el-button class="menuBtn" @click="redirect(4)" style=" border-radius: 8px;color: white;background: #36bba6;">登录</el-button></span>
   <span class="tab">
-  <el-dropdown @command="register">
-  <el-button  class="menuBtn">
+  <el-dropdown @command="toregister">
+  <el-button  class="menuBtn"  style=" border-radius: 8px;color: white;background: #36bba6;">
   注册
   </el-button>
   <el-dropdown-menu slot="dropdown">
@@ -33,7 +33,7 @@
      <el-input type="textarea" rows="10" class="require" v-model="publishInfo.content"></el-input>
    </el-form-item>
     <el-form-item label="技术栈" prop="skillList">
-       <el-button @click="addskill()" class="addbtn">添加</el-button>
+       <el-button @click="addskill()" class="addbtn"  style=" border-radius: 8px;color: white;background: #36bba6;">添加</el-button>
         <div  v-for="(item, key) in publishInfo.skillList" :key="key">
       <input placeholder="技术" class="requireinput" v-model="item.name"/>
       <select  class="requireselect" v-model="item.weight">
@@ -46,11 +46,11 @@
       </div>
   </el-form-item>
    <el-form-item>
-     <el-button @click="addjob('publishInfo')">确定</el-button>
+     <el-button @click="addjob('publishInfo')"  style=" border-radius: 8px;color: white;background: #36bba6;">确定</el-button>
    </el-form-item>
   </el-form>
 </el-dialog>
-<span v-if="!isShow" class="tab"><el-button class="menuBtn" @click="logout()">退出登录</el-button></span>
+<span v-if="!isShow" class="tab"><el-button  @click="logout()"  style=" border-radius: 8px;color: white;background: #36bba6;">退出登录</el-button></span>
    </div>
   </div>
  </header>
@@ -78,12 +78,7 @@ header {
   color: white;
 }
 .contain .tab {
-  margin: 0.5rem;
-}
-.menuBtn {
-  border-radius: 8px;
-  color: white;
-  background: #36bba6;
+  margin: 0.8rem;
 }
 .icon {
   position: relative;
@@ -123,185 +118,184 @@ header {
   left: 17.5rem;
 }
 .el-icon-error {
-  color: red;
+  color: #dcdfe6;
   position: relative;
+}
+.el-icon-error:hover {
+  color: red;
 }
 
 </style>
 
-<script>
-import fetch from "../../api/fetch";
+<script>/* eslint-disable standard/object-curly-even-spacing */
+
+import fetch from '../../api/fetch'
 export default {
-  data() {
+  data () {
     var checktitle = (rule, value, callback) => {
       if (!value) {
-        return callback(new Error("职位名称不能为空"));
+        return callback(new Error('职位名称不能为空'))
       } else {
-        callback();
+        callback()
       }
-    };
+    }
     var checkintroduce = (rule, value, callback) => {
       if (!value) {
-        return callback(new Error("职位介绍不能为空"));
+        return callback(new Error('职位介绍不能为空'))
       } else {
-        callback();
+        callback()
       }
-    };
+    }
     var checkskill = (rule, value, callback) => {
       if (!value) {
-        return callback(new Error("技术要求不能为空"));
+        return callback(new Error('技术要求不能为空'))
       } else {
-        callback();
+        callback()
       }
-    };
+    }
     return {
       index: 0,
+      count: 0,
       publishInfo: {
-        hrId: "",
-        title: "",
-        content: "",
-        companyId: "",
+        hrId: '',
+        title: '',
+        content: '',
+        companyId: '',
         skillList: [
           {
-            name: "",
+            name: '',
             weight: 0
           }
         ]
       },
       publishvisible: false,
       isHr: false,
-      content: "",
+      content: '',
       companyList: [],
-      msg: "",
+      msg: '',
       isShow: true,
       publishRules: {
-        title: [{ validator: checktitle, trigger: "blur" }],
-        content: [{ validator: checkintroduce, trigger: "blur" }],
-        skillList: [{ validator: checkskill, trigger: "blur" }]
+        title: [{ validator: checktitle, trigger: 'blur' }],
+        content: [{ validator: checkintroduce, trigger: 'blur' }],
+        skillList: [{ validator: checkskill, trigger: 'blur' }]
       }
-    };
-  },
-  created() {
-    const s = document.createElement("script");
-    s.type = "text/javascript";
-    s.src = "https://cdn.goeasy.io/goeasy.js";
-    document.body.appendChild(s);
-    this.getChannel();
-  },
-  mounted() {
-    var icon = document.getElementsByClassName("icon")[0];
-    icon.innerHTML = localStorage.getItem("count");
-    console.log('menu userId', localStorage.getItem('userId'))
-    if (localStorage.getItem("userId")) {
-      this.isShow = false;
     }
-    if (localStorage.getItem("role") === 1) {
-      this.isHr = !this.isHr;
+  },
+  created () {
+    const s = document.createElement('script')
+    s.type = 'text/javascript'
+    s.src = 'https://cdn.goeasy.io/goeasy.js'
+    document.body.appendChild(s)
+    this.getChannel()
+  },
+  watch: {
+    count () {
+      location.reload()
     }
-     if(icon.innerHTML == 0) {
-        icon.style.display = 'none'
+  },
+  mounted () {
+    var icon = document.getElementsByClassName('icon')[0]
+    icon.innerHTML = localStorage.getItem('count')
+    if (sessionStorage.getItem('userId')) {
+      this.isShow = false
+    }
+    if (localStorage.getItem('role') === '1') {
+      this.isHr = true
     }
   },
   methods: {
-    redirect(num, flag) {
+    redirect (num, flag) {
       if (num === 1) {
-        this.$router.push({ name: "index" });
+        this.$router.push({ name: 'index' })
       } else if (num === 2) {
-        this.$router.push({ name: "userInfo" });
+        this.$router.push({ name: 'userInfo' })
       } else if (num === 3) {
-        this.$router.push({ name: "infoCenter" });
+        this.$router.push({ name: 'infoCenter' })
       } else if (num === 4) {
-        this.$router.push({ name: "login" });
+        this.$router.push({ name: 'login' })
       } else if (num === 5) {
-        this.$router.push({ name: "infoCenter" });
+        this.$router.push({ name: 'infoCenter' })
       } else if (num === 6) {
         this.$router.push({ name: 'hrView'})
       }
     },
-    register(command) {
-      console.log("command", command);
-      this.$router.push({ name: "register" });
-      localStorage.setItem("isRegister", command);
-    },
-    getJob(value) {
-      console.log("输入框", value);
-      if (value !== null) {
-        localStorage.setItem("content", value);
+    toregister (command) {
+      if (command === 'true') {
+        this.$router.push({ name: 'register' })
+      } else {
+        this.$router.push({name: 'hrRegister'})
       }
-      this.$router.push({ name: "test" });
     },
-    getChannel() {
-      console.log("userid", localStorage.getItem("userId"));
-      var goEasy = new GoEasy({
-        appkey: "BC-9e32a2089e08457399dfc6032fcaa294"
-      });
+    getJob (value) {
+      if (value !== null) {
+        localStorage.setItem('content', value)
+      }
+      this.$router.push({ name: 'search', params: {count: 1}})
+    },
+    getChannel () {
+      var goEasy = new GoEasy ({
+        appkey: 'BC-9e32a2089e08457399dfc6032fcaa294'
+      })
       goEasy.subscribe({
-        channel: localStorage.getItem("userId"),
-        onMessage: function(message) {
-          var icon = document.getElementsByClassName("icon")[0];
-          console.log("icon", icon);
+        channel: sessionStorage.getItem('userId'),
+        onMessage: function (message) {
+          var icon = document.getElementsByClassName('icon')[0]
           if (message instanceof Object) {
-            localStorage.setItem("count", message.content);
-            icon.innerHTML = localStorage.getItem("count");
+            localStorage.setItem('count', message.content)
+            icon.innerHTML = localStorage.getItem('count')
           } else {
-            localStorage.setItem("count", message);
-            icon.innerHTML = localStorage.getItem("count");
+            localStorage.setItem('count', message)
+            icon.innerHTML = localStorage.getItem('count')
           }
         }
-      });
+      })
     },
-    logout() {
+    logout () {
       fetch
         .logout()
         .then(res => {
-          console.log("退出登录", res);
           if (res.status === 200) {
             this.$message({
               message: res.data.msg,
-              type: "success"
-            });
-            localStorage.setItem('userId', "")
-            localStorage.setItem('role', "")
-            this.$router.push({ name: "login" });
+              type: 'success'
+            })
+            sessionStorage.setItem('userId', '')
+            localStorage.setItem('role', '')
+            this.$router.push({ name: 'login' })
           }
         })
         .catch(e => {
-          console.log(e);
-        });
+          console.log(e)
+        })
     },
-    addjob(formName) {
-      this.publishvisible = false;
-      this.publishInfo.hrId = localStorage.getItem("userId");
-      this.publishInfo.companyId = localStorage.getItem("companyId");
-      console.log("jobinfo", this.publishInfo);
+    addjob (formName) {
+      this.publishvisible = false
+      this.publishInfo.hrId = sessionStorage.getItem('userId')
+      this.publishInfo.companyId = localStorage.getItem('companyId')
       this.$refs[formName].validate(valid => {
         if (valid) {
           fetch.publishJob(this.publishInfo).then(res => {
-            console.log(res)
-            if(res.status === 200){
-               this.$message({
-                 message: "发布成功",
-                 type: "success"
-               })
-               this.publishvisible = false
-               this.$refs[formName].resetFields();
+            if (res.status === 200) {
+              this.publishvisible = false
+              this.count++
+              this.$refs[formName].resetFields()
             }
           }).catch(e => {
             console.log(e)
           })
         }
-      });
+      })
     },
-    deleteItem(key){
-      this.publishInfo.skillList.splice(key,1)
+    deleteItem (key) {
+      this.publishInfo.skillList.splice(key, 1)
     },
-    addskill() {
-       let newskills = {
+    addskill () {
+      let newskills = {
         weight: 0,
-        name: "",
+        name: ''
       }
       this.publishInfo.skillList.push(newskills)
     }
   }
-};
+}
 </script>

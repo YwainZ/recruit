@@ -12,13 +12,11 @@
 <el-card class="companycard">
   <div class="job">招聘信息</div>
   <p v-if="!isShow" class="nojob">暂时没有招聘信息哦</p>
-  <div class="jobcard" v-if="isShow" >
-    <el-card v-for="(item, key) in recruit" :key="key" shadow="hover">
+    <div v-if="isShow"  v-for="(item, key) in recruit" :key="key" shadow="hover" style=" width: 120%;margin: 1rem auto auto 0.06rem;">
       <div class="jobinfo" @click="getJobDetail(item.id)">
       <p class="jobname">{{item.title}}</p>
       <p><i class="el-icon-location"></i>{{detail.address}}<span>|</span>{{detail.scale}}<span>|</span>{{detail.type}}</p>
       </div>
-    </el-card>
   </div>
 </el-card>
   </div>
@@ -77,10 +75,6 @@ p span {
 .jobname {
   font-size: 18px;
 }
-.jobcard .el-card {
-  width: 100%;
-  margin: 1rem auto auto 0.06rem;
-}
 .nojob {
   font-size: 18px;
   color: #909399;
@@ -91,19 +85,19 @@ p span {
 import fetch from "../api/fetch";
 import menu from "../components/common/menu";
 export default {
-  data() {
+  data () {
     return {
-      companyId: localStorage.getItem("companyId"),
+      companyId: localStorage.getItem('companyId'),
       detail: [],
       recruit: [],
       isShow: true
-    };
+    }
   },
-  mounted() {
-    this.getCompanyInfo();
+  mounted () {
+    this.getCompanyInfo()
   },
   methods: {
-    getCompanyInfo() {
+    getCompanyInfo () {
       fetch
         .getCompanyDetail(this.companyId)
         .then(res => {
@@ -112,22 +106,22 @@ export default {
               this.detail = res.data.data.company
               this.recruit = res.data.data.recruitList
               if (this.recruit.length === 0) {
-                this.isShow = false;
+                this.isShow = false
               }
             }
           }
         })
         .catch(e => {
-          console.log(e);
-        });
+          console.log(e)
+        })
     },
-    getJobDetail(id) {
-      localStorage.setItem("jobId", id)
-      this.$router.push({name: "jobInfo"})
+    getJobDetail (id) {
+      localStorage.setItem('jobId', id)
+      this.$router.push({name: 'jobInfo'})
     }
   },
   components: {
-    "my-menu": menu
+    'my-menu': menu
   }
-};
+}
 </script>

@@ -1,10 +1,10 @@
 <template>
 <div>
-  <div v-if="!show" class="nofind">
+  <div v-if="show" class="nofind">
     <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1524746733938&di=9ae24b5205e97c2876b48d3ff26f1c23&imgtype=0&src=http%3A%2F%2Fwww.snlfjx.com%2Fforum%2FSkin%2Fimgs%2Fno-data.png">
     <p>暂时没有记录哦</p>
   </div>
-  <div v-for="(item, index) in list" :key="index" v-if="show" >
+  <div v-for="(item, index) in list" :key="index" v-if="!show" >
     <el-card shadow="hover" class="receiveBox">
       <div class="flex">
       <el-progress  :width="80" type="circle" :percentage="item.rate" color="#A6F6AF" class="circle" ></el-progress>
@@ -84,57 +84,56 @@
 <script>
 import fetch from '../../api/fetch'
 export default {
-  data() {
+  data () {
     return {
       getResumeList: {
-        name: "",
-        sex: "",
-        age: "",
-        skills: [
-         {
-         id: 1,
-         name: "",
-         level: "",
-         resumeId: 1
-       }
-      ],
-      school: "",
-      address: "",
-      endTime: 2019,
-      phone: "",
-      email: "",
-      introduce: "",
-      experience: "",
-      awards: "",
-      avatar: ""
+        name: '',
+        sex: '',
+        age: '',
+        skills: [{
+          id: 1,
+          name: '',
+          level: '',
+          resumeId: 1
+        }],
+        school: '',
+        address: '',
+        endTime: 2019,
+        phone: '',
+        email: '',
+        introduce: '',
+        experience: '',
+        awards: '',
+        avatar: ''
       },
       list: [],
-      show: true,
-      getResumev: false,
+      show: false,
+      getResumev: false
     }
   },
-  mounted() {
+  mounted () {
     this.getList()
   },
   methods: {
-    getList() {
+    getList () {
       fetch.receiveResume().then(res => {
-        console.log('he', res.data.data.receiveList)
         this.list = res.data.data.receiveList
+        if (this.list.length === 0) {
+          this.show = true
+        }
       }).catch(e => {
         console.log(e)
       })
     },
-    getTableList(id){
-      this.getResumev = true;
-       fetch
+    getTableList (id) {
+      this.getResumev = true
+      fetch
         .getResume(id)
         .then(res => {
           if (res.status === 200) {
             if (res.data.success === true) {
               if (res.data.data !== null) {
-                 console.log("shuju", res.data.data)
-                 this.getResumeList = res.data.data;
+                this.getResumeList = res.data.data
               }
             }
           }

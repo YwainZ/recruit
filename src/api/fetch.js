@@ -55,7 +55,6 @@ export default {
     return axios.get(api.getJobDetail(id), {headers: headers})
   },
   deliveryReusme (body) {
-    console.log('headers', headers)
     return axios.post(api.deliveryReusme(), JSON.stringify(body), {headers: headers})
   },
   getMessage () {
@@ -78,6 +77,9 @@ export default {
   },
   deletejob (id) {
     return axios.delete(api.deletejob(), {params: {id: id}}, {headers: headers})
+  },
+  hrRegister (hrInfo) {
+    return axios.post(api.hrRegister(), JSON.stringify(hrInfo), {headers: headers})
   }
 
 }
