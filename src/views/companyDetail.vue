@@ -37,6 +37,7 @@ body {
 
 .companycard {
   width: 70%;
+  height: 100%;
   margin: 2% 15% auto 15%;
 }
 .avatar {
@@ -55,7 +56,7 @@ body {
 }
 
 .introduce p {
-  margin: 8px;
+  margin: 5px;
 }
 
 p span {

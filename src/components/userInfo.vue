@@ -40,7 +40,7 @@
       </tr>
       <el-button class="edit" @click="changeEdit">编辑</el-button>
     </table>
-    <el-form  :model="list" status-icon :rules="rules2" ref="list" label-width="100px" class="userForm"
+    <el-form  :model="list" status-icon :rules="rules2" ref="list" label-width="100px" class="geren"
              v-if="isEdit">
       <el-form-item label="昵称" prop="nickname">
         <el-input v-model="list.nickname" auto-complete="off"></el-input>
@@ -90,17 +90,15 @@
   table {
    width: 600px;
   }
-
   table tr td {
     padding: 11.2px;
     text-align: left;
   }
-  .userForm {
+  .geren {
     width: 500px;
   }
   .edit {
-    position: relative;
-    margin: 14px auto auto 100px;
+    margin: 14px;
   }
 </style>
 

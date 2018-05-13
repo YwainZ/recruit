@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-collapse>
-      <el-collapse-item title="修改手机号" name="1">
+      <el-collapse-item title="修改手机号" name="1" class="set">
         <el-form :model="phoneForm" status-icon :rules="phonerules" ref="phoneForm" label-width="100px"
                  class="demo-ruleForm">
           <el-form-item label="手机号" prop="phone" class="settinginput">
@@ -12,7 +12,7 @@
           </el-form-item>
         </el-form>
       </el-collapse-item>
-      <el-collapse-item title="修改密码" name="2">
+      <el-collapse-item title="修改密码" name="2" class="set">
         <el-form :model="passForm" status-icon :rules="passwordrules" ref="passForm" label-width="100px"
                  class="demo-ruleForm">
           <el-form-item label="密码" prop="pass" class="settinginput">
@@ -26,7 +26,7 @@
           </el-form-item>
         </el-form>
       </el-collapse-item>
-      <el-collapse-item title="修改邮箱" name="3">
+      <el-collapse-item title="修改邮箱" name="3" class="set">
         <el-form :model="emailForm" status-icon :rules="emailrules" ref="emailForm" label-width="100px"
                  class="demo-ruleForm">
           <el-form-item label="邮箱" prop="email" class="settinginput">
@@ -45,7 +45,7 @@
     margin-top: 20px
   }
 
-  .el-collapse-item__header {
+  .set {
     margin-top: 21px;
     font-size: 14px;
     color: #909399
@@ -62,8 +62,7 @@
   }
 </style>
 
-<script>
-  /* eslint-disable indent */
+<script>/* eslint-disable indent */
 
   import fetch from '../api/fetch'
 

@@ -6,7 +6,7 @@
      <p>啊哦，职位已经下线了</p>
    </el-card>
    <div v-if="!isShow">
-  <el-card class="jobcard">
+  <el-card class="jobcard" style="height: 200px;">
   <img :src="company.avatar" class="avatar">
   <div class="introduce">
   <p class="title">{{recruit.title}}</p>

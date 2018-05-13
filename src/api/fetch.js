@@ -7,7 +7,7 @@ let headers = {
 }
 export default {
   getCompany () {
-    return axios.get(api.getCompany(), {headers: headers})
+    return axios.get(api.getCompany(), {params: {size: 8}}, {headers: headers})
   },
   userRegister (info) {
     return axios.post(api.userRegister(), JSON.stringify(info), {headers: headers})

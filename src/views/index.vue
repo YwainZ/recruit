@@ -38,13 +38,13 @@
   width: 70%;
   margin: 4% 15% auto 15%;
   margin-top: 40px;
-  display: flex;
-  justify-content: space-between;
 }
 .wrapper-card .card {
   border: 1px solid #ebebeb;
   width: 22%;
-  height: 224px;
+  height: 230px;
+  float: left;
+  margin: 14px;
   border-radius: 6px;
 }
 .wrapper-card .card:hover {
@@ -55,7 +55,7 @@
 .wrapper-card .image {
   border-radius: 6px 6px 0 0;
   width: 100%;
-  height: 65%;
+  height: 70%;
   margin-bottom: 20px;
 }
 .el-carousel__item h3 {

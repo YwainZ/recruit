@@ -33,7 +33,7 @@
      <el-input type="textarea" rows="10" class="require" v-model="publishInfo.content"></el-input>
    </el-form-item>
     <el-form-item label="技术栈" prop="skillList">
-       <el-button @click="addskill()" class="addbtn"  style=" border-radius: 8px;color: white;background: #36bba6;">添加</el-button>
+       <el-button @click="addskill()" class="addbtn">添加</el-button>
         <div  v-for="(item, key) in publishInfo.skillList" :key="key">
       <input placeholder="技术" class="requireinput" v-model="item.name"/>
       <select  class="requireselect" v-model="item.weight">
@@ -46,7 +46,7 @@
       </div>
   </el-form-item>
    <el-form-item>
-     <el-button @click="addjob('publishInfo')"  style=" border-radius: 8px;color: white;background: #36bba6;">确定</el-button>
+     <el-button @click="addjob('publishInfo')">确定</el-button>
    </el-form-item>
   </el-form>
 </el-dialog>
@@ -114,12 +114,13 @@ header {
 }
 .addbtn {
   position: relative;
-  top: 35px;
-  left: 245px;
+  top: 40px;
+  left: 270px;
 }
 .el-icon-error {
   color: #dcdfe6;
   position: relative;
+  left: -30px;
 }
 .el-icon-error:hover {
   color: red;
