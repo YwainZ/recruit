@@ -112,7 +112,7 @@
                 <option label="掌握" value=3></option>
                 <option label="精通" value=4></option>
               </select>
-              <i class="el-icon-error" @click="deleteItem(key)"></i>
+              <i class="el-icon-error error" @click="deleteItem(key)"></i>
             </div>
           </div>
         </el-form-item>
@@ -179,7 +179,7 @@
                 <option label="掌握" value=3></option>
                 <option label="精通" value=4></option>
               </select>
-              <i class="el-icon-error" @click="deleteItem(key)"></i>
+              <i class="el-icon-error error" @click="deleteItem(key)"></i>
             </div>
           </div>
         </el-form-item>
@@ -198,12 +198,6 @@
   </div>
 </template>
 <style>
-  .el-icon-error {
-    float: right;
-    padding-top: -112px;
-    color: red
-  }
-
   .input {
     width: 45%;
     height: 40px;
@@ -214,12 +208,13 @@
     padding: 0 15px;
     margin: auto 11.2px 14px auto;
   }
-  .el-icon-error {
+  .error {
     color: #dcdfe6;
     position: relative;
-    top: 6px
+    top: -52px;
+    left: 210px;
   }
-  .el-icon-error:hover {
+  .error:hover {
     color: red;
   }
   .select {

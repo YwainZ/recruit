@@ -120,7 +120,7 @@ header {
 .el-icon-error {
   color: #dcdfe6;
   position: relative;
-  left: -80px;
+  left: -85px;
 }
 .el-icon-error:hover {
   color: red;
