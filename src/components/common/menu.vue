@@ -42,7 +42,7 @@
       <option label="掌握" value=3></option>
       <option label="精通" value=4></option>
   </select>
-    <i class="el-icon-error"  @click="deleteItem(key)"></i>
+    <i class="el-icon-error delete"  @click="deleteItem(key)"></i>
       </div>
   </el-form-item>
    <el-form-item>
@@ -117,12 +117,12 @@ header {
   top: 40px;
   left: 270px;
 }
-.el-icon-error {
+.delete {
   color: #dcdfe6;
   position: relative;
-  left: -85px;
+  left: -10px;
 }
-.el-icon-error:hover {
+.delete:hover {
   color: red;
 }
 
