@@ -75,7 +75,7 @@
           <el-input v-model="resumeList.name" auto-complete="off"></el-input>
         </el-form-item>
         <el-form-item label="性别" prop="sex">
-          <el-select v-model="resumeList.sex" placeholder="请选择性别">
+          <el-select v-model="resumeList.sex" placeholder="请选择性别" style="width: 100%">
             <el-option label="男" value="男"></el-option>
             <el-option label="女" value="女"></el-option>
           </el-select>
@@ -89,7 +89,7 @@
         <el-form-item label="我的简介" prop="introduce">
           <el-input type="textarea" :autosize="{ minRows: 4, maxRows: 6}" v-model="resumeList.introduce"></el-input>
         </el-form-item>
-        <el-form-item label="毕业年份" prop="endTime">
+        <el-form-item label="毕业年份" prop="endTime" >
           <el-input v-model.number="resumeList.endTime"></el-input>
         </el-form-item>
         <el-form-item label="学校" prop="school">
@@ -135,7 +135,7 @@
           <el-input v-model="resumeList.name" auto-complete="off"></el-input>
         </el-form-item>
         <el-form-item label="性别" prop="sex">
-          <el-select v-model="resumeList.sex" placeholder="请选择性别">
+          <el-select v-model="resumeList.sex" placeholder="请选择性别" style="width: 100%">
             <el-option label="男" value="男"></el-option>
             <el-option label="女" value="女"></el-option>
           </el-select>
@@ -150,7 +150,7 @@
           <el-input type="textarea" :autosize="{ minRows: 4, maxRows: 6}" v-model="resumeList.introduce"></el-input>
         </el-form-item>
         <el-form-item label="毕业年份" prop="endTime">
-          <el-select v-model="resumeList.endTime">
+          <el-select v-model="resumeList.endTime" style="width: 100%">
             <el-option
               v-for="item in options"
               :key="item.value"
@@ -200,7 +200,7 @@
 <style>
   .el-icon-error {
     float: right;
-    padding-top: -8px;
+    padding-top: -112px;
     color: red
   }
 
@@ -212,7 +212,7 @@
     outline: 0;
     background: #fff;
     padding: 0 15px;
-    margin: auto 0.8rem 1rem auto;
+    margin: auto 11.2px 14px auto;
   }
   .el-icon-error {
     color: #dcdfe6;
@@ -230,7 +230,7 @@
     outline: 0;
     background: #fff;
     padding: 0 15px;
-    margin: auto 0.8rem 1rem auto;
+    margin: auto 11.2px 14px auto;
   }
 
   .mytable {
@@ -239,67 +239,43 @@
   }
 
   .progress {
-    width: 13rem;
+    width: 182px;
     border: 0;
   }
 
   .modBtn {
-    margin: 1rem;
-  }
-
-  .el-form-item {
-    text-align: center;
-  }
-
-  .el-select {
-    width: 100%;
+    margin: 14px;
   }
 
   .resumeInfo {
     width: 100%;
     text-align: left;
-    height: 5rem;
+    height: 90px;
     border-left: 5px solid #36bba6;
-  }
-
-  .back {
-    position: relative;
-    left: 20rem;
-    top: 2.5rem;
   }
 
   .createResume {
     position: relative;
-    left: 16rem;
+    left: 224px;
   }
 
   .resumeHead {
     width: 100%;
     border: 1px solid #ededed;
     background: #f4f4f4;
-    padding: 1.5rem;
+    padding: 21px;
   }
 
   .checkBtn {
     position: relative;
-    top: -1.6rem;
-    left: 40rem;
-  }
-
-  .skillinput {
-    width: 100%;
-    margin-bottom: 10px;
-  }
-
-  .skillselect {
-    width: 100%;
-    margin-bottom: 10px;
+    top: -22.4px;
+    left: 680px;
   }
 
   .addbtn {
     position: relative;
-    top: 2.5rem;
-    left: 18rem;
+    top: 40px;
+    left: 265px;
   }
 
   .resumeInfoForm {
@@ -491,7 +467,7 @@ export default {
         }
       })
     },
-    getResume(userId) {
+    getResume (userId) {
       fetch
         .getResume(userId)
         .then(res => {

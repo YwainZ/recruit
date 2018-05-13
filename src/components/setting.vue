@@ -46,15 +46,15 @@
   }
 
   .el-collapse-item__header {
-    margin-top: 1.5rem;
+    margin-top: 21px;
     font-size: 14px;
     color: #909399
   }
 
   .btn {
     position: relative;
-    top: -4rem;
-    left: 16rem;
+    top: -62px;
+    left: 225px;
   }
 
   .settinginput {
@@ -178,6 +178,5 @@
       }
     }
 
-  };
+  }
 </script>
-

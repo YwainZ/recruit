@@ -38,7 +38,7 @@
         <td> 我感兴趣的工作：</td>
         <td>{{list.intentionJob}}</td>
       </tr>
-      <el-button class='editor' @click="changeEdit">编辑</el-button>
+      <el-button class="edit" @click="changeEdit">编辑</el-button>
     </table>
     <el-form  :model="list" status-icon :rules="rules2" ref="list" label-width="100px" class="userForm"
              v-if="isEdit">
@@ -46,7 +46,7 @@
         <el-input v-model="list.nickname" auto-complete="off"></el-input>
       </el-form-item>
       <el-form-item label="性别" prop="sex">
-        <el-select v-model="list.sex" placeholder="请选择性别">
+        <el-select v-model="list.sex" placeholder="请选择性别" style="width: 100%">
           <el-option label="男" value="男"></el-option>
           <el-option label="女" value="女"></el-option>
         </el-select>
@@ -58,7 +58,7 @@
         <el-input v-model="list.introduce"></el-input>
       </el-form-item>
       <el-form-item label="毕业年份" prop="endTime">
-        <el-select v-model="list.endTime">
+        <el-select v-model="list.endTime" style="width: 100%">
           <el-option
             v-for="item in options"
             :key="item.value"
@@ -80,9 +80,9 @@
         <el-input v-model="list.intentionJob"></el-input>
       </el-form-item>
       <el-form-item>
+        <el-button class='editor' @click="changeEdit">返回</el-button>
         <el-button  @click="submitInfo('list')">提交</el-button>
       </el-form-item>
-      <el-button class='editor' @click="changeEdit">返回</el-button>
     </el-form>
   </div>
 </template>
@@ -92,23 +92,19 @@
   }
 
   table tr td {
-    padding: 0.8rem;
+    padding: 11.2px;
     text-align: left;
   }
   .userForm {
     width: 500px;
   }
-  .el-form-item {
-    text-align: center;
-  }
-  .editor {
-    float: right;
-    margin: 1rem 5rem auto auto;
+  .edit {
+    position: relative;
+    margin: 14px auto auto 100px;
   }
 </style>
 
-<script>
-  /* eslint-disable indent */
+<script>/* eslint-disable indent */
 
   import fetch from '../api/fetch'
 
@@ -216,10 +212,10 @@
       }
     },
     methods: {
-      changeEdit() {
+      changeEdit () {
         this.isEdit = !this.isEdit
       },
-      submitInfo(formName) {
+      submitInfo (formName) {
         this.$refs[formName].validate(valid => {
           if (valid) {
             fetch

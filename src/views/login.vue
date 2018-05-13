@@ -13,6 +13,7 @@
           <el-button style="margin-left: -2rem;" class="loginBtn" @click="submitForm('loginInfo')">登录</el-button>
         </el-form-item>
       </el-form>
+      <i  class="el-icon-back" @click="backIndex">返回</i>
       <span class="toRegister">没有账号？<span @click="toRegister">直接注册</span></span>
     </div>
   </div>
@@ -23,24 +24,21 @@
     padding: 0;
     margin: 0;
   }
-
   * {
     box-sizing: border-box;
   }
-
   .container {
     width: 100%;
-    height: 60rem;
+    height: 100%;
     border: 1px solid #ededed;
     background: url("../assets/bgimg.jpg") no-repeat;
     background-size: 100% 200%;
   }
-
   .registerForm {
     background: rgba(255, 255, 255, 0.8);
     border: 1px solid #ededed;
-    width: 30rem;
-    height: 20rem;
+    width: 450px;
+    height: 320px;
     margin: 10% 35% 25% 35%;
     box-shadow: 0px 5px 8px #888;
     border-radius: 8px;
@@ -50,32 +48,30 @@
     margin-top: 25px;
     color: #36bba6;
   }
-
   .loginForm {
     position: relative;
-    top: 1rem;
-    left: -1rem;
-    padding: 1rem
+    top: 14px;
+    left: -14px;
+    padding: 14px;
   }
-
-  .el-input__inner:hover {
-    border: 1px solid #36bba6;
-  }
-
   .toRegister {
     color: #888;
     font-size: 14px;
     position: relative;
-    left: 10rem;
+    left: 110px;
   }
-
   .toRegister span {
     color: #36bba6;
     cursor: pointer;
   }
-
   .loginInput {
-    width: 17rem
+    width: 100%;
+  }
+  .el-icon-back  {
+    position: relative;
+    left: -82px;
+    font-size: 14px;
+    color: #36bba6;
   }
 </style>
 
@@ -114,6 +110,9 @@
       }
     },
     methods: {
+      backIndex () {
+        this.$router.push({name: 'index'})
+      },
       toRegister () {
         this.$router.push({name: 'register'})
       },

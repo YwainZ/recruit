@@ -13,7 +13,7 @@
   <p>{{company.introduce}}</p>
   <p>{{company.address}}<span>|</span>{{company.scale}}<span>|</span>{{company.type}}</p>
   </div>
-  <el-button class="jobbtn" @click="sendResume()" v-if="!isHr">投递简历</el-button>
+  <el-button class="jobbtn" @click="sendResume()">投递简历</el-button>
 </el-card>
 <el-card class="jobcard">
   <div class="jobintroduce">职位介绍</div>
@@ -40,47 +40,46 @@ body {
 }
 .avatar {
   float: left;
-  width: 9rem;
-  height: 7.8rem;
+  width: 126px;
+  height: 109.2px;
 }
 .title {
-  font-size: 1.5rem;
+  font-size: 21px;
 }
 .introduce {
-  height: 7.8rem;
+  height: 109.2px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-left: 8rem;
 }
 .introduce p {
-  margin: 0.5rem;
+  margin: 8px;
 }
 p span {
-  margin: 1rem;
+  margin: 14px;
 }
 .jobintroduce {
   border-left: 5px solid #36bba6;
   text-align: left;
-  padding-left: 0.5rem;
+  padding-left: 8px;
 }
 .hravatar {
   float: left;
-  width: 5rem;
-  height: 5rem;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
-  margin-top: 1rem
+  margin-top: 14px
 }
 .hrinfo {
-  margin:1rem auto 3rem auto;
+  margin:14px auto 42px auto;
   float: left;
 }
 .hrinfo span{
-    margin-right: 1rem
+    margin-right: 14px
 }
 .jobbtn {
   float: right;
-  margin-bottom: 1rem;
+  margin-bottom: 20px;
 }
 </style>
 
@@ -95,14 +94,10 @@ export default {
       recruit: [],
       recruitId: 0,
       title: '',
-      isHr: false,
       isShow: false
     }
   },
   mounted () {
-    if (localStorage.getItem('role') === '1') {
-      this.isHr = true
-    }
     this.getJobDetail()
   },
   methods: {

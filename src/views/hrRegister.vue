@@ -16,7 +16,7 @@
           <el-input v-model.number="hrInfo.phone"></el-input>
         </el-form-item>
         <el-form-item label="验证码" prop="code">
-          <el-input v-model.number="hrInfo.code" class="codeinput"></el-input>
+        <el-input v-model.number="hrInfo.code"  style="width: 230px;padding-right: 10px;"></el-input>
           <el-button class="registerBtn" @click="sendCode" style="border: 1px solid #36bba6;border-radius: 8px;color: #36bba6;">{{this.msg}}</el-button>
         </el-form-item>
         <div>
@@ -38,6 +38,7 @@
           <el-button class="registerBtn" @click="hrSubmit('hrInfo')">注册</el-button>
         </el-form-item>
       </el-form>
+      <i  class="el-icon-back" @click="backIndex">返回</i>
       <span class="toLogin">已有账号?<span @click="toLogin">直接登录</span></span>
     </div>
   </div>
@@ -64,8 +65,8 @@
   .hrForm {
     background: rgba(255, 255, 255, 0.8);
     border: 1px solid #ededed;
-    width: 30rem;
-    height: 42rem;
+    width: 480px;
+    height: 630px;
     margin: 10% 35% 25% 35%;
     box-shadow: 0px 5px 8px #888;
     border-radius: 8px;
@@ -78,24 +79,18 @@
 
   .demo-ruleForm {
     position: relative;
-    top: 1rem;
-    left: -1rem;
-    padding: 1rem
+    top: 14px;
+    left: -14px;
+    padding: 14px;
   }
-
   .choose {
     width: 100%;
   }
-
-  .el-input__inner:hover {
-    border: 1px solid #36bba6;
-  }
-
   .toLogin {
     color: #888;
     font-size: 14px;
     float: right;
-    margin: 3rem 1.5rem auto auto;
+    margin: -8px 21px auto auto;
   }
 
   .toLogin span {
@@ -103,10 +98,14 @@
     cursor: pointer;
   }
 
-  .codeinput {
-    width: 230px;
-    padding-right: 10px;
+  .el-icon-back  {
+    position: relative;
+    top: -13px;
+    left: -100px;
+    font-size: 14px;
+    color: #36bba6;
   }
+
 </style>
 
 <script>/* eslint-disable indent,quotes,space-before-function-paren,brace-style */
@@ -194,6 +193,9 @@ export default {
     this.getCompany()
   },
   methods: {
+    backIndex () {
+      this.$router.push({name: 'index'})
+    },
     sendCode() {
       const TIME_COUNT = 60
       fetch

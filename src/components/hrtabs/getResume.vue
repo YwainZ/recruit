@@ -39,35 +39,35 @@
 </template>
 <style>
 .progress2{
-  width: 13rem;
+  width: 182px;
   border: 0;
 }
 .mytable {
   width: 100%;
-  height: 50rem;
+  height: 700px;
 }
 .clickbtn {
-  height: 2.5rem;
-  margin-top: 1rem
+  height: 35px;
+  margin-top: 14px;
 }
 .pipei {
   position: relative;
-  top: 5.5rem;
-  left: -4.8rem;
+  top: 82px;
+  left: -76px;
 }
 .flex {
   display: flex;
   justify-content: flex-start;
 }
 .receiveInfo {
-  margin: 2rem auto auto 1rem
+  margin: 28px auto auto 14px;
 }
 .receive {
    position: relative;
-   left: 20.5rem;
+   left: 330px;
 }
 .receiveBox {
-  margin-bottom: 1rem;
+  margin-bottom: 14px;
   width: 100%;
 }
 .nofind p{
@@ -75,9 +75,9 @@
   color: #909399;
 }
 .nofind img {
-  width: 25rem;
-  height: 20rem;
-  margin: 2rem 2rem auto auto;
+  width: 350px;
+  height: 280px;
+  margin: 28px 28rem auto auto;
 }
 </style>
 

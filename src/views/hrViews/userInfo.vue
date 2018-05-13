@@ -24,12 +24,12 @@ import receive from '../../components/hrtabs/getResume'
 import setting from '../../components/setting'
 import manageJob from '../../components/hrtabs/manageJob'
 export default {
- components:{
-   "my-menu": menu,
-   receive,
-   setting,
-   manageJob
- }
+  components: {
+    'my-menu': menu,
+    receive,
+    setting,
+    manageJob
+  }
 }
 </script>
 

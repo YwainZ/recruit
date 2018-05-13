@@ -12,7 +12,7 @@
 <div class="wrapper-card">
   <div class="card" v-for="(item, key) in companyList" :key="key">
     <img :src="item.avatar" class="image" @click="getCompanyDetail(item.id)">
-    <p>{{item.name}}|互联网</p>
+    <p style="margin-top: 10px">{{item.name}}|互联网</p>
   </div>
 </div>
 </div>
@@ -44,7 +44,7 @@
 .wrapper-card .card {
   border: 1px solid #ebebeb;
   width: 22%;
-  height: 16rem;
+  height: 224px;
   border-radius: 6px;
 }
 .wrapper-card .card:hover {
@@ -63,13 +63,6 @@
   font-size: 14px;
   opacity: 0.75;
   line-height: 150px;
-  margin: 0;
-}
-.el-carousel__item:nth-child(2n) {
-  background-color: #99a9bf;
-}
-.el-carousel__item:nth-child(2n + 1) {
-  background-color: #d3dce6;
 }
 .boxImg {
   width: 100%;
@@ -80,41 +73,40 @@
 import fetch from '../api/fetch'
 import menu from '../components/common/menu'
 export default {
-  data() {
+  data () {
     return {
-      crouselImg:[
-        {img: "https://upload-images.jianshu.io/upload_images/9381131-174e85f64219dd6d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"},
-        {img: "https://upload-images.jianshu.io/upload_images/9381131-174e85f64219dd6d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"},
-        {img: "https://upload-images.jianshu.io/upload_images/9381131-174e85f64219dd6d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"},
-        {img: "https://upload-images.jianshu.io/upload_images/9381131-174e85f64219dd6d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"}
+      crouselImg: [
+        {img: 'https://sxsimg.xiaoyuanzhao.com/97/E8/9757C6F113FF8A98769B1B627EE7FDE8.png'},
+        {img: 'https://sxsimg.xiaoyuanzhao.com/EE/34/EEEDE091CD9D4B62098CEFC493BA8634.png'},
+        {img: 'https://sxsimg.xiaoyuanzhao.com/2E/62/2E25D1313CF3C38BD2DDA49E3B310462.png'},
+        {img: 'https://sxsimg.xiaoyuanzhao.com/FD/0C/FDBBBD21A98136E3054ADDD432A5020C.png'}
 
       ],
-      activeIndex2: "1",
-      currentDate: "完美",
-      company:"",
-      companyList:[]
-    };
+      activeIndex2: '1',
+      currentDate: '完美',
+      company: '',
+      companyList: []
+    }
   },
-   mounted(){
-    this.getCompany();
+  mounted () {
+    this.getCompany()
   },
   methods: {
-    getCompany(){
-      fetch.getCompany().then(res =>{
-        if (res.status===200){
-          this.companyList = res.data.data.companyList;
+    getCompany () {
+      fetch.getCompany().then(res => {
+        if (res.status === 200) {
+          this.companyList = res.data.data.companyList
         }
       })
     },
-    getCompanyDetail(id) {
-      localStorage.setItem("companyId", id)
+    getCompanyDetail (id) {
+      localStorage.setItem('companyId', id)
       this.$router.push({name: 'companyDetail'})
     }
   },
   components: {
-    "my-menu": menu
+    'my-menu': menu
   }
 
-};
+}
 </script>
-

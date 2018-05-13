@@ -20,18 +20,19 @@
   justify-content: space-between;
 }
 .deliverycard {
-  margin-bottom: 1rem;
+  margin-bottom: 14px;
   width: 100%;
-  height: 5rem;
+  height: 90px;
+  border-left: 5px solid #36bba6;
 }
 .nofind p{
   font-size: 18px;
   color: #909399;
 }
 .nofind img {
-  width: 25rem;
-  height: 20rem;
-  margin: 2rem 2rem auto auto;
+  width: 350px;
+  height: 280px;
+  margin: 28px 28px auto auto;
 }
 </style>
 

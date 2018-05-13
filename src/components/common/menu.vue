@@ -4,8 +4,8 @@
   <div>
   <span @click="redirect(1)" class="tab">首页</span>
   <span v-if="isHr" @click="publishvisible = true" class="tab">发布职位</span>
-  <span v-if="isHr" @click="redirect(6)">个人中心</span>
-  <span @click="redirect(2)" class="tab"  v-if="!isHr">个人中心</span>
+  <span v-if="isHr && !isShow" @click="redirect(6)">个人中心</span>
+  <span @click="redirect(2)" class="tab"  v-if="!isHr && !isShow">个人中心</span>
   <span class="tab" v-if="!isHr"><el-input placeholder="搜索心仪的职位" style="width:18rem"  v-model="content"  @change="getJob(content)"><i slot="prefix" class="el-input__icon el-icon-search"></i></el-input></span>
   </div>
   <div>
@@ -65,7 +65,7 @@ html * {
 }
 header {
   width: 100%;
-  height: 3.5rem;
+  height: 55px;
   background: #36bba6;
 }
 .contain {
@@ -74,19 +74,19 @@ header {
   width: 70%;
   margin: 0 15% auto 15%;
   text-align: center;
-  line-height: 3.5rem;
+  line-height: 50px;
   color: white;
 }
 .contain .tab {
-  margin: 0.8rem;
+  margin: 11.2px;
 }
 .icon {
   position: relative;
   background: red;
-  font-size: 6px;
+  font-size: 10px;
   border-radius: 50%;
-  left: -0.8rem;
-  top: -0.5rem;
+  left: -11.2px;
+  top: -8px;
   padding: 0 5px;
 }
  .requireinput {
@@ -97,7 +97,7 @@ header {
   outline: 0;
   background: #fff;
   padding: 0 15px;
-  margin: auto 0.8rem 1rem auto;
+  margin: auto 11.2px 14px auto;
 }
 .requireselect {
   width: 35%;
@@ -107,15 +107,15 @@ header {
   outline: 0;
   background: #fff;
   padding: 0 15px;
-  margin: auto 0.8rem 1rem auto;
+  margin: auto 11.2px 14px auto;
 }
 .require {
   width: 80%;
 }
 .addbtn {
   position: relative;
-  top: 2.5rem;
-  left: 17.5rem;
+  top: 35px;
+  left: 245px;
 }
 .el-icon-error {
   color: #dcdfe6;

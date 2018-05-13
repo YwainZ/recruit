@@ -22,9 +22,9 @@
 }
 .jobavatar {
   float: left;
-  width: 5rem;
-  height: 4.5rem;
-  margin-right: 1rem
+  width: 70px;
+  height: 63px;
+  margin-right: 14px;
 }
 .introduce {
   display: flex;
@@ -32,7 +32,7 @@
   align-items: flex-start;
 }
 .introduce p {
-  margin-bottom: 1rem
+  margin-bottom: 14px;
 }
 </style>
 <script>
@@ -44,16 +44,10 @@ export default {
       content: localStorage.getItem('content'),
       list: [],
       havejob: false,
-      smallnum: 0
     }
   },
   mounted () {
     this.getJob()
-  },
-  watch : {
-    smallnum () {
-      
-    }
   },
   components: {
     'my-menu': menu

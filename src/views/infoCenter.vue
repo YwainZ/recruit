@@ -17,7 +17,7 @@
   <el-dialog  title="系统通知" :visible.sync="dialogVisible" width="30%" >
   <span>{{content}}</span>
   <span slot="footer" class="dialog-footer">
-    <el-button type="primary" @click="confirmClick">确 定</el-button>
+    <el-button type="primary" @click="confirmClick">确定</el-button>
   </span>
 </el-dialog>
   </div>
@@ -98,26 +98,26 @@ export default {
 }
 .infoTitle {
   text-align: center;
-  line-height: 5rem;
-  height: 5rem;
-  margin: auto auto auto 5rem;
+  line-height: 90px;
+  height: 90px;
+  margin: auto auto auto 70px;
 }
 .infoTitle p {
   float: left;
-  margin-top: 0.5rem;
+  margin-top: 8px;
 }
 .time {
   float: right;
-  margin-top: -2rem;
+  margin-top: -28px;
 }
 .myMsg {
-  margin-top: 1rem;
-  font-size: 4rem;
+  margin-top: 14px;
+  font-size: 65px;
   float: left;
   color: #5E9FA3
 }
 .haveRead {
   float: right;
-  margin-top: -5rem;
+  margin-top: -70px;
 }
 </style>

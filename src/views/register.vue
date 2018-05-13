@@ -1,6 +1,6 @@
 <template>
 <div class="container">
-    <div class="hrForm">
+    <div class="userForm">
      <h3>注册leader直聘</h3>
     <el-form :model="hrInfo" status-icon :rules="hrrules" ref="hrInfo" label-width="100px" class="demo-ruleForm">
     <el-form-item label="用户名" prop="username">
@@ -16,7 +16,7 @@
     <el-input v-model.number="hrInfo.phone"></el-input>
   </el-form-item>
     <el-form-item label="验证码" prop="code">
-    <el-input v-model.number="hrInfo.code" class="codeinput"></el-input>
+    <el-input v-model.number="hrInfo.code"  style="width: 230px;padding-right: 10px;"></el-input>
       <el-button style="border: 1px solid #36bba6;border-radius: 8px;color: #36bba6;" @click="sendCode">{{this.msg}}</el-button>
   </el-form-item>
    <el-form-item label="邮箱" prop="email">
@@ -26,59 +26,70 @@
     <el-button style="margin-left: -2.2rem"  @click="finderSubmit('hrInfo')">注册</el-button>
   </el-form-item>
 </el-form>
+      <i  class="el-icon-back" @click="backIndex">返回</i>
 <span class="toLogin">已有账号?<span @click="toLogin">直接登录</span></span>
   </div>
   </div>
 </template>
 
 <style>
-html * {
-  padding: 0;
-  margin: 0;
-}
-* {
-  box-sizing: border-box;
-}
-.container {
-  border: 1px solid #ededed;
-  width: 100%;
-  height: 100%;
-  background: url("../assets/bgimg.jpg") no-repeat;
-  background-size: 100% 100%;
-}
-.hrForm {
-  background: rgba(255, 255, 255, 0.8);
-  border: 1px solid #ededed;
-  width: 30rem;
-  height: 38rem;
-  margin: 10% 35% 25% 35%;
-  box-shadow: 0px 5px 8px #888;
-  border-radius: 8px;
-}
-.hrForm h3 {
-  color: #36bba6;
-  margin-top: 25px;
-}
-.demo-ruleForm {
-  position: relative;
-  top: 1rem;
-  left: -1rem;
-  padding: 1rem
-}
-.toLogin {
-  color: #888;
-  font-size: 14px;
-  float: right;
-  margin: 3rem 1.5rem auto auto;
-}
-.toLogin span {
-  color: #36bba6;
-  cursor: pointer;
-}
-.codeinput {
-  width: 230px;
-  padding-right: 10px;
-}
+  html * {
+    padding: 0;
+    margin: 0;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  .container {
+    border: 1px solid #ededed;
+    width: 100%;
+    height: 100%;
+    background: url("../assets/bgimg.jpg") no-repeat;
+    background-size: 100% 100%;
+  }
+
+  .userForm {
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid #ededed;
+    width: 480px;
+    height: 560px;
+    margin: 10% 35% 25% 35%;
+    box-shadow: 0px 5px 8px #888;
+    border-radius: 8px;
+  }
+
+  .userForm h3 {
+    color: #36bba6;
+    margin-top: 25px;
+  }
+
+  .demo-ruleForm {
+    position: relative;
+    top: 14px;
+    left: -14px;
+    padding: 14px;
+  }
+  .toLogin {
+    color: #888;
+    font-size: 14px;
+    float: right;
+    margin: -8px 21px auto auto;
+  }
+
+  .toLogin span {
+    color: #36bba6;
+    cursor: pointer;
+  }
+
+  .el-icon-back  {
+    position: relative;
+    top: -13px;
+    left: -100px;
+    font-size: 14px;
+    color: #36bba6;
+  }
 </style>
 
 <script>
@@ -161,6 +172,9 @@ export default {
     }
   },
   methods: {
+    backIndex () {
+      this.$router.push({name: 'index'})
+    },
     sendCode () {
       const TIME_COUNT = 60
       fetch

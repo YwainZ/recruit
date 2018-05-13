@@ -25,12 +25,10 @@
 * {
   box-sizing: border-box;
 }
-
 body {
   margin: 0;
   padding: 0;
 }
-
 .companycard .job {
   border-left: 5px solid #36bba6;
   text-align: left;
@@ -43,26 +41,25 @@ body {
 }
 .avatar {
   float: left;
-  width: 9rem;
-  height: 7.8rem;
+  width: 126px;
+  height: 109.2px;
 }
 .title {
-  font-size: 1.5rem;
+  font-size: 21px;
 }
-
 .introduce {
-  height: 7.8rem;
+  height: 109.2px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
 .introduce p {
-  margin: 0.5rem;
+  margin: 8px;
 }
 
 p span {
-  margin: 1rem;
+  margin: 14px;
 }
 .jobinfo {
   display: flex;
@@ -70,7 +67,7 @@ p span {
   align-items: flex-start;
 }
 .jobinfo p {
-  margin: 0.2rem;
+  margin: 2.8px;
 }
 .jobname {
   font-size: 18px;
