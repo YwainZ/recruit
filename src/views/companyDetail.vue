@@ -1,7 +1,7 @@
 <template>
  <div>
 <my-menu></my-menu>
-<el-card class="companycard">
+<el-card class="companycard" style="height: 180px">
   <img :src="detail.avatar" class="avatar">
   <div class="introduce">
   <p class="title">{{detail.name}}</p>
