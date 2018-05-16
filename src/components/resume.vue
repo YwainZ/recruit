@@ -439,10 +439,10 @@ export default {
     cancelSubmit () {
       this.dialogFormVisible = false
     },
-    deleteItem(key) {
+    deleteItem (key) {
       this.resumeList.skills.splice(key, 1)
     },
-    changeResume(formName) {
+    changeResume (formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
           fetch.sendResume(this.resumeList).then(res => {
@@ -453,6 +453,7 @@ export default {
                   type: 'success'
                 })
                 this.resumeFormVisible = false
+                this.dialogFormVisible = false
                 this.isChange = false
               }
             }
