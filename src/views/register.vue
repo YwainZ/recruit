@@ -17,7 +17,7 @@
         </el-form-item>
         <el-form-item label="验证码" prop="code">
           <el-input v-model.number="hrInfo.code" style="width: 200px;padding-right: 10px;"></el-input>
-          <el-button style="border: 1px solid #36bba6;border-radius: 8px;color: #36bba6;" @click="sendCode">
+          <el-button sty le="border: 1px solid #36bba6;border-radius: 8px;color: #36bba6;" @click="sendCode">
             {{this.msg}}
           </el-button>
         </el-form-item>
@@ -100,9 +100,7 @@
 
 <script>/* eslint-disable indent */
 
-  import fetch from "../api/fetch";
-  import axios from "axios";
-  import api from "../api/index";
+  import fetch from '../api/fetch'
 
   export default {
     data () {
@@ -222,7 +220,7 @@
           }
         })
       },
-      finderSubmit(formName) {
+      finderSubmit (formName) {
         this.$refs[formName].validate(valid => {
           if (valid) {
             let res = {

@@ -199,7 +199,9 @@ export default {
   },
   mounted () {
     var icon = document.getElementsByClassName('icon')[0]
-    icon.innerHTML = localStorage.getItem('count')
+    if (localStorage.getItem('count')) {
+      icon.innerHTML = localStorage.getItem('count')
+    }
     if (sessionStorage.getItem('userId')) {
       this.isShow = false
     }

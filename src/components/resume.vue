@@ -333,7 +333,7 @@ export default {
       } else {
         callback()
       }
-    };
+    }
     var checkage = (rule, value, callback) => {
       if (!value) {
         return callback(new Error('年龄不能为空'))
@@ -361,7 +361,7 @@ export default {
       } else {
         callback()
       }
-    };
+    }
     return {
       len: 0,
       isChange: false,
@@ -484,7 +484,7 @@ export default {
           console.log(e)
         })
     },
-    addSkill() {
+    addSkill () {
       let newskills = {
         id: 0,
         level: 0,

@@ -86,8 +86,8 @@ p span {
 </style>
 
 <script>
-import menu from "../components/common/menu";
-import fetch from "../api/fetch";
+import menu from '../components/common/menu'
+import fetch from '../api/fetch'
 export default {
   data () {
     return {

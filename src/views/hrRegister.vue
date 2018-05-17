@@ -115,9 +115,7 @@
 
 <script>/* eslint-disable indent,quotes,space-before-function-paren,brace-style */
 
-import fetch from "../api/fetch";
-import axios from "axios";
-import api from "../api/index";
+import fetch from '../api/fetch'
 
 export default {
   data() {
@@ -192,7 +190,7 @@ export default {
         phone: [{validator: checkPhone, trigger: "blur"}],
         email: [{validator: checkEmail, trigger: "blur"}]
       }
-    };
+    }
   },
   mounted() {
     this.getCompany()
@@ -214,7 +212,7 @@ export default {
         })
         .catch(e => {
           console.log(e)
-        });
+        })
       if (!this.timer) {
         this.count = TIME_COUNT
         this.show = false

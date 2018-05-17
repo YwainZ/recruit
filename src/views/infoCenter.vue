@@ -24,9 +24,9 @@
 </template>
 
 <script>
-import menu from "../components/common/menu";
-import fetch from "../api/fetch";
-import ElCard from "../../node_modules/element-ui/packages/card/src/main.vue";
+import menu from '../components/common/menu'
+import fetch from '../api/fetch'
+import ElCard from '../../node_modules/element-ui/packages/card/src/main.vue'
 export default {
   data () {
     return {
@@ -34,7 +34,7 @@ export default {
       infoList: [],
       dialogVisible: false,
       content: '',
-      isShow: false,
+      isShow: true,
       count: localStorage.getItem('count')
     }
   },
@@ -65,8 +65,8 @@ export default {
           if (res.status === 200) {
             if (res.data.success === true) {
               this.infoList = res.data.data
-              if (this.infoList.length === 0) {
-                this.isShow = true
+              if (this.infoList.length !== 0) {
+                this.isShow = false
               }
             }
           }

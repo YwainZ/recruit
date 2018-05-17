@@ -81,9 +81,7 @@
 
 <script>/* eslint-disable indent */
 
-  import api from "../api/index";
-  import axios from "axios";
-  import fetch from "../api/fetch";
+  import fetch from '../api/fetch'
 
   export default {
     data () {
