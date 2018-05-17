@@ -13,8 +13,10 @@
           <el-button style="margin-left: -2rem;" class="loginBtn" @click="submitForm('loginInfo')">登录</el-button>
         </el-form-item>
       </el-form>
+      <div class="footer">
       <i  class="el-icon-back" @click="backIndex">返回</i>
       <span class="toRegister">没有账号？<span @click="toRegister">直接注册</span></span>
+    </div>
     </div>
   </div>
 </template>
@@ -29,17 +31,17 @@
   }
   .container {
     width: 100%;
-    height: 100%;
+    height: 1600px;
     border: 1px solid #ededed;
     background: url("../assets/bgimg.jpg") no-repeat;
-    background-size: 100% 200%;
+    background-size: 100% 100%;
   }
   .registerForm {
     background: rgba(255, 255, 255, 0.8);
     border: 1px solid #ededed;
     width: 450px;
     height: 320px;
-    margin: 10% 35% 25% 35%;
+    margin: 200px auto auto 500px;
     box-shadow: 0px 5px 8px #888;
     border-radius: 8px;
   }
@@ -57,8 +59,6 @@
   .toRegister {
     color: #888;
     font-size: 14px;
-    position: relative;
-    left: 110px;
   }
   .toRegister span {
     color: #36bba6;
@@ -68,10 +68,14 @@
     width: 100%;
   }
   .el-icon-back  {
-    position: relative;
-    left: -82px;
     font-size: 14px;
     color: #36bba6;
+    cursor: pointer;
+  }
+  .footer {
+    margin: auto 30px auto 40px;
+    display: flex;
+    justify-content: space-between;
   }
 </style>
 

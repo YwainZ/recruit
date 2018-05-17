@@ -2,7 +2,7 @@
   <div class="container">
     <div class="hrForm">
       <h3>注册leader直聘</h3>
-      <el-form :model="hrInfo" status-icon :rules="hrrules" ref="hrInfo" label-width="100px" class="demo-ruleForm">
+      <el-form :model="hrInfo" status-icon :rules="hrrules" ref="hrInfo" label-width="100px" class="hrruleForm">
         <el-form-item label="用户名" prop="username">
           <el-input type="text" v-model="hrInfo.username" auto-complete="off"></el-input>
         </el-form-item>
@@ -16,8 +16,8 @@
           <el-input v-model.number="hrInfo.phone"></el-input>
         </el-form-item>
         <el-form-item label="验证码" prop="code">
-        <el-input v-model.number="hrInfo.code"  style="width: 230px;padding-right: 10px;"></el-input>
-          <el-button class="registerBtn" @click="sendCode" style="border: 1px solid #36bba6;border-radius: 8px;color: #36bba6;">{{this.msg}}</el-button>
+        <el-input v-model.number="hrInfo.code"  style="width: 200px;padding-right: 10px;"></el-input>
+          <el-button  @click="sendCode" style="border: 1px solid #36bba6;border-radius: 8px;color: #36bba6;">{{this.msg}}</el-button>
         </el-form-item>
         <div>
           <el-form-item label="公司" prop="company">
@@ -38,8 +38,10 @@
           <el-button class="registerBtn" @click="hrSubmit('hrInfo')">注册</el-button>
         </el-form-item>
       </el-form>
+      <div class="footer">
       <i  class="el-icon-back" @click="backIndex">返回</i>
       <span class="toLogin">已有账号?<span @click="toLogin">直接登录</span></span>
+    </div>
     </div>
   </div>
 </template>
@@ -57,7 +59,7 @@
   .container {
     border: 1px solid #ededed;
     width: 100%;
-    height: 100%;
+    height: 1600px;
     background: url("../assets/bgimg.jpg") no-repeat;
     background-size: 100% 100%;
   }
@@ -65,9 +67,9 @@
   .hrForm {
     background: rgba(255, 255, 255, 0.8);
     border: 1px solid #ededed;
-    width: 480px;
+    width: 450px;
     height: 630px;
-    margin: 10% 35% 25% 35%;
+    margin: 200px auto auto 500px;
     box-shadow: 0px 5px 8px #888;
     border-radius: 8px;
   }
@@ -77,7 +79,7 @@
     margin-top: 25px;
   }
 
-  .demo-ruleForm {
+  .hrruleForm {
     position: relative;
     top: 14px;
     left: -14px;
@@ -89,8 +91,6 @@
   .toLogin {
     color: #888;
     font-size: 14px;
-    float: right;
-    margin: -8px 21px auto auto;
   }
 
   .toLogin span {
@@ -99,13 +99,18 @@
   }
 
   .el-icon-back  {
-    position: relative;
-    top: -13px;
-    left: -100px;
     font-size: 14px;
     color: #36bba6;
+    cursor: pointer;
   }
-
+  .footer {
+    margin: auto 30px auto 40px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .registerBtn {
+    margin-left: -50px;
+  }
 </style>
 
 <script>/* eslint-disable indent,quotes,space-before-function-paren,brace-style */

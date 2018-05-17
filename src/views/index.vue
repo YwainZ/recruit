@@ -1,7 +1,7 @@
 <template>
 <div>
   <my-menu></my-menu>
-<div>
+<div class="indexContain">
 <div class="cardBox">
  <el-carousel trigger="click" height="400px">
       <el-carousel-item v-for="(item, key) in crouselImg" :key="key">
@@ -20,13 +20,20 @@
 </template>
 <style>
 @import "../css/index.css";
-.cardBox {
-  width: 70%;
-  margin: 2% 15% auto 15%;
-  box-shadow: 0 2px 5px #888;
-  border-radius: 6px;
+body {
+  background: #f5f7f9;
 }
-.el-carousel {
+.indexContain {
+  background: white;
+  margin: auto 180px auto 220px;
+  width: 1000px;
+  height: 1500px;
+  border:1px solid #ededed;
+}
+.cardBox {
+  width: 1000px;
+  margin-top: 20px;
+  box-shadow: 0 2px 5px #888;
   border-radius: 6px;
 }
 .cardBox:hover {
@@ -35,13 +42,12 @@
   box-shadow: 0px 5px 10px #888;
 }
 .wrapper-card {
-  width: 70%;
-  margin: 4% 15% auto 15%;
+  width: 1000px;
   margin-top: 40px;
 }
 .wrapper-card .card {
-  border: 1px solid #ebebeb;
-  width: 22%;
+  border: 1px solid #ededed;
+  width: 220px;
   height: 230px;
   float: left;
   margin: 14px;

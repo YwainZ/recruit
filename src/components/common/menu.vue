@@ -24,7 +24,7 @@
 </el-dropdown>
 </span>
 </span>
-<el-dialog :visible.sync="publishvisible" title="发布职位">
+<el-dialog :visible.sync="publishvisible" title="发布职位" class="publishDialog">
   <el-form :model="publishInfo" :rules="publishRules" ref='publishInfo'>
    <el-form-item label="职位名称" prop="title" class="jobinput">
     <el-input class="require" v-model="publishInfo.title"></el-input>
@@ -71,14 +71,17 @@ header {
 .contain {
   display: flex;
   justify-content: space-between;
-  width: 70%;
-  margin: 0 15% auto 15%;
+  width: 1000px;
+  margin: auto 180px auto 220px;
   text-align: center;
   line-height: 50px;
   color: white;
 }
 .contain .tab {
   margin: 11.2px;
+}
+.publishDialog {
+  width: 1500px;
 }
 .icon {
   position: relative;
@@ -115,7 +118,7 @@ header {
 .addbtn {
   position: relative;
   top: 40px;
-  left: 270px;
+  left: 280px;
 }
 .delete {
   color: #dcdfe6;
@@ -260,8 +263,9 @@ export default {
               message: res.data.msg,
               type: 'success'
             })
-            sessionStorage.setItem('userId', '')
-            localStorage.setItem('role', '')
+            sessionStorage.removeItem('userId')
+            localStorage.removeItem('role')
+            localStorage.removeItem('token')
             this.$router.push({ name: 'login' })
           }
         })

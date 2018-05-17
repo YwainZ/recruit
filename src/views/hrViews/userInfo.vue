@@ -1,7 +1,7 @@
 <template>
   <div>
     <my-menu></my-menu>
-    <el-tabs type="border-card" tabPosition="left" style="height: 1000px;" class="hr">
+    <el-tabs type="border-card" tabPosition="left" style="width:1000px;height: 1000px;" class="hr">
     <el-tab-pane>
     <span slot="label">职位管理<i class="el-icon-arrow-right"></i></span>
    <manage-job></manage-job>
@@ -35,6 +35,6 @@ export default {
 
 <style>
 .hr {
-   margin: 2% 15% auto 15%;
+   margin: 20px 180px auto 220px;
 }
 </style>

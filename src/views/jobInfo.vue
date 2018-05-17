@@ -17,7 +17,9 @@
 </el-card>
 <el-card class="jobcard">
   <div class="jobintroduce">职位介绍</div>
-  <p style="height: 6rem;">{{recruit.content}}</p>
+  <div class="jobcontent">
+  <p>{{recruit.content}}</p>
+  </div>
   <div class="jobintroduce">联系hr</div>
   <div class="hrinfo">
     <span><i class="el-icon-news"></i>{{hr.username}}</span>
@@ -36,18 +38,20 @@ body {
   padding: 0;
 }
 .jobcard {
-  margin: 2% 15% auto 15%;
+  width: 1000px;
+  margin: 20px 180px auto 220px;
 }
 .avatar {
   float: left;
   width: 126px;
-  height: 109.2px;
+  height: 110px;
 }
 .title {
   font-size: 21px;
 }
 .introduce {
-  height: 109.2px;
+  margin-left: 140px;
+  height: 110px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -63,12 +67,10 @@ p span {
   text-align: left;
   padding-left: 8px;
 }
-.hravatar {
-  float: left;
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  margin-top: 14px
+.jobcontent {
+  height: 100px;
+  margin: 15px auto 15px auto;
+  text-align: left;
 }
 .hrinfo {
   margin:14px auto 42px auto;

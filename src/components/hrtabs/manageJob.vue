@@ -64,7 +64,7 @@ export default {
 
 .mycard {
   border-left: 5px solid #36bba6;
-  height: 90px;
+  height: 100px;
   margin-bottom: 14px;
 }
 .myflex {

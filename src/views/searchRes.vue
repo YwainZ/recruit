@@ -15,15 +15,15 @@
 </template>
 <style>
 .nojob {
-  margin: 2% 15% auto 15%;
+  margin: 20px 180px auto 220px;
 }
 .jobcard {
-  margin: 2% 15% auto 15%;
+  margin: 20px 180px auto 220px;
 }
 .jobavatar {
   float: left;
-  width: 70px;
-  height: 63px;
+  width: 126px;
+  height: 110px;
   margin-right: 14px;
 }
 .introduce {
@@ -32,6 +32,7 @@
   align-items: flex-start;
 }
 .introduce p {
+  font-size: 18px;
   margin-bottom: 14px;
 }
 </style>

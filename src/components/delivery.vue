@@ -22,7 +22,7 @@
 .deliverycard {
   margin-bottom: 14px;
   width: 100%;
-  height: 90px;
+  height: 100px;
   border-left: 5px solid #36bba6;
 }
 .nofind p{

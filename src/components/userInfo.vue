@@ -98,7 +98,7 @@
     width: 500px;
   }
   .edit {
-    margin: 14px;
+    margin:10px auto auto 40px;
   }
 </style>
 

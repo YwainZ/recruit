@@ -4,11 +4,11 @@
       <span>创建简历让更多的人发现你</span>
       <el-button class="createResume" @click="dialogFormVisible = true">新建简历</el-button>
     </div>
-    <el-card v-if="haveResume" class="resumeInfo">
+    <el-card v-if="haveResume" class="resumeCard">
       <p>个人简历-{{resumeList.name}}</p>
       <el-button class="checkBtn" @click="resumeFormVisible = true">查看简历</el-button>
     </el-card>
-    <el-dialog title="我的简历" :visible.sync="resumeFormVisible">
+    <el-dialog title="我的简历" :visible.sync="resumeFormVisible" class="myDialog">
       <div v-if="!isChange">
         <table border="1" cellspacing="0" style="border-color:#ededed" class="mytable">
           <tr>
@@ -112,7 +112,7 @@
                 <option label="掌握" value=3></option>
                 <option label="精通" value=4></option>
               </select>
-              <i class="el-icon-error error" @click="deleteItem(key)"></i>
+              <i class="el-icon-error deleteIt" @click="deleteItem(key)"></i>
             </div>
           </div>
         </el-form-item>
@@ -128,7 +128,7 @@
         </el-form-item>
       </el-form>
     </el-dialog>
-    <el-dialog title="新建简历" :visible.sync="dialogFormVisible">
+    <el-dialog title="新建简历" :visible.sync="dialogFormVisible" class="myDialog">
       <el-form :model="resumeList" status-icon :rules="resumerules" ref="resumeInfo" label-width="100px"
                class="resumeInfoForm">
         <el-form-item label="姓名" prop="name">
@@ -179,7 +179,7 @@
                 <option label="掌握" value=3></option>
                 <option label="精通" value=4></option>
               </select>
-              <i class="el-icon-error error" @click="deleteItem(key)"></i>
+              <i class="el-icon-error deleteIt" @click="deleteItem(key)"></i>
             </div>
           </div>
         </el-form-item>
@@ -208,13 +208,11 @@
     padding: 0 15px;
     margin: auto 11.2px 14px auto;
   }
-  .error {
+  .deleteIt {
     color: #dcdfe6;
     position: relative;
-    top: -52px;
-    left: 210px;
   }
-  .error:hover {
+  .deleteIt:hover {
     color: red;
   }
   .select {
@@ -242,10 +240,10 @@
     margin: 14px;
   }
 
-  .resumeInfo {
-    width: 100%;
+  .resumeCard {
+    width: 830px;
     text-align: left;
-    height: 90px;
+    height: 100px;
     border-left: 5px solid #36bba6;
   }
 
@@ -270,11 +268,14 @@
   .addbtn {
     position: relative;
     top: 40px;
-    left: 265px;
+    left: 280px;
   }
 
   .resumeInfoForm {
     width: 80%;
+  }
+  .myDialog {
+    width: 1500px;
   }
 </style>
 
@@ -433,8 +434,7 @@ export default {
   },
   methods: {
     cancelChange () {
-      this.resumeFormVisible = false
-      this.isChange = !this.isChanges
+      this.isChange = !this.isChange
     },
     cancelSubmit () {
       this.dialogFormVisible = false
