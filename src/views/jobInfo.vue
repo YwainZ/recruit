@@ -63,7 +63,7 @@ p span {
   margin: 14px;
 }
 .jobintroduce {
-  border-left: 5px solid #36bba6;
+  border-left: 5px solid #888;
   text-align: left;
   padding-left: 8px;
 }

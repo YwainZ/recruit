@@ -48,7 +48,7 @@
 
   .registerForm h3 {
     margin-top: 25px;
-    color: #36bba6;
+    color: #888;
   }
   .loginForm {
     position: relative;
@@ -61,7 +61,7 @@
     font-size: 14px;
   }
   .toRegister span {
-    color: #36bba6;
+    color: #888;
     cursor: pointer;
   }
   .loginInput {
@@ -69,7 +69,7 @@
   }
   .el-icon-back  {
     font-size: 14px;
-    color: #36bba6;
+    color: #888;
     cursor: pointer;
   }
   .footer {
