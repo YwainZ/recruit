@@ -63,7 +63,7 @@ export default {
 <style>
 
 .mycard {
-  border-left: 5px solid #36bba6;
+  border-left: 5px solid #888;
   height: 100px;
   margin-bottom: 14px;
 }

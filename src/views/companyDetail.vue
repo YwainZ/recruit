@@ -30,7 +30,7 @@ body {
   padding: 0;
 }
 .companycard .job {
-  border-left: 5px solid #36bba6;
+  border-left: 5px solid #888;
   text-align: left;
   padding-left: 0.5rem;
 }
