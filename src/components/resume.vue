@@ -244,7 +244,7 @@
     width: 830px;
     text-align: left;
     height: 100px;
-    border-left: 5px solid #36bba6;
+    border-left: 5px solid #888;
   }
 
   .createResume {
