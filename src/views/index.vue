@@ -1,7 +1,7 @@
 <template>
 <div>
   <my-menu></my-menu>
-<div class="indexContain">
+  <div class="indexContain">
 <div class="cardBox">
  <el-carousel trigger="click" height="400px">
       <el-carousel-item v-for="(item, key) in crouselImg" :key="key">
@@ -9,48 +9,102 @@
       </el-carousel-item>
     </el-carousel>
 </div>
+  </div>
+  <div class="division"><h3>热门企业</h3>
+                        <h3 style="color: #888;font-weight: 400">--- Hot ---</h3></div>
+  <div class="cardContain">
 <div class="wrapper-card">
   <div class="card" v-for="(item, key) in companyList" :key="key">
     <img :src="item.avatar" class="image" @click="getCompanyDetail(item.id)">
-    <p style="margin-top: 10px">{{item.name}}|互联网</p>
+</div>
+</div>
   </div>
-</div>
-</div>
+  <div class="division"><h3>互联网动态</h3>
+    <h3 style="color: #888;font-weight: 400">--- news ---</h3></div>
+  <div class="newsContain">
+    <div>
+      <img src="#"/>
+      <span>巴拉巴拉</span>
+    </div>
+    <div>
+      <img src="#"/>
+      <span>巴拉巴拉</span>
+    </div>
+    <div>
+      <img src="#"/>
+      <span>巴拉巴拉</span>
+    </div>
+  </div>
+  <div class="aboutus">
+    <span></span>
+  </div>
+  <div class="division"><h3>联系我们</h3>
+    <h3 style="color: #888;font-weight: 400">--- CONTACT ---</h3></div>
+  <div class="footer">
+  </div>
 </div>
 </template>
 <style>
 @import "../css/index.css";
 body {
-  background: #f5f7f9;
+  background: #ededed;
 }
 .indexContain {
-  background: white;
-  margin: auto 180px auto 220px;
-  width: 1000px;
-  height: 1500px;
+  width: 100%;
+  height: 100%;
   border:1px solid #ededed;
+  background: #fff;
+}
+.cardContain {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+}
+.newsContain {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+}
+.footer {
+  width: 100%;
+  height: 100px;
+  background: black;
+}
+.aboutus  {
+  width: 100%;
+  height: 500px;
+  background: url("https://upload-images.jianshu.io/upload_images/9381131-26f1415d8499dc6b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240") no-repeat;
+  background-size: 100% 100%;
+  filter: grayscale(100%);
+  opacity: 0.5;
+
 }
 .cardBox {
-  width: 1000px;
-  margin-top: 20px;
-  box-shadow: 0 2px 5px #888;
+  position: relative;
+  width: 1200px;
+  margin: 50px auto 50px 140px;
+  box-shadow: 0 10px 15px #888;
   border-radius: 6px;
 }
 .cardBox:hover {
   transform: translateY(-5px);
   transition: 0.3s;
-  box-shadow: 0px 5px 10px #888;
+  box-shadow: 0 15px 25px #888;
 }
 .wrapper-card {
-  width: 1000px;
-  margin-top: 40px;
+  width: 1200px;
+  height:1000px;
+  margin: 30px auto auto 140px;
+  padding-top: 30px;
 }
 .wrapper-card .card {
+  color: #07111B;
+  font-size: 16px;
   border: 1px solid #ededed;
-  width: 220px;
-  height: 230px;
+  width: 336px;
+  height: 243px;
   float: left;
-  margin: 14px;
+  margin: 30px;
   border-radius: 6px;
 }
 .wrapper-card .card:hover {
@@ -61,7 +115,7 @@ body {
 .wrapper-card .image {
   border-radius: 6px 6px 0 0;
   width: 100%;
-  height: 70%;
+  height: 100%;
   margin-bottom: 20px;
 }
 .el-carousel__item h3 {
@@ -73,6 +127,14 @@ body {
 .boxImg {
   width: 100%;
   height: 100%;
+  border-radius: 6px;
+}
+.division {
+    width: 100%;
+    margin: 30px  auto;
+    text-align: center;
+    padding-left: 10px;
+    color: #5a5a5a;
 }
 </style>
 <script>

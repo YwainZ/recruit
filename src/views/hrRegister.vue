@@ -17,7 +17,7 @@
         </el-form-item>
         <el-form-item label="验证码" prop="code">
         <el-input v-model.number="hrInfo.code"  style="width: 200px;padding-right: 10px;"></el-input>
-          <el-button  @click="sendCode" style="border: 1px solid #36bba6;border-radius: 8px;color: #36bba6;">{{this.msg}}</el-button>
+          <el-button  @click="sendCode" style="border: 1px solid #888;border-radius: 8px;color: #36bba6;">{{this.msg}}</el-button>
         </el-form-item>
         <div>
           <el-form-item label="公司" prop="company">
@@ -75,7 +75,7 @@
   }
 
   .hrForm h3 {
-    color: #36bba6;
+    color: #888;
     margin-top: 25px;
   }
 
@@ -94,13 +94,13 @@
   }
 
   .toLogin span {
-    color: #36bba6;
+    color: #888;
     cursor: pointer;
   }
 
   .el-icon-back  {
     font-size: 14px;
-    color: #36bba6;
+    color: #888;
     cursor: pointer;
   }
   .footer {
