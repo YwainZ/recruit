@@ -19,20 +19,18 @@
 </div>
 </div>
   </div>
-  <div class="division"><h3>互联网动态</h3>
-    <h3 style="color: #888;font-weight: 400">--- news ---</h3></div>
+  <div class="division"><h3>热门职位</h3>
+    <h3 style="color: #888;font-weight: 400">--- JOBS ---</h3></div>
   <div class="newsContain">
-    <div>
-      <img src="#"/>
-      <span>巴拉巴拉</span>
+    <div class="newsItem"  v-for = "(item, key) in jobList" :key = "key">
+      <div class="picContain" ontouchstart="this.classList.toggle('hover');">
+        <div class="flipper">
+      <span class="itemPic">{{item.company.name}}</span>
+      <span class="back">{{item.company.createTime}}</span>
+        </div>
     </div>
-    <div>
-      <img src="#"/>
-      <span>巴拉巴拉</span>
-    </div>
-    <div>
-      <img src="#"/>
-      <span>巴拉巴拉</span>
+      <span>{{item.recruit.title}}</span>
+      <p>{{item.recruit.content}}</p>
     </div>
   </div>
   <div class="aboutus">
@@ -64,6 +62,52 @@ body {
   width: 100%;
   height: 100%;
   background: #fff;
+}
+.picContain {
+  margin-right: 10px;
+  perspective: 1000;
+}
+.picContain:hover .flipper, .picContain.hover .flipper{
+  transform: rotateY(180deg);
+}
+.picContain, .itemPic, .back{
+  width: 80px;
+  height: 80px;
+}
+.flipper {
+  transition: 0.6s;
+  transform-style:preserve-3d;
+  position: relative;
+}
+.newsItem {
+  display: flex;
+  justify-content: flex-start;
+  width: 1200px;
+  margin: 50px auto 50px 140px;
+  height: 114px;
+  text-align: left;
+  color: #5a5a5a;
+  font-weight: 500;
+  padding-top: 15px;
+  border-bottom: 1px solid #ededed;
+}
+.itemPic, .back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  backface-visibility: hidden;
+  background: #cc0000;
+  text-align: center;
+  color: white;
+  font-weight: 500;
+  line-height: 80px;
+  white-space: nowrap;
+}
+.itemPic {
+  z-index: 2;
+}
+.back {
+  transform: rotateY(180deg);
 }
 .footer {
   width: 100%;
@@ -153,13 +197,27 @@ export default {
       activeIndex2: '1',
       currentDate: '完美',
       company: '',
-      companyList: []
+      companyList: [],
+      jobList: []
     }
   },
   mounted () {
     this.getCompany()
+    this.getJob()
   },
   methods: {
+    getJob () {
+      fetch.findJob().then(res => {
+        if (res.status === 200) {
+          if (res.data.success === true) {
+            this.jobList = res.data.data.recruitList
+            console.log(this.jobList)
+          }
+        }
+      }).catch(e => {
+        console.log(e)
+      })
+    },
     getCompany () {
       fetch.getCompany().then(res => {
         if (res.status === 200) {
