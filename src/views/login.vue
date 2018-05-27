@@ -13,7 +13,7 @@
           <el-button style="margin-left: -2rem;" class="loginBtn" @click="submitForm('loginInfo')">登录</el-button>
         </el-form-item>
       </el-form>
-      <div class="footer">
+      <div class="footer-tip">
       <i  class="el-icon-back" @click="backIndex">返回</i>
       <span class="toRegister">没有账号？<span @click="toRegister">直接注册</span></span>
     </div>
@@ -31,24 +31,23 @@
   }
   .container {
     width: 100%;
-    height: 1600px;
     border: 1px solid #ededed;
     background: url("../assets/bgimg.jpg") no-repeat;
     background-size: 100% 100%;
   }
   .registerForm {
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.6);
     border: 1px solid #ededed;
     width: 450px;
     height: 320px;
-    margin: 200px auto auto 500px;
+    margin: 250px auto 250px 500px;
     box-shadow: 0px 5px 8px #888;
     border-radius: 8px;
   }
 
   .registerForm h3 {
     margin-top: 25px;
-    color: #888;
+    color: #5a5a5a;
   }
   .loginForm {
     position: relative;
@@ -57,11 +56,11 @@
     padding: 14px;
   }
   .toRegister {
-    color: #888;
+    color: #5a5a5a;
     font-size: 14px;
   }
   .toRegister span {
-    color: #888;
+    color: #5a5a5a;
     cursor: pointer;
   }
   .loginInput {
@@ -69,10 +68,10 @@
   }
   .el-icon-back  {
     font-size: 14px;
-    color: #888;
+    color: #5a5a5a;
     cursor: pointer;
   }
-  .footer {
+  .footer-tip {
     margin: auto 30px auto 40px;
     display: flex;
     justify-content: space-between;

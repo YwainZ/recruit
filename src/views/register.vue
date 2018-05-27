@@ -17,7 +17,7 @@
         </el-form-item>
         <el-form-item label="验证码" prop="code">
           <el-input v-model.number="hrInfo.code" style="width: 200px;padding-right: 10px;"></el-input>
-          <el-button sty le="border: 1px solid #888;border-radius: 8px;color: #36bba6;" @click="sendCode">
+          <el-button sty le="border: 1px solid #888;border-radius: 8px;color: #5a5a5a;" @click="sendCode">
             {{this.msg}}
           </el-button>
         </el-form-item>
@@ -28,7 +28,7 @@
           <el-button style="margin-left: -2.2rem" @click="finderSubmit('hrInfo')">注册</el-button>
         </el-form-item>
       </el-form>
-      <div class="footer">
+      <div class="footer-tip2">
       <i class="el-icon-back" @click="backIndex">返回</i>
       <span class="toLogin">已有账号？<span @click="toLogin">直接登录</span></span>
       </div>
@@ -49,17 +49,16 @@
   .container {
     border: 1px solid #ededed;
     width: 100%;
-    height: 1600px;
     background: url("../assets/bgimg.jpg") no-repeat;
     background-size: 100% 100%;
   }
 
   .userForm {
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.6);
     border: 1px solid #ededed;
     width: 450px;
     height: 580px;
-    margin: 200px auto auto 500px;
+    margin: 150px auto 150px 500px;
     box-shadow: 0px 5px 8px #888;
     border-radius: 8px;
   }
@@ -77,21 +76,21 @@
   }
 
   .toLogin {
-    color: #888;
+    color: #5a5a5a;
     font-size: 14px;
   }
 
   .toLogin span {
-    color: #888;
+    color: #5a5a5a;
     cursor: pointer;
   }
 
   .el-icon-back {
     font-size: 14px;
-    color: #888;
+    color: #5a5a5a;
     cursor: pointer;
   }
-  .footer {
+  .footer-tip2 {
     margin: auto 30px auto 40px;
     display: flex;
     justify-content: space-between;
