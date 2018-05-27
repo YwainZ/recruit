@@ -12,7 +12,7 @@
 <el-card class="companycard">
   <div class="job">招聘信息</div>
   <p v-if="!isShow" class="nojob">暂时没有招聘信息哦</p>
-    <div v-if="isShow"  v-for="(item, key) in recruit" :key="key" shadow="hover">
+    <div v-if="isShow"  v-for="(item, key) in recruit" :key="key">
       <div class="jobinfo" @click="getJobDetail(item.id)">
       <p class="jobname">{{item.title}}</p>
       <p><i class="el-icon-location"></i>{{detail.address}}<span>|</span>{{detail.scale}}<span>|</span>{{detail.type}}</p>
@@ -70,6 +70,8 @@ p span {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  border: 1px solid #ededed;
+  padding-left: 15px;
 }
 .jobinfo p {
   margin-top: 20px;
