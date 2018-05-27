@@ -4,7 +4,7 @@
       <div>
         <span @click="redirect(1)" class="tab">首页</span>
         <span v-if="isHr" @click="publishvisible = true" class="tab">发布职位</span>
-        <span v-if="isHr && !isShow" @click="redirect(6)">个人中心</span>
+        <span v-if="isHr && !isShow" @click="redirect(6)" class="tab">个人中心</span>
         <span @click="redirect(2)" class="tab" v-if="!isHr && !isShow">个人中心</span>
         <span class="tab" v-if="!isHr"><el-input placeholder="搜索心仪的职位" style="width:18rem" v-model="content"
                                                  @change="getJob(content)"><i slot="prefix"
@@ -101,6 +101,7 @@
     left: -11.2px;
     top: -8px;
     padding: 0 5px;
+    color: #fff;
   }
 
   .requireinput {
