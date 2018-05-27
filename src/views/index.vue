@@ -3,7 +3,7 @@
   <my-menu></my-menu>
   <div class="indexContain">
 <div class="cardBox">
- <el-carousel trigger="click" height="400px">
+ <el-carousel trigger="click" height="400px" >
       <el-carousel-item v-for="(item, key) in crouselImg" :key="key">
         <img :src="item.img" class="boxImg">
       </el-carousel-item>
@@ -22,23 +22,31 @@
   <div class="division"><h3>热门职位</h3>
     <h3 style="color: #888;font-weight: 400">--- JOBS ---</h3></div>
   <div class="newsContain">
-    <div class="newsItem"  v-for = "(item, key) in jobList" :key = "key">
+    <div class="newsItem"  v-for = "(item, key) in jobList" :key = "key" @click="jobDetail(item.recruit.id)">
       <div class="picContain" ontouchstart="this.classList.toggle('hover');">
         <div class="flipper">
       <span class="itemPic">{{item.company.name}}</span>
       <span class="back">{{item.company.createTime}}</span>
         </div>
     </div>
-      <span>{{item.recruit.title}}</span>
-      <p>{{item.recruit.content}}</p>
+    <div>
+      <p>{{item.recruit.title}}</p>
+      <p style="margin-top:25px">{{item.recruit.content}}</p>
+      </div>
     </div>
   </div>
   <div class="aboutus">
-    <span></span>
+    <h2>关于我们</h2>
+    <p>"Conviction is everything in wishing. If you don’t believe in your own power to make your wish come true,</p>
+      <p> your wish will fly away, never to be seen again. But which leads to the most important point of all. </p>
+        <p>If you’re wishing for something possible, then it may be possible for you to do whatever you need to <p>
+          <p> make it come true.The ultimate magic is not wishing, but doing"</p>
   </div>
   <div class="division"><h3>联系我们</h3>
     <h3 style="color: #888;font-weight: 400">--- CONTACT ---</h3></div>
   <div class="footer">
+    <img src="../assets/github4.png"><span>https://github.com/Clairezyw</span>
+     <img src="../assets/github4.png"><span>https://github.com/stalary</span>
   </div>
 </div>
 </template>
@@ -59,6 +67,7 @@ body {
   background: #fff;
 }
 .newsContain {
+  padding-top: 1px;
   width: 100%;
   height: 100%;
   background: #fff;
@@ -83,7 +92,7 @@ body {
   display: flex;
   justify-content: flex-start;
   width: 1200px;
-  margin: 50px auto 50px 140px;
+  margin: 50px auto 80px 140px;
   height: 114px;
   text-align: left;
   color: #5a5a5a;
@@ -113,6 +122,8 @@ body {
   width: 100%;
   height: 100px;
   background: black;
+  color: white;
+  padding-top:20px
 }
 .aboutus  {
   width: 100%;
@@ -120,8 +131,14 @@ body {
   background: url("https://upload-images.jianshu.io/upload_images/9381131-26f1415d8499dc6b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240") no-repeat;
   background-size: 100% 100%;
   filter: grayscale(100%);
-  opacity: 0.5;
-
+  opacity: 0.7;
+  color: white;
+  font-weight: 600;
+  padding-top: 60px
+}
+.aboutus p {
+  margin-top: 15px;
+  font-size: 20px;
 }
 .cardBox {
   position: relative;
@@ -161,12 +178,7 @@ body {
   width: 100%;
   height: 100%;
   margin-bottom: 20px;
-}
-.el-carousel__item h3 {
-  color: #475669;
-  font-size: 14px;
-  opacity: 0.75;
-  line-height: 150px;
+  border-radius: 6px;
 }
 .boxImg {
   width: 100%;
@@ -180,6 +192,15 @@ body {
     padding-left: 10px;
     color: #5a5a5a;
 }
+.footer img{
+  width:25px;
+  height: 25px;
+  margin-right: 10px
+}
+.footer span {
+  margin-right: 20px;
+}
+
 </style>
 <script>
 import fetch from '../api/fetch'
@@ -188,9 +209,9 @@ export default {
   data () {
     return {
       crouselImg: [
-        {img: 'https://sxsimg.xiaoyuanzhao.com/97/E8/9757C6F113FF8A98769B1B627EE7FDE8.png'},
-        {img: 'https://sxsimg.xiaoyuanzhao.com/EE/34/EEEDE091CD9D4B62098CEFC493BA8634.png'},
-        {img: 'https://sxsimg.xiaoyuanzhao.com/2E/62/2E25D1313CF3C38BD2DDA49E3B310462.png'},
+        {img: 'https://sxsimg.xiaoyuanzhao.com/3C/09/3C4A275077015CBF398443CC21774709.png'},
+        {img: 'https://sxsimg.xiaoyuanzhao.com/C3/55/C35273E2AAA17DBA580304E05DF22155.png'},
+        {img: 'https://sxsimg.xiaoyuanzhao.com/C6/FC/C60F54D6D175ABAF3E9A33F0FDE867FC.png'},
         {img: 'https://sxsimg.xiaoyuanzhao.com/FD/0C/FDBBBD21A98136E3054ADDD432A5020C.png'}
 
       ],
@@ -206,12 +227,15 @@ export default {
     this.getJob()
   },
   methods: {
+    jobDetail(id) {
+     localStorage.setItem('jobId', id)
+     this.$router.push({name: 'jobInfo'})
+    },
     getJob () {
       fetch.findJob().then(res => {
         if (res.status === 200) {
           if (res.data.success === true) {
             this.jobList = res.data.data.recruitList
-            console.log(this.jobList)
           }
         }
       }).catch(e => {
