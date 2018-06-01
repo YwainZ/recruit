@@ -95,7 +95,7 @@ export default {
 <style>
 .infocard {
   width: 1000px;
-  margin: 20px 180px auto 220px;
+  margin: 20px auto auto auto;
 }
 .infoTitle {
   text-align: center;

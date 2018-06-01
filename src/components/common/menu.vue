@@ -27,7 +27,7 @@
 </el-dropdown>
 </span>
 </span>
-        <el-dialog :visible.sync="publishvisible" title="发布职位" class="publishDialog">
+        <el-dialog :visible.sync="publishvisible" title="发布职位">
           <el-form :model="publishInfo" :rules="publishRules" ref='publishInfo'>
             <el-form-item label="职位名称" prop="title" class="jobinput">
               <el-input class="require" v-model="publishInfo.title"></el-input>
@@ -75,8 +75,7 @@
     display: flex;
     justify-content: space-between;
     width: 1000px;
-    margin: auto 180px auto 220px;
-    text-align: center;
+    margin: auto;
     line-height: 60px;
     font-weight: 500;
   }
@@ -86,12 +85,6 @@
     margin: 10px;
     padding: 6px;
     border-radius: 4px;
-  }
-  .contain .tab:not(:nth-child(2)):hover {
-    background: #cc0000;
-  }
-  .publishDialog {
-    width: 1500px;
   }
   .icon {
     position: relative;
@@ -212,13 +205,17 @@ export default {
     this.getChannel()
   },
   watch: {
-    count() {
+    count () {
       location.reload()
     }
   },
-  mounted() {
+  mounted () {
     var icon = document.getElementsByClassName('icon')[0]
-    if (localStorage.getItem('count')) {
+    if (icon.innerHTML == '0') {
+      icon.style.visibility = 'hidden'
+    }
+    else if (localStorage.getItem('count')) {
+      icon.style.visibility = 'visible'
       icon.innerHTML = localStorage.getItem('count')
     }
     if (sessionStorage.getItem('userId')) {
@@ -229,7 +226,7 @@ export default {
     }
   },
   methods: {
-    redirect(num, flag) {
+    redirect (num, flag) {
       if (num === 1) {
         this.$router.push({name: 'index'})
       } else if (num === 2) {
@@ -244,20 +241,20 @@ export default {
         this.$router.push({name: 'hrView'})
       }
     },
-    toregister(command) {
+    toregister (command) {
       if (command === 'true') {
         this.$router.push({name: 'register'})
       } else {
         this.$router.push({name: 'hrRegister'})
       }
     },
-    getJob(value) {
+    getJob (value) {
       if (value !== null) {
         localStorage.setItem('content', value)
       }
       this.$router.push({name: 'search', params: {count: 1}})
     },
-    getChannel() {
+    getChannel () {
       var goEasy = new GoEasy({
         appkey: 'BC-9e32a2089e08457399dfc6032fcaa294'
       })

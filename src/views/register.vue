@@ -51,6 +51,7 @@
     width: 100%;
     background: url("../assets/bgimg.jpg") no-repeat;
     background-size: 100% 100%;
+    min-height: 1000px;
   }
 
   .userForm {
@@ -58,7 +59,7 @@
     border: 1px solid #ededed;
     width: 450px;
     height: 580px;
-    margin: 150px auto 150px 500px;
+    margin: 150px auto 150px auto;
     box-shadow: 0px 5px 8px #888;
     border-radius: 8px;
   }

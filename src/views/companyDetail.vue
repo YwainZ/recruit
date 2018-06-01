@@ -38,7 +38,7 @@ body {
 .companycard {
   width: 1000px;
   height: 100%;
-  margin: 20px 180px auto 220px;
+  margin: 20px auto auto auto;
 }
 .avatar {
   float: left;

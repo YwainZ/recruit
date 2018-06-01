@@ -1,11 +1,11 @@
 <template>
 <div>
-  <my-menu></my-menu>
+  <my-menu class="myMenu"></my-menu>
   <div class="indexContain">
 <div class="cardBox">
- <el-carousel trigger="click" height="400px" >
+ <el-carousel trigger="click" height="400px" style="position: sticky;">
       <el-carousel-item v-for="(item, key) in crouselImg" :key="key">
-        <img :src="item.img" class="boxImg">
+        <img :src="item.img" class="boxImg" >
       </el-carousel-item>
     </el-carousel>
 </div>
@@ -55,6 +55,11 @@
 body {
   background: #ededed;
 }
+.myMenu {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
 .indexContain {
   width: 100%;
   height: 100%;
@@ -74,7 +79,7 @@ body {
 }
 .picContain {
   margin-right: 10px;
-  perspective: 1000;
+  perspective: 1000px;
 }
 .picContain:hover .flipper, .picContain.hover .flipper{
   transform: rotateY(180deg);
@@ -92,7 +97,7 @@ body {
   display: flex;
   justify-content: flex-start;
   width: 1200px;
-  margin: 50px auto 80px 140px;
+  margin: auto;
   height: 114px;
   text-align: left;
   color: #5a5a5a;
@@ -143,19 +148,14 @@ body {
 .cardBox {
   position: relative;
   width: 1200px;
-  margin: 50px auto 50px 140px;
+  margin: 20px auto 20px auto;
   box-shadow: 0 10px 15px #888;
   border-radius: 6px;
-}
-.cardBox:hover {
-  transform: translateY(-5px);
-  transition: 0.3s;
-  box-shadow: 0 15px 25px #888;
 }
 .wrapper-card {
   width: 1200px;
   height:1000px;
-  margin: 30px auto auto 140px;
+  margin: 30px auto auto auto;
   padding-top: 30px;
 }
 .wrapper-card .card {

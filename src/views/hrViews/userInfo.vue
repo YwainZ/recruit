@@ -24,17 +24,30 @@ import receive from '../../components/hrtabs/getResume'
 import setting from '../../components/setting'
 import manageJob from '../../components/hrtabs/manageJob'
 export default {
+  data () {
+    return {
+      hrRefresh: 0
+    }
+  },
   components: {
     'my-menu': menu,
     receive,
     setting,
     manageJob
+  },
+  mounted () {
+    this.hrRefresh = this.$route.params.hrRefresh !== undefined ? this.$route.params.hrRefresh : 0
+  },
+  watch: {
+    hrRefresh () {
+      location.reload()
+    }
   }
 }
 </script>
 
 <style>
 .hr {
-   margin: 20px 180px auto 220px;
+   margin: 20px auto auto auto;
 }
 </style>

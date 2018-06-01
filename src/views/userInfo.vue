@@ -18,7 +18,7 @@
           <span class="username">{{list ? list.nickname : ''}}</span>
         </div>
       </el-card>
-      <el-tabs type="border-card" tabPosition="left" style="width:1000px;height: 1000px;margin: 14px 180px auto 220px;">
+      <el-tabs type="border-card" tabPosition="left" style="width:1000px;height: 1000px;margin: 14px auto auto auto;">
         <el-tab-pane>
           <span slot="label">个人信息<i class="el-icon-arrow-right"></i></span>
           <user :list="list" :imageUrl="imageUrl" class="user"></user>
@@ -50,7 +50,7 @@
   }
   .box-card {
     width: 1000px;
-    margin: 14px 180px auto 220px;
+    margin: 14px auto auto auto;
   }
   .img {
     border-radius: 50%;
@@ -110,7 +110,8 @@
           intentionJob: ''
         },
         imageUrl: '',
-        head: {}
+        head: {},
+        refresh: 0
       }
     },
     computed: {
@@ -124,6 +125,12 @@
         Authorization: 'Basic ' + localStorage.getItem('token')
       }
       this.getUserInfo()
+      this.refresh = this.$route.params.refresh !== undefined ? this.$route.params.refresh : 0
+    },
+    watch: {
+      refresh () {
+        location.reload()
+      }
     },
     components: {
       user: Info,

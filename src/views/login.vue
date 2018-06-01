@@ -34,13 +34,14 @@
     border: 1px solid #ededed;
     background: url("../assets/bgimg.jpg") no-repeat;
     background-size: 100% 100%;
+    min-height: 1000px;
   }
   .registerForm {
     background: rgba(255, 255, 255, 0.6);
     border: 1px solid #ededed;
     width: 450px;
     height: 320px;
-    margin: 250px auto 250px 500px;
+    margin: 250px auto 250px auto;
     box-shadow: 0px 5px 8px #888;
     border-radius: 8px;
   }
@@ -130,9 +131,9 @@
                     localStorage.setItem('role', res.data.data.role)
                     sessionStorage.setItem('userId', res.data.data.userId)
                     if (res.data.data.role === 2) {
-                      this.$router.push({name: 'userInfo'})
+                      this.$router.push({name: 'userInfo', params: {refresh: 1}})
                     } else {
-                      this.$router.push({name: 'hrView'})
+                      this.$router.push({name: 'hrView', params: {hrRefresh: 2}})
                     }
                   } else {
                     this.$message({
