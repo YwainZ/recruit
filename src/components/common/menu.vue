@@ -197,7 +197,7 @@ export default {
       }
     }
   },
-  created() {
+  created () {
     const s = document.createElement('script')
     s.type = 'text/javascript'
     s.src = 'https://cdn.goeasy.io/goeasy.js'
