@@ -227,9 +227,9 @@ export default {
     this.getJob()
   },
   methods: {
-    jobDetail(id) {
-     localStorage.setItem('jobId', id)
-     this.$router.push({name: 'jobInfo'})
+    jobDetail (id) {
+      localStorage.setItem('jobId', id)
+      this.$router.push({name: 'jobInfo'})
     },
     getJob () {
       fetch.findJob().then(res => {

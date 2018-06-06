@@ -147,7 +147,7 @@
 import fetch from '../../api/fetch'
 
 export default {
-  data() {
+  data () {
     var checktitle = (rule, value, callback) => {
       if (!value) {
         return callback(new Error('职位名称不能为空'))
@@ -197,7 +197,7 @@ export default {
       }
     }
   },
-  created () {
+  beforemounted () {
     const s = document.createElement('script')
     s.type = 'text/javascript'
     s.src = 'https://cdn.goeasy.io/goeasy.js'
@@ -211,11 +211,7 @@ export default {
   },
   mounted () {
     var icon = document.getElementsByClassName('icon')[0]
-    if (icon.innerHTML == '0') {
-      icon.style.visibility = 'hidden'
-    }
-    else if (localStorage.getItem('count')) {
-      icon.style.visibility = 'visible'
+    if (localStorage.getItem('count')) {
       icon.innerHTML = localStorage.getItem('count')
     }
     if (sessionStorage.getItem('userId')) {
@@ -272,7 +268,7 @@ export default {
         }
       })
     },
-    logout() {
+    logout () {
       fetch
         .logout()
         .then(res => {
@@ -291,7 +287,7 @@ export default {
           console.log(e)
         })
     },
-    addjob(formName) {
+    addjob (formName) {
       this.publishvisible = false
       this.publishInfo.hrId = sessionStorage.getItem('userId')
       this.publishInfo.companyId = localStorage.getItem('companyId')
@@ -309,10 +305,10 @@ export default {
         }
       })
     },
-    deleteItem(key) {
+    deleteItem (key) {
       this.publishInfo.skillList.splice(key, 1)
     },
-    addskill() {
+    addskill () {
       let newskills = {
         weight: 0,
         name: ''
