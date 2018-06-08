@@ -23,7 +23,7 @@
   <div class="jobintroduce">联系hr</div>
   <div class="hrinfo">
     <span><i class="el-icon-news"></i>{{hr.username}}</span>
-    <span><i class="el-icon-message"></i>{{hr.email}}</span>
+    <a :href= "`mailto:${hr.email}`"><span><i class="el-icon-message"></i>{{hr.email}}</span></a>
   </div>
 </el-card>
    </div>
@@ -37,7 +37,7 @@ body {
   margin: 0;
   padding: 0;
 }
-.jobcard {
+div .jobcard {
   width: 1000px;
   margin: 20px auto auto auto;
 }

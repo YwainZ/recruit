@@ -70,7 +70,6 @@ p span {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  border: 1px solid #ededed;
   padding-left: 15px;
 }
 .jobinfo p {

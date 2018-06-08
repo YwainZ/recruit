@@ -60,8 +60,8 @@ export default {
           if (res.status === 200) {
             if (res.data.data === null) {
               this.show = false
-            }
-            this.list = res.data.data.sendList
+            } else {
+            this.list = res.data.data.sendList ? res.data.data.sendList : []}
           }
         })
         .catch(e => {

@@ -11,8 +11,8 @@
                                                                               class="el-input__icon el-icon-search"></i></el-input></span>
       </div>
       <div>
-        <span @click="redirect(3)" class="tab"><i class="el-icon-message" style="margin-right:0.3rem"
-                                                  @click="redirect(5)"></i>消息中心</span><span class="icon">0</span>
+        <span @click="redirect(3)" class="tab" v-show="!isShow"><i class="el-icon-message" style="margin-right:0.3rem"
+                                                  @click="redirect(5)"></i>消息中心<span class="icon">0</span></span>
         <span v-if="isShow">
   <span class="tab" @click="redirect(4)">登录</span>
   <span >
@@ -91,7 +91,7 @@
     background: red;
     font-size: 10px;
     border-radius: 50%;
-    left: -11.2px;
+    left: 0;
     top: -8px;
     padding: 0 5px;
     color: #fff;
@@ -138,10 +138,7 @@
   .delete:hover {
     color: red;
   }
-
-
 </style>
-
 <script>/* eslint-disable standard/object-curly-even-spacing */
 
 import fetch from '../../api/fetch'
@@ -172,6 +169,7 @@ export default {
     return {
       index: 0,
       count: 0,
+      websocket: null,
       publishInfo: {
         hrId: '',
         title: '',
@@ -197,12 +195,27 @@ export default {
       }
     }
   },
-  beforemounted () {
-    const s = document.createElement('script')
-    s.type = 'text/javascript'
-    s.src = 'https://cdn.goeasy.io/goeasy.js'
-    document.body.appendChild(s)
-    this.getChannel()
+  created () {
+    if (sessionStorage.getItem('userId') !== null) {
+      if ('WebSocket' in window) {
+        this.websocket = new WebSocket('ws://47.94.248.38:6200/message/' + `${sessionStorage.getItem('userId')}`, [])
+      } else {
+        alert('浏览器不支持WebSocket')
+      }
+      this.websocket.onopen = function (event) {
+        console.log('建立连接')
+      }
+      this.websocket.onclose = function (event) {
+        console.log('关闭连接')
+      }
+      this.websocket.onmessage = function (event) {
+        console.log('接收消息' + event.data)
+        localStorage.setItem('count', event.data)
+      }
+      this.websocket.onerror = function (event) {
+        console.log('websocket通信发生错误')
+      }
+    }
   },
   watch: {
     count () {
@@ -211,18 +224,21 @@ export default {
   },
   mounted () {
     var icon = document.getElementsByClassName('icon')[0]
-    if (localStorage.getItem('count')) {
-      icon.innerHTML = localStorage.getItem('count')
-    }
     if (sessionStorage.getItem('userId')) {
       this.isShow = false
     }
     if (localStorage.getItem('role') === '1') {
       this.isHr = true
     }
+    if (!this.isShow) {
+      icon.innerHTML = localStorage.getItem('count') ? localStorage.getItem('count') : '0'
+      if (icon.innerHTML === '0') {
+        icon.style.visibility = 'hidden'
+      }
+    }
   },
   methods: {
-    redirect (num, flag) {
+    redirect (num) {
       if (num === 1) {
         this.$router.push({name: 'index'})
       } else if (num === 2) {
@@ -250,24 +266,6 @@ export default {
       }
       this.$router.push({name: 'search', params: {count: 1}})
     },
-    getChannel () {
-      var goEasy = new GoEasy({
-        appkey: 'BC-9e32a2089e08457399dfc6032fcaa294'
-      })
-      goEasy.subscribe({
-        channel: sessionStorage.getItem('userId'),
-        onMessage: function (message) {
-          var icon = document.getElementsByClassName('icon')[0]
-          if (message instanceof Object) {
-            localStorage.setItem('count', message.content)
-            icon.innerHTML = localStorage.getItem('count')
-          } else {
-            localStorage.setItem('count', message)
-            icon.innerHTML = localStorage.getItem('count')
-          }
-        }
-      })
-    },
     logout () {
       fetch
         .logout()
@@ -280,6 +278,8 @@ export default {
             sessionStorage.removeItem('userId')
             localStorage.removeItem('role')
             localStorage.removeItem('token')
+            localStorage.removeItem('count')
+            this.websocket.close()
             this.$router.push({name: 'login'})
           }
         })

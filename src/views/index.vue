@@ -36,17 +36,15 @@
     </div>
   </div>
   <div class="aboutus">
-    <h2>关于我们</h2>
-    <p>"Conviction is everything in wishing. If you don’t believe in your own power to make your wish come true,</p>
-      <p> your wish will fly away, never to be seen again. But which leads to the most important point of all. </p>
-        <p>If you’re wishing for something possible, then it may be possible for you to do whatever you need to <p>
-          <p> make it come true.The ultimate magic is not wishing, but doing"</p>
+    <h3>关于我们</h3>
+    <p>面向互联网求职招聘，提供更多的实习和工作机会</p>
+    <p>即刻起，点赞你的生活，从这一份工作开始。</p>
   </div>
   <div class="division"><h3>联系我们</h3>
     <h3 style="color: #888;font-weight: 400">--- CONTACT ---</h3></div>
   <div class="footer">
-    <img src="../assets/github4.png"><span>https://github.com/Clairezyw</span>
-     <img src="../assets/github4.png"><span>https://github.com/stalary</span>
+    <a href="https://github.com/Clairezyw"><img src="../assets/github4.png"><span>https://github.com/Clairezyw</span></a>
+    <a href="https://github.com/stalary"><img src="../assets/github4.png"><span>https://github.com/stalary</span></a>
   </div>
 </div>
 </template>
@@ -127,8 +125,11 @@ body {
   width: 100%;
   height: 100px;
   background: black;
-  color: white;
   padding-top:20px
+}
+.footer a {
+  color: white;
+  text-decoration: none;
 }
 .aboutus  {
   width: 100%;
@@ -141,14 +142,14 @@ body {
   font-weight: 600;
   padding-top: 60px
 }
-.aboutus p {
-  margin-top: 15px;
-  font-size: 20px;
+.aboutus p{
+  margin-top: 30px;
+  font-size: 18px;
 }
 .cardBox {
   position: relative;
   width: 1200px;
-  margin: 20px auto 20px auto;
+  margin: 20px auto 30px auto;
   box-shadow: 0 10px 15px #888;
   border-radius: 6px;
 }
@@ -161,7 +162,6 @@ body {
 .wrapper-card .card {
   color: #07111B;
   font-size: 16px;
-  border: 1px solid #ededed;
   width: 336px;
   height: 243px;
   float: left;
