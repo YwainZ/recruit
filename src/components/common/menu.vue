@@ -195,8 +195,11 @@ export default {
       }
     }
   },
+  created () {
+    this.initWs();
+  },
   mounted () {
-    this.initWs()
+    var icon = document.getElementsByClassName('icon')[0]
     if (sessionStorage.getItem('userId')) {
       this.isShow = false
     }
@@ -206,27 +209,26 @@ export default {
   },
   methods: {
     initWs () {
-      if (sessionStorage.getItem('userId') !== null) {
-        if ('WebSocket' in window) {
-          this.websocket = new WebSocket('ws://47.94.248.38:6200/message/' + `${sessionStorage.getItem('userId')}`, [])
-        } else {
-          alert('浏览器不支持WebSocket')
-        }
-      }
-      this.websocket.onopen = this.openWS
-      this.websocket.onmessage = this.receiveWSMessage
-      this.websocket.onclose = this.closeWS
+      if ('WebSocket' in window) {
+        this.websocket = new WebSocket('ws://47.94.248.38:6200/message/' + `${sessionStorage.getItem('userId')}`, [])
+      } else {
+        alert('浏览器不支持WebSocket')
+    }
+      this.websocket.onopen = this.openWS;
+      this.websocket.onmessage = this.receiveWSMessage;
+      this.websocket.onclose = this.closeWS;
     },
     openWS (e) {
       console.log('建立连接')
+      
     },
     receiveWSMessage (e) {
       console.log('接收消息' + e.data)
-      this.count = parseInt(e.data)
+      this.count = e.data;
     },
     closeWS (e) {
       console.log('关闭连接')
-    },
+  },
     redirect (num) {
       if (num === 1) {
         this.$router.push({name: 'index'})

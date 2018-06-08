@@ -108,10 +108,7 @@
           intentionJob: ''
         },
         imageUrl: '',
-        head: {
-        ContentType: 'application/json',
-        Authorization: 'Basic ' + localStorage.getItem('token')
-      },
+        head: {},
         refresh: 0
       }
     },
@@ -121,14 +118,23 @@
       }
     },
     mounted () {
+      this.head = {
+        ContentType: 'application/json',
+        Authorization: 'Basic ' + localStorage.getItem('token')
+      }
       this.getUserInfo()
       this.refresh = this.$route.params.refresh !== undefined ? this.$route.params.refresh : 0
+    },
+    watch: {
+      refresh () {
+        location.reload()
+      }
     },
     components: {
       user: Info,
       myResume: Resume,
       delivery: Delivery,
-      setting: Setting
+      setting: Setting,
     },
     methods: {
       getUserInfo () {

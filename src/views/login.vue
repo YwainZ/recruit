@@ -131,9 +131,9 @@
                     localStorage.setItem('role', res.data.data.role)
                     sessionStorage.setItem('userId', res.data.data.userId)
                     if (res.data.data.role === 2) {
-                      this.$router.push({name: 'userInfo'})
+                      this.$router.push({name: 'userInfo', params: {refresh: 1}})
                     } else {
-                      this.$router.push({name: 'hrView'})
+                      this.$router.push({name: 'hrView', params: {hrRefresh: 2}})
                     }
                   } else {
                     this.$message({
