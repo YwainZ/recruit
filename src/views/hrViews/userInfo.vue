@@ -34,11 +34,6 @@ export default {
   },
   mounted () {
     this.hrRefresh = this.$route.params.hrRefresh !== undefined ? this.$route.params.hrRefresh : 0
-  },
-  watch: {
-    hrRefresh () {
-      location.reload()
-    }
   }
 }
 </script>
