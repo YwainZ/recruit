@@ -1,6 +1,5 @@
 <template>
  <div>
-<my-menu></my-menu>
 <el-card class="companycard" style="height: 180px">
   <img :src="detail.avatar" class="avatar">
   <div class="introduce">
@@ -86,7 +85,6 @@ p span {
 
 <script>
 import fetch from '../api/fetch'
-import menu from '../components/common/menu'
 export default {
   data () {
     return {
@@ -123,8 +121,5 @@ export default {
       this.$router.push({name: 'jobInfo'})
     }
   },
-  components: {
-    'my-menu': menu
-  }
 }
 </script>

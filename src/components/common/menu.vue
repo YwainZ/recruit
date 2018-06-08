@@ -12,7 +12,7 @@
       </div>
       <div>
         <span @click="redirect(3)" class="tab" v-show="!isShow"><i class="el-icon-message" style="margin-right:0.3rem"
-                                                  @click="redirect(5)"></i>消息中心<span class="icon">0</span></span>
+                                                  @click="redirect(5)"></i>消息中心<span class="icon" v-show="count > 0">{{ count }}</span></span>
         <span v-if="isShow">
   <span class="tab" @click="redirect(4)">登录</span>
   <span >
@@ -196,31 +196,7 @@ export default {
     }
   },
   created () {
-    if (sessionStorage.getItem('userId') !== null) {
-      if ('WebSocket' in window) {
-        this.websocket = new WebSocket('ws://47.94.248.38:6200/message/' + `${sessionStorage.getItem('userId')}`, [])
-      } else {
-        alert('浏览器不支持WebSocket')
-      }
-      this.websocket.onopen = function (event) {
-        console.log('建立连接')
-      }
-      this.websocket.onclose = function (event) {
-        console.log('关闭连接')
-      }
-      this.websocket.onmessage = function (event) {
-        console.log('接收消息' + event.data)
-        localStorage.setItem('count', event.data)
-      }
-      this.websocket.onerror = function (event) {
-        console.log('websocket通信发生错误')
-      }
-    }
-  },
-  watch: {
-    count () {
-      location.reload()
-    }
+    this.initWs();
   },
   mounted () {
     var icon = document.getElementsByClassName('icon')[0]
@@ -230,14 +206,29 @@ export default {
     if (localStorage.getItem('role') === '1') {
       this.isHr = true
     }
-    if (!this.isShow) {
-      icon.innerHTML = localStorage.getItem('count') ? localStorage.getItem('count') : '0'
-      if (icon.innerHTML === '0') {
-        icon.style.visibility = 'hidden'
-      }
-    }
   },
   methods: {
+    initWs () {
+      if ('WebSocket' in window) {
+        this.websocket = new WebSocket('ws://47.94.248.38:6200/message/' + `${sessionStorage.getItem('userId')}`, [])
+      } else {
+        alert('浏览器不支持WebSocket')
+    }
+      this.websocket.onopen = this.openWS;
+      this.websocket.onmessage = this.receiveWSMessage;
+      this.websocket.onclose = this.closeWS;
+    },
+    openWS (e) {
+      console.log('建立连接')
+      
+    },
+    receiveWSMessage (e) {
+      console.log('接收消息' + e.data)
+      this.count = e.data;
+    },
+    closeWS (e) {
+      console.log('关闭连接')
+  },
     redirect (num) {
       if (num === 1) {
         this.$router.push({name: 'index'})

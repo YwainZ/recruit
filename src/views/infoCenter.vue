@@ -1,6 +1,5 @@
 <template>
   <div>
-  <my-menu></my-menu>
     <el-card class="infocard" v-if="isShow">
       <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1524746733938&di=9ae24b5205e97c2876b48d3ff26f1c23&imgtype=0&src=http%3A%2F%2Fwww.snlfjx.com%2Fforum%2FSkin%2Fimgs%2Fno-data.png"/>
       <p>暂时没有消息哦</p>
@@ -24,7 +23,6 @@
 </template>
 
 <script>
-import menu from '../components/common/menu'
 import fetch from '../api/fetch'
 import ElCard from '../../node_modules/element-ui/packages/card/src/main.vue'
 export default {
@@ -40,7 +38,6 @@ export default {
   },
   components: {
     ElCard,
-    'my-menu': menu
   },
   mounted () {
     this.getMessage()

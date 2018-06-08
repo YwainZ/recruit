@@ -1,6 +1,5 @@
 <template>
  <div>
-   <my-menu></my-menu>
    <el-card v-if="isShow" class="jobcard">
      <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1524746733938&di=9ae24b5205e97c2876b48d3ff26f1c23&imgtype=0&src=http%3A%2F%2Fwww.snlfjx.com%2Fforum%2FSkin%2Fimgs%2Fno-data.png">
      <p>啊哦，职位已经下线了</p>
@@ -86,7 +85,6 @@ p span {
 </style>
 
 <script>
-import menu from '../components/common/menu'
 import fetch from '../api/fetch'
 export default {
   data () {
@@ -142,8 +140,5 @@ export default {
       })
     }
   },
-  components: {
-    'my-menu': menu
-  }
 }
 </script>

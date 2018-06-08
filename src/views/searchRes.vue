@@ -1,6 +1,5 @@
 <template>
   <div>
-    <my-menu></my-menu>
     <el-card class="nojob" v-if="!havejob">暂时没有该岗位信息</el-card>
     <el-card v-if="havejob" v-for="(item, key) in list" :key="key" class="jobcard">
       <div  @click="findDetail(item.recruit.id)">
@@ -37,7 +36,6 @@
 }
 </style>
 <script>
-import menu from '../components/common/menu'
 import fetch from '../api/fetch'
 export default {
   data () {
@@ -49,9 +47,6 @@ export default {
   },
   mounted () {
     this.getJob()
-  },
-  components: {
-    'my-menu': menu
   },
   methods: {
     findDetail (id) {

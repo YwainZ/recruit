@@ -1,6 +1,5 @@
 <template>
 <div>
-  <my-menu class="myMenu"></my-menu>
   <div class="indexContain">
 <div class="cardBox">
  <el-carousel trigger="click" height="400px" style="position: sticky;">
@@ -204,7 +203,6 @@ body {
 </style>
 <script>
 import fetch from '../api/fetch'
-import menu from '../components/common/menu'
 export default {
   data () {
     return {
@@ -254,9 +252,6 @@ export default {
       this.$router.push({name: 'companyDetail'})
     }
   },
-  components: {
-    'my-menu': menu
-  }
 
 }
 </script>

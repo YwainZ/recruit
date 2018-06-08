@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import CommonPage from '../components/common/commonPage.vue'
 import index from '../views/index.vue'
 import jobInfo from '../views/jobInfo.vue'
 
@@ -16,18 +17,36 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'index',
-      component: index
+      component: CommonPage,
+      children: [
+        {
+          path: '/',
+          name: 'index',
+          component: index
+        }
+      ]
     },
     {
       path: '/jobInfo',
-      name: 'jobInfo',
-      component: jobInfo
+      component: CommonPage,
+      children: [
+        {
+          path: '/',
+          name: 'jobInfo',
+          component: jobInfo
+        }
+      ]
     },
     {
       path: '/infoCenter',
-      name: 'infoCenter',
-      component: infoCenter
+      component: CommonPage,
+      children: [
+        {
+          path: '/',
+          name: 'infoCenter',
+          component: infoCenter
+        }
+      ]
     },
     {
       path: '/login',
@@ -41,23 +60,47 @@ export default new Router({
     },
     {
       path: '/userInfo',
-      name: 'userInfo',
-      component: userInfo
+      component: CommonPage,
+      children: [
+        {
+          path: '/',
+          name: 'userInfo',
+          component: userInfo
+        }
+      ]
     },
     {
       path: '/companyDetail',
-      name: 'companyDetail',
-      component: companyDetail
+      component: CommonPage,
+      children: [
+        {
+          path: '/',
+          name: 'companyDetail',
+          component: companyDetail
+        }
+      ]
     },
     {
       path: '/search',
-      name: 'search',
-      component: search
+      component: CommonPage,
+      children: [
+        {
+          path: '',
+          name: 'search',
+          component: search
+        }
+      ]
     },
     {
       path: '/hrView',
-      name: 'hrView',
-      component: hrUserInfo
+      component: CommonPage,
+      children: [
+        {
+          path: '/',
+          name: 'hrView',
+          component: hrUserInfo
+        }
+      ]
     },
     {
       path: '/hrRegister',

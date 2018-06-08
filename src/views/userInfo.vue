@@ -1,6 +1,5 @@
 <template>
   <div>
-    <my-menu></my-menu>
     <div class="wrapper">
       <el-card class="box-card">
         <div>
@@ -91,7 +90,6 @@
   import Resume from '../components/resume'
   import Delivery from '../components/delivery'
   import Setting from '../components/setting'
-  import menu from '../components/common/menu'
 
   export default {
     data () {
@@ -137,7 +135,6 @@
       myResume: Resume,
       delivery: Delivery,
       setting: Setting,
-      'my-menu': menu
     },
     methods: {
       getUserInfo () {

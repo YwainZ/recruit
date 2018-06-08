@@ -1,6 +1,5 @@
 <template>
   <div>
-    <my-menu></my-menu>
     <el-tabs type="border-card" tabPosition="left" style="width:1000px;height: 1000px;" class="hr">
     <el-tab-pane>
     <span slot="label">职位管理<i class="el-icon-arrow-right"></i></span>
@@ -19,7 +18,6 @@
 </template>
 
 <script>
-import menu from '../../components/common/menu'
 import receive from '../../components/hrtabs/getResume'
 import setting from '../../components/setting'
 import manageJob from '../../components/hrtabs/manageJob'
@@ -30,7 +28,6 @@ export default {
     }
   },
   components: {
-    'my-menu': menu,
     receive,
     setting,
     manageJob
