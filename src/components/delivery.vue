@@ -21,6 +21,10 @@
     overflow: scroll;
   }
 
+  .deliveryWrap::-webkit-scrollbar {
+    display: none;
+  }
+
   .resumeBox {
     display: flex;
     justify-content: space-between;

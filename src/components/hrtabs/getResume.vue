@@ -83,6 +83,10 @@
     overflow: scroll;
   }
 
+  .getResumeWrap::-webkit-scrollbar {
+    display: none;
+  }
+
   .progress2 {
     width: 182px;
     border: 0;
