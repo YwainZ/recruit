@@ -364,6 +364,7 @@ export default {
     }
     return {
       len: 0,
+      tip: 0,
       isChange: false,
       dialogFormVisible: false,
       resumeFormVisible: false,
@@ -432,6 +433,11 @@ export default {
     let userId = sessionStorage.getItem('userId')
     this.getResume(userId)
   },
+  watch: {
+    tip() {
+      location.reload()
+    }
+  },
   methods: {
     cancelChange () {
       this.isChange = !this.isChange
@@ -452,6 +458,7 @@ export default {
                   message: '保存成功',
                   type: 'success'
                 })
+                this.tip++
                 this.resumeFormVisible = false
                 this.dialogFormVisible = false
                 this.isChange = false
