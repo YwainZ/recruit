@@ -169,6 +169,7 @@ export default {
     return {
       index: 0,
       count: 0,
+      amount: 0,
       websocket: null,
       publishInfo: {
         hrId: '',
@@ -197,6 +198,11 @@ export default {
   },
   created () {
     this.initWs();
+  },
+  watch: {
+    amount () {
+      location.reload()
+    }
   },
   mounted () {
     var icon = document.getElementsByClassName('icon')[0]
@@ -288,7 +294,7 @@ export default {
           fetch.publishJob(this.publishInfo).then(res => {
             if (res.status === 200) {
               this.publishvisible = false
-              this.count++
+              this.amount++
               this.$refs[formName].resetFields()
             }
           }).catch(e => {
