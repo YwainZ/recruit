@@ -17,7 +17,7 @@
         </el-form-item>
         <el-form-item label="验证码" prop="code">
         <el-input v-model.number="hrInfo.code"  style="width: 200px;padding-right: 10px;"></el-input>
-          <el-button  @click="sendCode" style="border: 1px solid #888;border-radius: 8px;color: #5a5a5a;">{{this.msg}}</el-button>
+          <el-button  @click="sendCode">{{this.msg}}</el-button>
         </el-form-item>
         <div>
           <el-form-item label="公司" prop="company">
@@ -47,6 +47,7 @@
 </template>
 
 <style>
+@import "../assets/Animate/animate.min.css";
   html * {
     padding: 0;
     margin: 0;
@@ -194,8 +195,14 @@ export default {
   },
   mounted() {
     this.getCompany()
+    this.addAnimation()
   },
   methods: {
+    addAnimation() {
+      let form = document.getElementsByClassName('hrForm')[0]
+      form.classList.add('animated')
+      form.classList.add('bounceInDown')
+    },
     backIndex () {
       this.$router.push({name: 'index'})
     },
@@ -205,7 +212,7 @@ export default {
         .getCode(this.hrInfo.phone)
         .then(res => {
           if (res.status === 200) {
-            if (res.data.success === "true") {
+            if (res.data.success === true) {
               this.confirmCode = res.data.data
             }
           }
@@ -242,14 +249,20 @@ export default {
             username: this.hrInfo.username
           }
           fetch.hrRegister(result).then(res => {
-            if (res.status === 200) {
-              if (this.confirmCode === this.hrInfo.code) {
+            if (res.status == 200) {
+              if (this.confirmCode == this.hrInfo.code) {
                 this.$message({
                   message: "注册成功",
                   type: "success"
                 })
                 this.$router.push({name: "login"})
-              } else {
+              } else if(res.data.code == 1004) {
+                 this.$message({
+                  message: res.data.msg,
+                  type: "warning"
+                })
+              }
+              else{
                 this.$message({
                   message: "验证码错误",
                   type: "warning"
