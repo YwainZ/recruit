@@ -21,6 +21,7 @@
   <div class="division"><h3>热门职位</h3>
     <h3 style="color: #888;font-weight: 400">--- JOBS ---</h3></div>
   <div class="newsContain">
+    <div class="temp">
     <div class="newsItem"  v-for = "(item, key) in jobList" :key = "key" @click="jobDetail(item.recruit.id)">
       <div class="picContain" ontouchstart="this.classList.toggle('hover');">
         <div class="flipper">
@@ -33,11 +34,14 @@
       <p style="margin-top:25px">{{item.recruit.content}}</p>
       </div>
     </div>
+    </div>
   </div>
   <div class="aboutus">
-    <h3>关于我们</h3>
+    <div id="aboutusInfo">
+    <h2>关于我们</h2>
     <p>面向互联网求职招聘，提供更多的实习和工作机会</p>
     <p>即刻起，点赞你的生活，从这一份工作开始。</p>
+    </div>
   </div>
   <div class="division"><h3>联系我们</h3>
     <h3 style="color: #888;font-weight: 400">--- CONTACT ---</h3></div>
@@ -49,6 +53,7 @@
 </template>
 <style>
 @import "../css/index.css";
+@import "../assets/Animate/animate.min.css";
 body {
   background: #ededed;
 }
@@ -133,17 +138,21 @@ body {
 .aboutus  {
   width: 100%;
   height: 500px;
-  background: url("https://upload-images.jianshu.io/upload_images/9381131-26f1415d8499dc6b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240") no-repeat;
+  background: url("https://upload-images.jianshu.io/upload_images/9381131-fd2872c9d933b2de.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240") no-repeat;
   background-size: 100% 100%;
-  filter: grayscale(100%);
+  filter: grayscale(70%);
   opacity: 0.7;
   color: white;
   font-weight: 600;
-  padding-top: 60px
+  padding-top: 60px;
 }
 .aboutus p{
   margin-top: 30px;
   font-size: 18px;
+}
+#aboutusInfo {
+  margin-top: 80px;
+  animation-delay: 1s
 }
 .cardBox {
   position: relative;
@@ -221,10 +230,29 @@ export default {
     }
   },
   mounted () {
+    window.addEventListener('scroll', this.handler)
     this.getCompany()
     this.getJob()
   },
   methods: {
+    handler() {
+      let info = document.getElementById('aboutusInfo') || null
+      let card = document.getElementsByClassName('temp')[0] || null
+      if (info === null || card === null) {
+          return;
+      }
+      else if (document.documentElement.scrollTop > 1000) {
+         card.classList.add('animated')
+         card.classList.add('bounceInLeft')
+         info.classList.add('animated')
+         info.classList.add('bounceInLeft')
+      } else {
+        info.classList.remove('animated')
+        info.classList.remove('bounceInLeft')
+        card.classList.remove('animated')
+        card.classList.remove('bounceInLeft')
+      }
+    },
     jobDetail (id) {
       localStorage.setItem('jobId', id)
       this.$router.push({name: 'jobInfo'})
@@ -241,9 +269,11 @@ export default {
       })
     },
     getCompany () {
+
       fetch.getCompany().then(res => {
         if (res.status === 200) {
           this.companyList = res.data.data.companyList
+          console.log('res', res)
         }
       })
     },
