@@ -10,7 +10,7 @@
           <el-input type="password" v-model="loginInfo.password" auto-complete="off" class="loginInput"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button style="margin-left: -2rem;" class="loginBtn" @click="submitForm('loginInfo')">登录</el-button>
+          <el-button style="margin-left: -2rem;" class="loginBtn" @click="submitForm('loginInfo')" >登录</el-button>
         </el-form-item>
       </el-form>
       <div class="footer-tip">
@@ -22,6 +22,8 @@
 </template>
 
 <style>
+@import "../assets/Animate/animate.min.css";
+
   html * {
     padding: 0;
     margin: 0;
@@ -45,7 +47,6 @@
     box-shadow: 0px 5px 8px #888;
     border-radius: 8px;
   }
-
   .registerForm h3 {
     margin-top: 25px;
     color: #5a5a5a;
@@ -99,7 +100,6 @@
           callback()
         }
       }
-
       return {
         loginInfo: {
           password: '',
@@ -111,7 +111,15 @@
         }
       }
     },
+    mounted() {
+        this.addAnimation()
+    },
     methods: {
+      addAnimation() {
+        let form = document.getElementsByClassName('registerForm')[0];
+        form.classList.add('animated')
+        form.classList.add('bounceInDown')
+      },
       backIndex () {
         this.$router.push({name: 'index'})
       },
