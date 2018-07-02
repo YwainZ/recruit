@@ -14,16 +14,17 @@
 </template>
 <style>
 .nojob {
-  margin: 20px 180px auto 220px;
+  margin: 20px auto auto auto;
 }
 .jobcard {
-  margin: 20px 180px auto 220px;
+  width: 1000px;
+  margin: 20px auto auto auto;
 }
 .jobavatar {
   float: left;
   width: 126px;
   height: 110px;
-  margin-right: 14px;
+  margin: auto 14px 20px auto;
 }
 .introduce {
   display: flex;
