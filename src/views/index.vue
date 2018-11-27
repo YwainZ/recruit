@@ -49,6 +49,7 @@
     <a href="https://github.com/Clairezyw"><img src="../assets/github4.png"><span>https://github.com/Clairezyw</span></a>
     <a href="https://github.com/stalary"><img src="../assets/github4.png"><span>https://github.com/stalary</span></a>
   </div>
+  <test @getmess='get' :mess="mess"></test>
 </div>
 </template>
 <style>
@@ -212,9 +213,11 @@ body {
 </style>
 <script>
 import fetch from '../api/fetch'
+import test from './test'
 export default {
   data () {
     return {
+      mess: '',
       crouselImg: [
         {img: 'https://sxsimg.xiaoyuanzhao.com/3C/09/3C4A275077015CBF398443CC21774709.png'},
         {img: 'https://sxsimg.xiaoyuanzhao.com/C3/55/C35273E2AAA17DBA580304E05DF22155.png'},
@@ -235,6 +238,10 @@ export default {
     this.getJob()
   },
   methods: {
+    get(mess) {
+      this.mess = mess;
+      alert(this.mess);
+    },
     handler() {
       let info = document.getElementById('aboutusInfo') || null
       let card = document.getElementsByClassName('temp')[0] || null
@@ -282,6 +289,9 @@ export default {
       this.$router.push({name: 'companyDetail'})
     }
   },
+  components: {
+    test: test
+  }
 
 }
 </script>
