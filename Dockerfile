@@ -1,6 +1,5 @@
-FROM centos:7
+FROM node:8
 
-RUN yum install npm
 
 # 指定工作目录
 WORKDIR /app
