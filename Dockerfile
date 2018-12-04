@@ -1,6 +1,5 @@
 FROM centos:7
 
-RUN yum install update
 
 # 指定工作目录
 WORKDIR /app
