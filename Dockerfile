@@ -5,7 +5,9 @@ FROM node:8
 WORKDIR /app
 
 # 将当前目录下的所有文件拷贝到工作目录下面
-COPY . /app/
+COPY ./src  /app/
+COPY ./package.json  /app/
+COPY ./config  /app/
 
 RUN   npm  install
 
