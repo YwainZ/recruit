@@ -8,6 +8,7 @@ WORKDIR /app
 COPY ./src  /app/
 COPY ./package.json  /app/
 COPY ./config  /app/
+COPY ./build  /app/
 
 RUN   npm  install
 
