@@ -1,5 +1,6 @@
 FROM node:8
 
+RUN apt-get update
 
 # 指定工作目录
 WORKDIR /app
