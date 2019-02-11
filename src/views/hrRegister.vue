@@ -209,11 +209,14 @@ export default {
     sendCode() {
       const TIME_COUNT = 60
       fetch
-        .getCode(this.hrInfo.phone)
+        .sendCode(this.hrInfo.phone)
         .then(res => {
           if (res.status === 200) {
             if (res.data.success === true) {
-              this.confirmCode = res.data.data
+              $message({
+                message: '发送成功',
+                type: 'success'
+              })
             }
           }
         })
@@ -246,36 +249,25 @@ export default {
             email: this.hrInfo.email,
             password: this.hrInfo.password,
             phone: this.hrInfo.phone,
-            username: this.hrInfo.username
+            username: this.hrInfo.username,
+            code: this.hrInfo.code,
           }
           fetch.hrRegister(result).then(res => {
             if (res.status == 200) {
-              if (this.confirmCode == this.hrInfo.code) {
-                this.$message({
-                  message: "注册成功",
-                  type: "success"
-                })
-                this.$router.push({name: "login"})
-              } else if(res.data.code == 1004) {
-                 this.$message({
-                  message: res.data.msg,
-                  type: "warning"
-                })
-              }
-              else{
-                this.$message({
-                  message: "验证码错误",
-                  type: "warning"
-                })
-              }
-            }
-            else {
-              this.$message({
-                message: res.data.msg,
-                type: "warning"
-              })
-            }
-          }).catch(e => {
+                if (res.data.code === 0) {
+                  this.$message({
+                    message: "注册成功",
+                    type: "success"
+                  });
+                  this.$router.push({ name: "login" });
+                } else {
+                  this.$message({
+                    message: res.data.msg,
+                    type: "warning"
+                   });
+                }
+               }
+            }).catch(e => {
             console.log(e)
           })
         }

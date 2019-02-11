@@ -12,7 +12,7 @@
   <p>{{company.introduce}}</p>
   <p>{{company.address}}<span>|</span>{{company.scale}}<span>|</span>{{company.type}}</p>
   </div>
-  <el-button class="jobbtn" @click="sendResume()">投递简历</el-button>
+  <el-button class="jobbtn" @click="sendResume()" v-if="isHr">投递简历</el-button>
 </el-card>
 <el-card class="jobcard">
   <div class="jobintroduce">职位介绍</div>
@@ -94,11 +94,19 @@ export default {
       recruit: [],
       recruitId: 0,
       title: '',
-      isShow: false
+      isShow: false,
     }
   },
   mounted () {
     this.getJobDetail()
+  },
+  computed: {
+    isHr() {
+      if(localStorage.getItem('role') === '1') {
+      return false
+     }
+     return true
+    }
   },
   methods: {
     getJobDetail () {

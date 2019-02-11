@@ -198,10 +198,13 @@ export default {
     sendCode() {
       const TIME_COUNT = 60;
       fetch
-        .getCode(this.hrInfo.phone)
+        .sendCode(this.hrInfo.phone)
         .then(res => {
           if (res.status === 200) {
-            this.confirmCode = res.data.data;
+            $message({
+              message: '发送成功',
+              type: 'success'
+            })
           }
         })
         .catch(e => {
@@ -238,31 +241,26 @@ export default {
             email: this.hrInfo.email,
             phone: this.hrInfo.phone,
             password: this.hrInfo.password,
-            username: this.hrInfo.username
+            username: this.hrInfo.username,
+            code: this.hrInfo.code,
           };
           fetch
             .userRegister(res)
             .then(res => {
               if (res.status == 200) {
-                console.log("验证码", this.confirmCode, this.hrInfo.code);
-                if (this.confirmCode == this.hrInfo.code) {
+                if (res.data.code === 0) {
                   this.$message({
                     message: "注册成功",
                     type: "success"
                   });
                   this.$router.push({ name: "login" });
-                } else if (res.data.code == 1004) {
+                } else {
                   this.$message({
                     message: res.data.msg,
                     type: "warning"
-                  });
-                } else {
-                  this.$message({
-                    message: "验证码错误",
-                    type: "warning"
-                  });
+                   });
                 }
-              }
+               }
             })
             .catch(e => {
               this.$message({

@@ -217,7 +217,7 @@ export default {
     initWs () {
       if (sessionStorage.getItem('userId') !== null) {
         if ('WebSocket' in window) {
-          this.websocket = new WebSocket('ws://47.94.248.38:6200/message/' + `${sessionStorage.getItem('userId')}`, [])
+          this.websocket = new WebSocket('ws://pf.stalary.com/push/ws/' + `${sessionStorage.getItem('userId')}`, [])
         } else {
           alert('浏览器不支持WebSocket')
         }

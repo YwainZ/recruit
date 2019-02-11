@@ -1,4 +1,4 @@
-const host = 'http://personfilter.clairezyw.com'
+const host = 'http://pf.stalary.com'
 // const host = 'http://192.168.199.147:6200'
 
 export default {
@@ -17,8 +17,8 @@ export default {
   getUserInfo () {
     return host + '/user'
   },
-  getCodeAd () {
-    return host + '/common/code'
+  sendCode () {
+    return host + '/outside/code'
   },
   logout () {
     return host + '/user/logout'
