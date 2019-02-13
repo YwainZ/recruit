@@ -80,6 +80,15 @@ export default {
   },
   hrRegister (hrInfo) {
     return axios.post(api.hrRegister(), JSON.stringify(hrInfo), {headers: headers})
+  },
+  recommendCandidate () {
+    return axios.get(api.recommendCandidate(), {headers: headers})
+  },
+  recommendJob () {
+    return axios.get(api.recommendJob(), {headers: headers})
+  },
+  getRecommandJob() {
+    return axios.get(api.getRecommandJob(), {headers: headers})
   }
 
 }

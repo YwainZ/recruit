@@ -8,6 +8,7 @@ export default {
   userRegister () {
     return host + '/user'
   },
+  // 获取全部公司信息
   getComName () {
     return host + '/company/noPage'
   },
@@ -92,6 +93,17 @@ export default {
   },
   hrRegister () {
     return host + '/user/hr'
+  },
+  // 推荐候选人
+  recommendCandidate () {
+    return host + '/recruit/recommend/candidate'
+  },
+  // 推荐职位
+  recommendJob () {
+    return host + '/recruit/recommend/job'
+  },
+  // 获取感兴趣的工作
+  getRecommandJob () {
+    return host + '/recruit/name'
   }
-
 }

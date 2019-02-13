@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import CommonPage from '../components/common/commonPage.vue'
 import index from '../views/index.vue'
 import jobInfo from '../views/jobInfo.vue'
-import test from '../views/test.vue'
+
 Vue.use(Router)
 const infoCenter = resolve => require(['../views/infoCenter.vue'], resolve)
 const login = resolve => require(['../views/login.vue'], resolve)
@@ -106,11 +106,6 @@ export default new Router({
       path: '/hrRegister',
       name: 'hrRegister',
       component: hrRegister
-    },
-    {
-      path: '/test',
-      name: 'test',
-      component: test,
     }
   ]
 })

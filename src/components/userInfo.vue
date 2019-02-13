@@ -1,10 +1,14 @@
 <template>
   <div>
-    <table v-if="!isEdit">
+    <table v-if="!isEdit" class="container">
       <th> 个人信息</th>
       <tr>
         <td>昵称：</td>
         <td>{{list.nickname}}</td>
+      </tr>
+      <tr>
+        <td>姓名：</td>
+        <td>{{list.name}}</td>
       </tr>
       <tr>
         <td>性别：</td>
@@ -40,10 +44,13 @@
       </tr>
       <el-button class="edit" @click="changeEdit">编辑</el-button>
     </table>
-    <el-form  :model="list" status-icon :rules="rules2" ref="list" label-width="100px" class="geren"
+    <el-form  :model="list" status-icon :rules="rules2" ref="list" label-width="100px" class="formWrap"
              v-if="isEdit">
       <el-form-item label="昵称" prop="nickname">
         <el-input v-model="list.nickname" auto-complete="off"></el-input>
+      </el-form-item>
+       <el-form-item label="姓名" prop="name">
+        <el-input v-model="list.name" auto-complete="off"></el-input>
       </el-form-item>
       <el-form-item label="性别" prop="sex">
         <el-select v-model="list.sex" placeholder="请选择性别" style="width: 100%">
@@ -74,7 +81,14 @@
         <el-input v-model="list.school"></el-input>
       </el-form-item>
       <el-form-item label="我想去的公司" prop="intentionCompany">
-        <el-input v-model="list.intentionCompany"></el-input>
+        <el-select v-model="intentionCompany" multiple placeholder="请选择" style="width: 100%">
+          <el-option
+            v-for="item in companyOptions"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+        </el-option>
+       </el-select>
       </el-form-item>
       <el-form-item label="感兴趣的工作" prop="intentionJob">
         <el-input v-model="list.intentionJob"></el-input>
@@ -89,14 +103,19 @@
 <style>
   table {
    width: 600px;
+   font-size: 16px
   }
+
   table tr td {
     padding: 11.2px;
     text-align: left;
   }
-  .geren {
+
+  .formWrap {
     width: 500px;
+    font-size: 18px;
   }
+
   .edit {
     margin:10px auto auto 40px;
   }
@@ -112,6 +131,13 @@
       var checknickname = (rule, value, callback) => {
         if (!value) {
           return callback(new Error('昵称不能为空'))
+        } else {
+          callback()
+        }
+      }
+      var checkname = (rule, value, callback) => {
+        if (!value) {
+          return callback(new Error('姓名不能为空'))
         } else {
           callback()
         }
@@ -176,6 +202,7 @@
         isEdit: true,
         rules2: {
           nickname: [{validator: checknickname, trigger: 'blur'}],
+          name: [{validator: checkname, trigger: 'blur'}],
           sex: [{validator: checksex, trigger: 'blur'}],
           address: [{validator: checkaddress, trigger: 'blur'}],
           introduce: [{validator: checkintroduce, trigger: 'blur'}],
@@ -206,19 +233,34 @@
             value: '2022',
             label: '2022'
           }
-        ]
+        ],
+        companyOptions: [],
+        intentionCompany: []
+      }
+    },
+    mounted() {
+      this.getCompanyName()
+    },
+    watch: {
+      list(val, oldVal) {
+        if (val !== oldVal) {
+           this.intentionCompany = this.list.intentionCompany.split(',') || ''
+        }
       }
     },
     methods: {
       changeEdit () {
         this.isEdit = !this.isEdit
       },
+      // 提交订单信息
       submitInfo (formName) {
         this.$refs[formName].validate(valid => {
           if (valid) {
+            this.list.intentionCompany = this.intentionCompany.toString();
             fetch
               .putUserInfo(this.list)
               .then(res => {
+                console.log('list', this.list)
                 if (res.data.success) {
                   this.$message({
                     message: '保存成功',
@@ -232,6 +274,23 @@
           } else {
             console.log('error submit!!')
           }
+        })
+      },
+      // 获取公司名称
+      getCompanyName() {
+        fetch.getComName().then(res => {
+          if(res.status === 200) {
+            const companyList = res.data.data;
+            for(let i = 0; i < companyList.length; i++) {
+              const object = {};
+              object.value = companyList[i].name;
+              object.label = companyList[i].name;
+              this.companyOptions.push(object);
+            }
+            console.log('lallala', this.companyOptions)
+          }
+        }).catch(e => {
+          console.log('err', e)
         })
       }
     }

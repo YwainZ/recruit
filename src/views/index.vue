@@ -18,6 +18,18 @@
 </div>
 </div>
   </div>
+  <!--推荐-->
+  <div class="recommand" v-if="isLogin">
+    <div>{{isHr ? '推荐候选人': '推荐职位'}}</div>
+    <div v-for="(recommand, key) in recommandList" :key="key">
+      <p>{{recommand.title}}</p>
+      <div v-for="(candidate, key) in recommand.candidateList" :key="key">
+        <p>{{candidate.name}}</p>
+        <p>{{candidate.school}}</p>
+        <p>{{`简历匹配度：${candidate.rate}`}}</p>
+      </div>
+    </div>
+  </div>
   <div class="division"><h3>热门职位</h3>
     <h3 style="color: #888;font-weight: 400">--- JOBS ---</h3></div>
   <div class="newsContain">
@@ -49,7 +61,6 @@
     <a href="https://github.com/Clairezyw"><img src="../assets/github4.png"><span>https://github.com/Clairezyw</span></a>
     <a href="https://github.com/stalary"><img src="../assets/github4.png"><span>https://github.com/stalary</span></a>
   </div>
-  <test @getmess='get' :mess="mess"></test>
 </div>
 </template>
 <style>
@@ -58,17 +69,20 @@
 body {
   background: #ededed;
 }
+
 .myMenu {
   position: sticky;
   top: 0;
   z-index: 1;
 }
+
 .indexContain {
   width: 100%;
   height: 100%;
   border:1px solid #ededed;
   background: #fff;
 }
+
 .cardContain {
   width: 100%;
   height: 100%;
@@ -80,22 +94,27 @@ body {
   height: 100%;
   background: #fff;
 }
+
 .picContain {
   margin-right: 10px;
   perspective: 1000px;
 }
+
 .picContain:hover .flipper, .picContain.hover .flipper{
   transform: rotateY(180deg);
 }
+
 .picContain, .itemPic, .back{
   width: 80px;
   height: 80px;
 }
+
 .flipper {
   transition: 0.6s;
   transform-style:preserve-3d;
   position: relative;
 }
+
 .newsItem {
   display: flex;
   justify-content: flex-start;
@@ -108,6 +127,7 @@ body {
   padding-top: 15px;
   border-bottom: 1px solid #ededed;
 }
+
 .itemPic, .back {
   position: absolute;
   top: 0;
@@ -120,22 +140,27 @@ body {
   line-height: 80px;
   white-space: nowrap;
 }
+
 .itemPic {
   z-index: 2;
 }
+
 .back {
   transform: rotateY(180deg);
 }
+
 .footer {
   width: 100%;
   height: 100px;
   background: black;
   padding-top:20px
 }
+
 .footer a {
   color: white;
   text-decoration: none;
 }
+
 .aboutus  {
   width: 100%;
   height: 500px;
@@ -147,14 +172,17 @@ body {
   font-weight: 600;
   padding-top: 60px;
 }
+
 .aboutus p{
   margin-top: 30px;
   font-size: 18px;
 }
+
 #aboutusInfo {
   margin-top: 80px;
   animation-delay: 1s
 }
+
 .cardBox {
   position: relative;
   width: 1200px;
@@ -162,12 +190,14 @@ body {
   box-shadow: 0 10px 15px #888;
   border-radius: 6px;
 }
+
 .wrapper-card {
   width: 1200px;
   height:1000px;
   margin: 30px auto auto auto;
   padding-top: 30px;
 }
+
 .wrapper-card .card {
   color: #07111B;
   font-size: 16px;
@@ -177,11 +207,13 @@ body {
   margin: 30px;
   border-radius: 6px;
 }
+
 .wrapper-card .card:hover {
   transform: translateY(-5px);
   transition: 3ms;
   box-shadow: 5px 5px 10px #888;
 }
+
 .wrapper-card .image {
   border-radius: 6px 6px 0 0;
   width: 100%;
@@ -189,11 +221,13 @@ body {
   margin-bottom: 20px;
   border-radius: 6px;
 }
+
 .boxImg {
   width: 100%;
   height: 100%;
   border-radius: 6px;
 }
+
 .division {
     width: 100%;
     margin: 30px  auto;
@@ -201,23 +235,33 @@ body {
     padding-left: 10px;
     color: #5a5a5a;
 }
+
 .footer img{
   width:25px;
   height: 25px;
   margin-right: 10px
 }
+
 .footer span {
   margin-right: 20px;
 }
 
+.recommand {
+  position: fixed;
+  right: 0;
+  top: 80px;
+  width: 200px;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6)
+}
+
+
 </style>
 <script>
 import fetch from '../api/fetch'
-import test from './test'
 export default {
   data () {
     return {
-      mess: '',
       crouselImg: [
         {img: 'https://sxsimg.xiaoyuanzhao.com/3C/09/3C4A275077015CBF398443CC21774709.png'},
         {img: 'https://sxsimg.xiaoyuanzhao.com/C3/55/C35273E2AAA17DBA580304E05DF22155.png'},
@@ -229,19 +273,19 @@ export default {
       currentDate: '完美',
       company: '',
       companyList: [],
-      jobList: []
+      jobList: [],
+      recommandList: [],
+      isHr: localStorage.getItem('role') === '1',
+      isLogin: localStorage.getItem('token') ? true : false
     }
   },
   mounted () {
     window.addEventListener('scroll', this.handler)
     this.getCompany()
     this.getJob()
+    this.getRecommand()
   },
   methods: {
-    get(mess) {
-      this.mess = mess;
-      alert(this.mess);
-    },
     handler() {
       let info = document.getElementById('aboutusInfo') || null
       let card = document.getElementsByClassName('temp')[0] || null
@@ -260,10 +304,12 @@ export default {
         card.classList.remove('bounceInLeft')
       }
     },
+
     jobDetail (id) {
       localStorage.setItem('jobId', id)
       this.$router.push({name: 'jobInfo'})
     },
+
     getJob () {
       fetch.findJob().then(res => {
         if (res.status === 200) {
@@ -275,8 +321,8 @@ export default {
         console.log(e)
       })
     },
-    getCompany () {
 
+    getCompany () {
       fetch.getCompany().then(res => {
         if (res.status === 200) {
           this.companyList = res.data.data.companyList
@@ -284,14 +330,22 @@ export default {
         }
       })
     },
+
     getCompanyDetail (id) {
       localStorage.setItem('companyId', id)
       this.$router.push({name: 'companyDetail'})
+    },
+    // 获取推荐列表
+    getRecommand () {
+      if (this.isHr) {
+        fetch.recommendCandidate().then(res => {
+          if (res.status === 200) {
+            console.log('res', res)
+          }
+        })
+      }
     }
   },
-  components: {
-    test: test
-  }
 
 }
 </script>
