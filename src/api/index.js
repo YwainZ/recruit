@@ -29,7 +29,7 @@ export default {
   },
   // 获取投递列表
   deliveryList () {
-    return host + '/recruit/send'
+    return host + '/user/send'
   },
   // 提交用户信息
   putUserInfo () {
@@ -77,7 +77,7 @@ export default {
   },
   // hr resumelist
   receiveResume () {
-    return host + '/recruit/receive'
+    return host + '/user/receive'
   },
   // hr发布职位信息
   publishJob () {
