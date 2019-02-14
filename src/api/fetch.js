@@ -87,8 +87,7 @@ export default {
   recommendJob () {
     return axios.get(api.recommendJob(), {headers: headers})
   },
-  getRecommandJob() {
+  getRecommandJob () {
     return axios.get(api.getRecommandJob(), {headers: headers})
   }
-
 }

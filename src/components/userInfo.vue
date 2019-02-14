@@ -91,7 +91,14 @@
        </el-select>
       </el-form-item>
       <el-form-item label="感兴趣的工作" prop="intentionJob">
-        <el-input v-model="list.intentionJob"></el-input>
+        <el-select v-model="intentionJob" multiple placeholder="请选择" style="width: 100%">
+          <el-option
+            v-for="item in jobOptions"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+        </el-option>
+       </el-select>
       </el-form-item>
       <el-form-item>
         <el-button class='editor' @click="changeEdit">返回</el-button>
@@ -235,16 +242,20 @@
           }
         ],
         companyOptions: [],
-        intentionCompany: []
+        jobOptions: [],
+        intentionCompany: [],
+        intentionJob: []
       }
     },
     mounted() {
       this.getCompanyName()
+      this.getJobName()
     },
     watch: {
       list(val, oldVal) {
         if (val !== oldVal) {
            this.intentionCompany = this.list.intentionCompany.split(',') || ''
+           this.intentionJob = this.list.intentionJob.split(',') || ''
         }
       }
     },
@@ -277,7 +288,7 @@
         })
       },
       // 获取公司名称
-      getCompanyName() {
+      getCompanyName () {
         fetch.getComName().then(res => {
           if(res.status === 200) {
             const companyList = res.data.data;
@@ -287,10 +298,23 @@
               object.label = companyList[i].name;
               this.companyOptions.push(object);
             }
-            console.log('lallala', this.companyOptions)
           }
         }).catch(e => {
           console.log('err', e)
+        })
+      },
+      // 获取职位名称
+      getJobName () {
+        fetch.getRecommandJob().then(res => {
+          if(res.status === 200) {
+            const nameList = res.data.data;
+            for (let i = 0; i < nameList.length; i++) {
+              const object = {};
+              object.value = nameList[i];
+              object.label = nameList[i];
+              this.jobOptions.push(object);
+            }
+          }
         })
       }
     }
