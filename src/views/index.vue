@@ -25,9 +25,70 @@
   </div>
   <!--推荐候选人--->
   <div class="recommand" v-if="isLogin">
+    <!---简历弹窗-->
+   <el-dialog :title="getResumeList.name+'的简历'" :visible.sync="isShow">
+        <table border="1" cellspacing="0" style="border-color:#ededed" class="mytable">
+          <tr>
+            <td>姓名：</td>
+            <td>{{getResumeList.name}}</td>
+          </tr>
+          <tr>
+            <td>年龄：</td>
+            <td>{{getResumeList.age}}</td>
+          </tr>
+          <tr>
+            <td>性别：</td>
+            <td>{{getResumeList.sex}}</td>
+          </tr>
+          <tr>
+            <td>电话：</td>
+            <td>{{getResumeList.phone}}</td>
+          </tr>
+          <tr>
+            <td>邮箱：</td>
+            <td>{{getResumeList.email}}</td>
+          </tr>
+          <tr>
+            <td>地址：</td>
+            <td>{{getResumeList.address}}</td>
+          </tr>
+          <tr>
+            <td>学校：</td>
+            <td>{{getResumeList.school}}</td>
+          </tr>
+          <tr>
+            <td>毕业时间：</td>
+            <td>{{getResumeList.endTime}}</td>
+          </tr>
+          <tr>
+            <td>技术栈：</td>
+            <td>
+          <tr v-for="(item, key) in getResumeList.skills" :key="key">
+            <td class="progress2">{{item.name}}</td>
+            <td class="progress2">熟悉程度：
+              <el-progress :text-inside="true" :stroke-width="15" :percentage="item.level*25"></el-progress>
+            </td>
+          </tr>
+          </td>
+          </tr>
+          <tr>
+            <td>实习（工作）经历：</td>
+            <td>{{getResumeList.experience}}</td>
+          </tr>
+          <tr>
+            <td>自我介绍：</td>
+            <td>{{getResumeList.introduce}}</td>
+          </tr>
+          <tr>
+            <td>获奖经历：</td>
+            <td>{{getResumeList.awards}}</td>
+          </tr>
+        </table>
+      </el-dialog>
+
   <el-carousel height="180px" v-if="isHr">
     <el-carousel-item v-for="(recommand, key) in recommandList" :key="key" class="el-carousel-item">
-        <div v-for="(candidate, key) in recommand.candidateList" :key="key" class="recommandList">
+        <div v-for="(candidate, key) in recommand.candidateList" :key="key" class="recommandList" @click="getTableList(candidate.userId)">
         <el-progress type="circle" :percentage="candidate.rate" :width=100 :stroke-width="8"></el-progress>
         <div class="recommandInfo">
           <p>{{recommand.title}}</p>
@@ -37,6 +98,8 @@
       </div>
     </el-carousel-item>
   </el-carousel>
+
+
   <!--推荐职位-->
     <el-carousel height="180px" v-else>
     <el-carousel-item  class="el-carousel-item">
@@ -321,6 +384,16 @@ body {
   font-weight: bold;
 }
 
+.mytable {
+  width: 100%;
+  height: 700px;
+}
+
+.progress2 {
+  width: 182px;
+  border: 0;
+}
+
 </style>
 <script>
 import fetch from '../api/fetch'
@@ -341,9 +414,31 @@ export default {
       jobList: [],
       recommandList: [],
       isHr: localStorage.getItem('role') === '1',
-      isLogin: localStorage.getItem('token') ? true : false
+      isLogin: localStorage.getItem('token') ? true : false,
+      isShow:  false,
+      getResumeList: {
+          name: '',
+          sex: '',
+          age: '',
+          skills: [{
+            id: 1,
+            name: '',
+            level: '',
+            resumeId: 1
+          }],
+          school: '',
+          address: '',
+          endTime: 2019,
+          phone: '',
+          email: '',
+          introduce: '',
+          experience: '',
+          awards: '',
+          avatar: ''
+        },
     }
   },
+
   mounted () {
     window.addEventListener('scroll', this.handler)
     this.getCompany()
@@ -416,7 +511,25 @@ export default {
         }
       })
     }
-  }
+  },
+  // 查看推荐候选人
+  getTableList(id) {
+      this.isShow = true
+        fetch
+          .getResume(id)
+          .then(res => {
+            if (res.status === 200) {
+              if (res.data.success === true) {
+                if (res.data.data !== null) {
+                  this.getResumeList = res.data.data
+                }
+              }
+            }
+          })
+          .catch(e => {
+            console.log(e)
+          })
+      }
 },
 
 }

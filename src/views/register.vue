@@ -53,23 +53,23 @@
     </div>
     <el-dialog title="公司信息" :visible.sync="dialogShow">
       <el-form :model="companyInfo" class="companyForm">
-      <el-form-item label="名称" :label-width="formLabelWidth">
-        <el-input v-model="companyInfo.name" auto-complete="off"></el-input>
+      <el-form-item  :label-width="formLabelWidth">
+        <el-input v-model="companyInfo.name" auto-complete="off" placeholder="名称"></el-input>
       </el-form-item>
-      <el-form-item label="地址" :label-width="formLabelWidth">
-        <el-input v-model="companyInfo.address" auto-complete="off"></el-input>
+      <el-form-item  :label-width="formLabelWidth">
+        <el-input v-model="companyInfo.address" auto-complete="off" placeholder="地址"></el-input>
       </el-form-item>
-      <el-form-item label="logo" :label-width="formLabelWidth">
-        <el-input v-model="companyInfo.avatar" auto-complete="off"></el-input>
+      <el-form-item  :label-width="formLabelWidth">
+        <el-input v-model="companyInfo.avatar" auto-complete="off" placeholder="logo"></el-input>
       </el-form-item>
-      <el-form-item label="简介" :label-width="formLabelWidth">
-        <el-input v-model="companyInfo.introduce" auto-complete="off"></el-input>
+      <el-form-item :label-width="formLabelWidth">
+        <el-input v-model="companyInfo.introduce" auto-complete="off" placeholder="简介"></el-input>
       </el-form-item>
-      <el-form-item label="规模" :label-width="formLabelWidth">
-        <el-input v-model="companyInfo.scale" auto-complete="off"></el-input>
+      <el-form-item  :label-width="formLabelWidth">
+        <el-input v-model="companyInfo.scale" auto-complete="off" placeholder="规模"></el-input>
       </el-form-item>
-      <el-form-item label="类型" :label-width="formLabelWidth">
-        <el-input v-model="companyInfo.type" auto-complete="off"></el-input>
+      <el-form-item :label-width="formLabelWidth">
+        <el-input v-model="companyInfo.type" auto-complete="off" placeholder="类型"></el-input>
       </el-form-item>
   </el-form>
   <div slot="footer" class="dialog-footer">
@@ -164,9 +164,8 @@
   .tips {
     margin-top: -20px;
     text-align: left;
-    margin-left: 100px;
     cursor: pointer;
-    color: rgb(49, 113, 209);
+    color: red;
     font-size: 14px;
   }
 
@@ -200,6 +199,10 @@
     margin-bottom: 20px;
     cursor: pointer;
   }
+
+  .companyForm {
+    padding: 0 66px;
+  }
 </style>
 
 <script>/* eslint-disable indent,quotes,space-before-function-paren,brace-style */
@@ -218,8 +221,8 @@ export default {
     var checkCompany = (rule, value, callback) => {
       if (!value) {
         return callback(new Error("请选择公司"))
-      } else  {
-        callback()
+      } else {
+        return callback()
       }
 
     }
@@ -353,7 +356,7 @@ export default {
 
     hrSubmit(formName) {
       this.$refs[formName].validate(valid => {
-        if (valid) {
+        if (valid && !this.tipsShow) {
           let result = {
             email: this.hrInfo.email,
             password: this.hrInfo.password,
@@ -362,7 +365,7 @@ export default {
             code: this.hrInfo.code,
           }
           // hr注册
-          if (isHr) {
+          if (this.isHr) {
             result.companyId = this.companyId;
             fetch.hrRegister(result).then(res => {
             if (res.status == 200) {
@@ -382,11 +385,11 @@ export default {
             }).catch(e => {
             console.log(e)
           })
-        }
+        } else {
 
         // 用户注册
         fetch
-          .userRegister(res)
+          .userRegister(result)
           .then(res => {
             if (res.status == 200) {
               if (res.data.code === 0) {
@@ -409,6 +412,7 @@ export default {
                 type: "warning"
               });
             });
+        }
         }
       })
     },

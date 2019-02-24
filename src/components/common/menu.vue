@@ -3,7 +3,7 @@
     <div class="contain">
       <div>
         <span @click="redirect(1)" class="tab">首页</span>
-        <span v-if="isHr" @click="publishvisible = true" class="tab">发布职位</span>
+        <span v-if="isHr" @click="changeStatus" class="tab">发布职位</span>
         <span v-if="isHr && !isShow" @click="redirect(6)" class="tab">个人中心</span>
         <span @click="redirect(2)" class="tab" v-if="!isHr && !isShow">个人中心</span>
         <span class="tab" v-if="!isHr"><el-input placeholder="搜索心仪的职位" style="width:18rem" v-model="content"
@@ -19,7 +19,7 @@
           <span class="tab" @click="redirect(4)">登录</span>
           <span class="tab"  @click="toregister">注册</span>
         </span>
-        <el-dialog :visible.sync="publishvisible" title="发布职位">
+        <el-dialog title="发布职位" :visible.sync="publishvisible">
           <el-form :model="publishInfo" :rules="publishRules" ref='publishInfo'>
             <el-form-item label="职位名称" prop="title" class="jobinput">
               <el-input class="require" v-model="publishInfo.title"></el-input>
@@ -130,6 +130,7 @@
   .delete:hover {
     color: red;
   }
+
 </style>
 <script>/* eslint-disable standard/object-curly-even-spacing */
 
@@ -280,7 +281,6 @@ export default {
         if (valid) {
           fetch.publishJob(this.publishInfo).then(res => {
             if (res.status === 200) {
-              this.publishvisible = false
               this.amount++
               this.$refs[formName].resetFields()
             }
@@ -299,6 +299,9 @@ export default {
         name: ''
       }
       this.publishInfo.skillList.push(newskills)
+    },
+    changeStatus() {
+      this.publishvisible = true
     }
   }
 }
