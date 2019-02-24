@@ -19,19 +19,40 @@
 </div>
   </div>
   <!--推荐-->
-  <div class="recommand" v-if="isLogin">
-    <div>{{isHr ? '推荐候选人': '推荐职位'}}</div>
-    <div v-for="(recommand, key) in recommandList" :key="key">
-      <p>{{recommand.title}}</p>
-      <div v-for="(candidate, key) in recommand.candidateList" :key="key">
-        <p>{{candidate.name}}</p>
-        <p>{{candidate.school}}</p>
-        <p>{{`简历匹配度：${candidate.rate}`}}</p>
-      </div>
-    </div>
+  <div class="division" v-if="isLogin">
+    <h3>{{isHr ? '推荐候选人': '推荐职位'}}</h3>
+    <h3 style="color: #888;font-weight: 400">---- Hot ----</h3>
   </div>
-  <div class="division"><h3>热门职位</h3>
-    <h3 style="color: #888;font-weight: 400">--- JOBS ---</h3></div>
+  <!--推荐候选人--->
+  <div class="recommand" v-if="isLogin">
+  <el-carousel height="180px" v-if="isHr">
+    <el-carousel-item v-for="(recommand, key) in recommandList" :key="key" class="el-carousel-item">
+        <div v-for="(candidate, key) in recommand.candidateList" :key="key" class="recommandList">
+        <el-progress type="circle" :percentage="candidate.rate" :width=100 :stroke-width="8"></el-progress>
+        <div class="recommandInfo">
+          <p>{{recommand.title}}</p>
+          <p>{{candidate.name}}</p>
+          <p>{{candidate.school}}</p>
+        </div>
+      </div>
+    </el-carousel-item>
+  </el-carousel>
+  <!--推荐职位-->
+    <el-carousel height="180px" v-else>
+    <el-carousel-item  class="el-carousel-item">
+        <div class="recommandJob" v-for="(recommand, key) in recommandList" :key="key" @click="jobDetail(recommand.recruitId)">
+          <p>{{recommand.companyName}}</p>
+          <p>{{recommand.title}}</p>
+        </div>
+    </el-carousel-item>
+  </el-carousel>
+  </div>
+
+  <!--热门职位-->
+  <div class="division">
+    <h3>热门职位</h3>
+    <h3 style="color: #888;font-weight: 400">--- JOBS ---</h3>
+  </div>
   <div class="newsContain">
     <div class="temp">
     <div class="newsItem"  v-for = "(item, key) in jobList" :key = "key" @click="jobDetail(item.recruit.id)">
@@ -48,6 +69,7 @@
     </div>
     </div>
   </div>
+
   <div class="aboutus">
     <div id="aboutusInfo">
     <h2>关于我们</h2>
@@ -73,7 +95,7 @@ body {
 .myMenu {
   position: sticky;
   top: 0;
-  z-index: 1;
+  z-index: 100;
 }
 
 .indexContain {
@@ -88,6 +110,7 @@ body {
   height: 100%;
   background: #fff;
 }
+
 .newsContain {
   padding-top: 1px;
   width: 100%;
@@ -229,11 +252,11 @@ body {
 }
 
 .division {
-    width: 100%;
-    margin: 30px  auto;
-    text-align: center;
-    padding-left: 10px;
-    color: #5a5a5a;
+  width: 100%;
+  margin: 30px  auto;
+  text-align: center;
+  padding-left: 10px;
+   color: #5a5a5a;
 }
 
 .footer img{
@@ -247,14 +270,56 @@ body {
 }
 
 .recommand {
-  position: fixed;
-  right: 0;
-  top: 80px;
-  width: 200px;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.6)
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  padding: 36px 0;
+  font-size: 18px;
 }
 
+.recommandList {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: #5a5a5a;
+  font-weight: 500;
+}
+
+.recommandInfo {
+  margin-left: 16px;
+}
+
+.recommandInfo p {
+  margin-bottom: 6px;
+}
+
+.el-progress__text {
+  font-size: 16px !important;
+  text-align: center !important;
+}
+
+.el-carousel-item {
+  display: flex;
+  justify-content: space-around;
+}
+
+.el-carousel {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.recommandJob {
+  border: 1px solid #ebebeb;
+  text-align: left;
+  color: #fff;
+  line-height: 30px;
+  background: linear-gradient(#948E99, #2E1437);
+  border-radius: 4px;
+  width: 150px;
+  height: 180px;
+  padding: 20px 10px 10px;
+  font-weight: bold;
+}
 
 </style>
 <script>
@@ -337,15 +402,22 @@ export default {
     },
     // 获取推荐列表
     getRecommand () {
-      if (this.isHr) {
+      if (this.isLogin) {
+        if (this.isHr) {
         fetch.recommendCandidate().then(res => {
           if (res.status === 200) {
-            console.log('res', res)
+            this.recommandList = res.data.data
           }
         })
       }
+      fetch.recommendJob().then(res => {
+        if (res.status === 200) {
+          this.recommandList = res.data.data
+        }
+      })
     }
-  },
+  }
+},
 
 }
 </script>

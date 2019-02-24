@@ -12,7 +12,7 @@ const userInfo = resolve => require(['../views/userInfo.vue'], resolve)
 const companyDetail = resolve => require(['../views/companyDetail.vue'], resolve)
 const search = resolve => require(['../views/searchRes.vue'], resolve)
 const hrUserInfo = resolve => require(['../views/hrViews/userInfo.vue'], resolve)
-const hrRegister = resolve => require(['../views/hrRegister.vue'], resolve)
+
 export default new Router({
   routes: [
     {
@@ -101,11 +101,6 @@ export default new Router({
           component: hrUserInfo
         }
       ]
-    },
-    {
-      path: '/hrRegister',
-      name: 'hrRegister',
-      component: hrRegister
     }
   ]
 })

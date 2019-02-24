@@ -89,5 +89,9 @@ export default {
   },
   getRecommandJob () {
     return axios.get(api.getRecommandJob(), {headers: headers})
+  },
+  // 添加公司
+  addCompany (companyInfo) {
+    return axios.post(api.getCompany(), JSON.stringify(companyInfo), {headers: headers})
   }
 }

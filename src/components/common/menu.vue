@@ -11,22 +11,14 @@
                                                                               class="el-input__icon el-icon-search"></i></el-input></span>
       </div>
       <div>
-        <span @click="redirect(3)" class="tab" v-show="!isShow"><i class="el-icon-message" style="margin-right:0.3rem"
-                                                  @click="redirect(5)"></i>消息中心<span class="icon" v-show="count > 0">{{ count }}</span></span>
+        <span @click="redirect(3)" class="tab" v-show="!isShow">
+          <i class="el-icon-message" style="margin-right:0.3rem" @click="redirect(5)">
+            </i>消息中心<span class="icon" v-show="count > 0" ref="icon">{{ count }}</span>
+          </span>
         <span v-if="isShow">
-  <span class="tab" @click="redirect(4)">登录</span>
-  <span >
-  <el-dropdown @command="toregister">
-    <span class="tab">
-      注册
-    </span>
-  <el-dropdown-menu slot="dropdown">
-    <el-dropdown-item command=true>求职注册</el-dropdown-item>
-    <el-dropdown-item command=false>招聘注册</el-dropdown-item>
-  </el-dropdown-menu>
-</el-dropdown>
-</span>
-</span>
+          <span class="tab" @click="redirect(4)">登录</span>
+          <span class="tab"  @click="toregister">注册</span>
+        </span>
         <el-dialog :visible.sync="publishvisible" title="发布职位">
           <el-form :model="publishInfo" :rules="publishRules" ref='publishInfo'>
             <el-form-item label="职位名称" prop="title" class="jobinput">
@@ -205,7 +197,6 @@ export default {
     }
   },
   mounted () {
-    var icon = document.getElementsByClassName('icon')[0]
     if (sessionStorage.getItem('userId')) {
       this.isShow = false
     }
@@ -251,12 +242,8 @@ export default {
         this.$router.push({name: 'hrView'})
       }
     },
-    toregister (command) {
-      if (command === 'true') {
+    toregister () {
         this.$router.push({name: 'register'})
-      } else {
-        this.$router.push({name: 'hrRegister'})
-      }
     },
     getJob (value) {
       if (value !== null) {

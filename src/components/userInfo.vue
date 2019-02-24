@@ -178,7 +178,7 @@
         }
       }
       var checkcompany = (rule, value, callback) => {
-        if (!value) {
+        if (this.intentionCompany.length === 0) {
           return callback(new Error('想去的公司不能为空'))
         } else {
           callback()
@@ -192,7 +192,7 @@
         }
       }
       var checkjob = (rule, value, callback) => {
-        if (!value) {
+        if (this.intentionJob.length === 0) {
           return callback(new Error('感兴趣的工作不能为空'))
         } else {
           callback()
@@ -268,6 +268,7 @@
         this.$refs[formName].validate(valid => {
           if (valid) {
             this.list.intentionCompany = this.intentionCompany.toString();
+            this.list.intentionJob = this.intentionJob.toString();
             fetch
               .putUserInfo(this.list)
               .then(res => {

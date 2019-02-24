@@ -1,23 +1,24 @@
 <template>
   <div class="container">
     <div class="registerForm">
-      <h3>登录leader招聘</h3>
+    <img src="../assets/logo_1.png" class="logo" @click="backIndex"/>
       <el-form :model="loginInfo" status-icon :rules="rules2" ref="loginInfo" label-width="100px" class="loginForm">
-        <el-form-item label="用户名" prop="username">
-          <el-input type="text" v-model="loginInfo.username" auto-complete="off" class="loginInput"></el-input>
+        <el-form-item  prop="username">
+          <el-input type="text" v-model="loginInfo.username" auto-complete="off" class="loginInput" placeholder="用户名"></el-input>
         </el-form-item>
-        <el-form-item label="密码" prop="password">
-          <el-input type="password" v-model="loginInfo.password" auto-complete="off" class="loginInput"></el-input>
+        <el-form-item  prop="password">
+          <el-input type="password" v-model="loginInfo.password" auto-complete="off" class="loginInput" placeholder="密码"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button style="margin-left: -2rem;" class="loginBtn" @click="submitForm('loginInfo')" >登录</el-button>
+          <el-button class="loginBtn" @click="submitForm('loginInfo')" >登录</el-button>
         </el-form-item>
       </el-form>
-      <div class="footer-tip">
-      <i  class="el-icon-back" @click="backIndex">返回</i>
-      <span class="toRegister">没有账号？<span @click="toRegister">直接注册</span></span>
+      <div class="footer-tip" @click="toRegister">
+       没有账号？直接注册
     </div>
     </div>
+   <img class="bg_bottom" src="../assets/bg_bottom.png"/>
+  <img class="bg_bottom2" src="../assets/bg_bottom2.png"/>
   </div>
 </template>
 
@@ -28,56 +29,74 @@
     padding: 0;
     margin: 0;
   }
+
   * {
     box-sizing: border-box;
   }
+
   .container {
     width: 100%;
     border: 1px solid #ededed;
-    background: url("../assets/bgimg.jpg") no-repeat;
+    background: linear-gradient(#4c4c4c, #7f7f7f);
     background-size: 100% 100%;
-    min-height: 1000px;
+    min-height: 100vh;
   }
+
   .registerForm {
-    background: rgba(255, 255, 255, 0.6);
+    background: #fff;
     border: 1px solid #ededed;
     width: 450px;
     height: 320px;
     margin: 250px auto 250px auto;
     box-shadow: 0px 5px 8px #888;
     border-radius: 8px;
-  }
-  .registerForm h3 {
-    margin-top: 25px;
-    color: #5a5a5a;
-  }
-  .loginForm {
     position: relative;
-    top: 14px;
-    left: -14px;
-    padding: 14px;
   }
-  .toRegister {
-    color: #5a5a5a;
-    font-size: 14px;
+
+  .loginForm {
+    padding: 0 36px;
   }
-  .toRegister span {
-    color: #5a5a5a;
-    cursor: pointer;
+
+  .el-form-item__content {
+    margin-left: 0px !important;
   }
+
   .loginInput {
     width: 100%;
   }
-  .el-icon-back  {
-    font-size: 14px;
-    color: #5a5a5a;
-    cursor: pointer;
-  }
+
   .footer-tip {
-    margin: auto 30px auto 40px;
-    display: flex;
-    justify-content: space-between;
+    color: #5a5a5a;
+    font-size: 16px;
+    cursor: pointer;
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
   }
+
+  .bg_bottom {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+  }
+
+  .bg_bottom2 {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+  }
+
+  .logo {
+    width: 150px;
+    height: 80px;;
+    cursor: pointer;
+    opacity: 0.7;
+  }
+
+  .loginBtn {
+    width: 100%;
+  }
+
 </style>
 
 <script>/* eslint-disable indent */
