@@ -1,5 +1,5 @@
-// const host = 'http://pf.stalary.com'
-const host = 'http://localhost:10000'
+const host = 'http://pf.stalary.com'
+// const host = 'http://localhost:10000'
 
 export default {
   getCompany () {
