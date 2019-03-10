@@ -504,12 +504,13 @@ export default {
             this.recommandList = res.data.data
           }
         })
-      }
-      fetch.recommendJob().then(res => {
+      } else {
+        fetch.recommendJob().then(res => {
         if (res.status === 200) {
           this.recommandList = res.data.data
         }
       })
+      }
     }
   },
   // 查看推荐候选人
