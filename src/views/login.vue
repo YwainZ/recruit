@@ -10,22 +10,22 @@
           <el-input type="password" v-model="loginInfo.password" auto-complete="off" class="loginInput" placeholder="密码"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button class="loginBtn" @click="submitForm('loginInfo')" >登录</el-button>
+          <el-button type="primary" class="loginBtn" @click="submitForm('loginInfo')" >登录</el-button>
         </el-form-item>
       </el-form>
       <div class="footer-tip" @click="toRegister">
        没有账号？直接注册
     </div>
     </div>
-   <img class="bg_bottom" src="../assets/bg_bottom.png"/>
-  <img class="bg_bottom2" src="../assets/bg_bottom2.png"/>
+   <!-- <img class="bg_bottom" src="../assets/bg_bottom.png"/>
+  <img class="bg_bottom2" src="../assets/bg_bottom2.png"/> -->
   </div>
 </template>
 
 <style>
 @import "../assets/Animate/animate.min.css";
 
-  html * {
+  body {
     padding: 0;
     margin: 0;
   }
@@ -36,10 +36,26 @@
 
   .container {
     width: 100%;
-    border: 1px solid #ededed;
-    background: linear-gradient(#4c4c4c, #7f7f7f);
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .container::before {
+    content: '';
+    position: absolute;
+    background-image: url("https://upload-images.jianshu.io/upload_images/9381131-261e4e2e3fca50f5.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240");
     background-size: 100% 100%;
-    min-height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transform: matrix(1, 0, 0, 1, 0, 0);
+    transition: all 500ms linear 0s;
+  }
+
+  .container:hover::before {
+    transform: matrix(1.05, 0, 0, 1.05, 3.07, 5.7)
   }
 
   .registerForm {
@@ -66,7 +82,7 @@
   }
 
   .footer-tip {
-    color: #5a5a5a;
+    color: rgba(0, 0, 0, 0.5);
     font-size: 16px;
     cursor: pointer;
     position: absolute;

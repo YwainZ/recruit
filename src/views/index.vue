@@ -486,7 +486,6 @@ export default {
       fetch.getCompany().then(res => {
         if (res.status === 200) {
           this.companyList = res.data.data.companyList
-          console.log('res', res)
         }
       })
     },
